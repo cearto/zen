@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		279784A917A6FA5E00D76C46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279784A817A6FA5E00D76C46 /* UIKit.framework */; };
+		279784AB17A6FA5E00D76C46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279784AA17A6FA5E00D76C46 /* Foundation.framework */; };
+		279784AD17A6FA5E00D76C46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279784AC17A6FA5E00D76C46 /* CoreGraphics.framework */; };
+		279784B317A6FA5E00D76C46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 279784B117A6FA5E00D76C46 /* InfoPlist.strings */; };
+		279784B517A6FA5E00D76C46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 279784B417A6FA5E00D76C46 /* main.m */; };
+		279784B917A6FA5E00D76C46 /* auraAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 279784B817A6FA5E00D76C46 /* auraAppDelegate.m */; };
+		279784BB17A6FA5E00D76C46 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 279784BA17A6FA5E00D76C46 /* Default.png */; };
+		279784BD17A6FA5E00D76C46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 279784BC17A6FA5E00D76C46 /* Default@2x.png */; };
+		279784BF17A6FA5E00D76C46 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 279784BE17A6FA5E00D76C46 /* Default-568h@2x.png */; };
+		279784C217A6FA5E00D76C46 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279784C017A6FA5E00D76C46 /* MainStoryboard_iPhone.storyboard */; };
+		279784C517A6FA5E00D76C46 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279784C317A6FA5E00D76C46 /* MainStoryboard_iPad.storyboard */; };
+		279784C817A6FA5E00D76C46 /* auraMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279784C717A6FA5E00D76C46 /* auraMasterViewController.m */; };
+		279784CB17A6FA5E00D76C46 /* auraDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279784CA17A6FA5E00D76C46 /* auraDetailViewController.m */; };
+		279784D317A6FA5E00D76C46 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279784D217A6FA5E00D76C46 /* SenTestingKit.framework */; };
+		279784D417A6FA5E00D76C46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279784A817A6FA5E00D76C46 /* UIKit.framework */; };
+		279784D517A6FA5E00D76C46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279784AA17A6FA5E00D76C46 /* Foundation.framework */; };
+		279784DD17A6FA5E00D76C46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 279784DB17A6FA5E00D76C46 /* InfoPlist.strings */; };
+		279784E017A6FA5E00D76C46 /* AuraTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 279784DF17A6FA5E00D76C46 /* AuraTrackerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		279784D617A6FA5E00D76C46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2797849D17A6FA5E00D76C46 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 279784A417A6FA5E00D76C46;
+			remoteInfo = AuraTracker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		279784A517A6FA5E00D76C46 /* AuraTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuraTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		279784A817A6FA5E00D76C46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		279784AA17A6FA5E00D76C46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		279784AC17A6FA5E00D76C46 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		279784B017A6FA5E00D76C46 /* AuraTracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AuraTracker-Info.plist"; sourceTree = "<group>"; };
+		279784B217A6FA5E00D76C46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		279784B417A6FA5E00D76C46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		279784B617A6FA5E00D76C46 /* AuraTracker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AuraTracker-Prefix.pch"; sourceTree = "<group>"; };
+		279784B717A6FA5E00D76C46 /* auraAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = auraAppDelegate.h; sourceTree = "<group>"; };
+		279784B817A6FA5E00D76C46 /* auraAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = auraAppDelegate.m; sourceTree = "<group>"; };
+		279784BA17A6FA5E00D76C46 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		279784BC17A6FA5E00D76C46 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		279784BE17A6FA5E00D76C46 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		279784C117A6FA5E00D76C46 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		279784C417A6FA5E00D76C46 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		279784C617A6FA5E00D76C46 /* auraMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = auraMasterViewController.h; sourceTree = "<group>"; };
+		279784C717A6FA5E00D76C46 /* auraMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = auraMasterViewController.m; sourceTree = "<group>"; };
+		279784C917A6FA5E00D76C46 /* auraDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = auraDetailViewController.h; sourceTree = "<group>"; };
+		279784CA17A6FA5E00D76C46 /* auraDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = auraDetailViewController.m; sourceTree = "<group>"; };
+		279784D117A6FA5E00D76C46 /* AuraTrackerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuraTrackerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		279784D217A6FA5E00D76C46 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		279784DA17A6FA5E00D76C46 /* AuraTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AuraTrackerTests-Info.plist"; sourceTree = "<group>"; };
+		279784DC17A6FA5E00D76C46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		279784DE17A6FA5E00D76C46 /* AuraTrackerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuraTrackerTests.h; sourceTree = "<group>"; };
+		279784DF17A6FA5E00D76C46 /* AuraTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuraTrackerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		279784A217A6FA5E00D76C46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279784A917A6FA5E00D76C46 /* UIKit.framework in Frameworks */,
+				279784AB17A6FA5E00D76C46 /* Foundation.framework in Frameworks */,
+				279784AD17A6FA5E00D76C46 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		279784CD17A6FA5E00D76C46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279784D317A6FA5E00D76C46 /* SenTestingKit.framework in Frameworks */,
+				279784D417A6FA5E00D76C46 /* UIKit.framework in Frameworks */,
+				279784D517A6FA5E00D76C46 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2797849C17A6FA5E00D76C46 = {
+			isa = PBXGroup;
+			children = (
+				279784AE17A6FA5E00D76C46 /* AuraTracker */,
+				279784D817A6FA5E00D76C46 /* AuraTrackerTests */,
+				279784A717A6FA5E00D76C46 /* Frameworks */,
+				279784A617A6FA5E00D76C46 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		279784A617A6FA5E00D76C46 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				279784A517A6FA5E00D76C46 /* AuraTracker.app */,
+				279784D117A6FA5E00D76C46 /* AuraTrackerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		279784A717A6FA5E00D76C46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				279784A817A6FA5E00D76C46 /* UIKit.framework */,
+				279784AA17A6FA5E00D76C46 /* Foundation.framework */,
+				279784AC17A6FA5E00D76C46 /* CoreGraphics.framework */,
+				279784D217A6FA5E00D76C46 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		279784AE17A6FA5E00D76C46 /* AuraTracker */ = {
+			isa = PBXGroup;
+			children = (
+				279784B717A6FA5E00D76C46 /* auraAppDelegate.h */,
+				279784B817A6FA5E00D76C46 /* auraAppDelegate.m */,
+				279784C017A6FA5E00D76C46 /* MainStoryboard_iPhone.storyboard */,
+				279784C317A6FA5E00D76C46 /* MainStoryboard_iPad.storyboard */,
+				279784C617A6FA5E00D76C46 /* auraMasterViewController.h */,
+				279784C717A6FA5E00D76C46 /* auraMasterViewController.m */,
+				279784C917A6FA5E00D76C46 /* auraDetailViewController.h */,
+				279784CA17A6FA5E00D76C46 /* auraDetailViewController.m */,
+				279784AF17A6FA5E00D76C46 /* Supporting Files */,
+			);
+			path = AuraTracker;
+			sourceTree = "<group>";
+		};
+		279784AF17A6FA5E00D76C46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				279784B017A6FA5E00D76C46 /* AuraTracker-Info.plist */,
+				279784B117A6FA5E00D76C46 /* InfoPlist.strings */,
+				279784B417A6FA5E00D76C46 /* main.m */,
+				279784B617A6FA5E00D76C46 /* AuraTracker-Prefix.pch */,
+				279784BA17A6FA5E00D76C46 /* Default.png */,
+				279784BC17A6FA5E00D76C46 /* Default@2x.png */,
+				279784BE17A6FA5E00D76C46 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		279784D817A6FA5E00D76C46 /* AuraTrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				279784DE17A6FA5E00D76C46 /* AuraTrackerTests.h */,
+				279784DF17A6FA5E00D76C46 /* AuraTrackerTests.m */,
+				279784D917A6FA5E00D76C46 /* Supporting Files */,
+			);
+			path = AuraTrackerTests;
+			sourceTree = "<group>";
+		};
+		279784D917A6FA5E00D76C46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				279784DA17A6FA5E00D76C46 /* AuraTrackerTests-Info.plist */,
+				279784DB17A6FA5E00D76C46 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		279784A417A6FA5E00D76C46 /* AuraTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 279784E317A6FA5E00D76C46 /* Build configuration list for PBXNativeTarget "AuraTracker" */;
+			buildPhases = (
+				279784A117A6FA5E00D76C46 /* Sources */,
+				279784A217A6FA5E00D76C46 /* Frameworks */,
+				279784A317A6FA5E00D76C46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AuraTracker;
+			productName = AuraTracker;
+			productReference = 279784A517A6FA5E00D76C46 /* AuraTracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		279784D017A6FA5E00D76C46 /* AuraTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 279784E617A6FA5E00D76C46 /* Build configuration list for PBXNativeTarget "AuraTrackerTests" */;
+			buildPhases = (
+				279784CC17A6FA5E00D76C46 /* Sources */,
+				279784CD17A6FA5E00D76C46 /* Frameworks */,
+				279784CE17A6FA5E00D76C46 /* Resources */,
+				279784CF17A6FA5E00D76C46 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				279784D717A6FA5E00D76C46 /* PBXTargetDependency */,
+			);
+			name = AuraTrackerTests;
+			productName = AuraTrackerTests;
+			productReference = 279784D117A6FA5E00D76C46 /* AuraTrackerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2797849D17A6FA5E00D76C46 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = aura;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Cesar Torres";
+			};
+			buildConfigurationList = 279784A017A6FA5E00D76C46 /* Build configuration list for PBXProject "AuraTracker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2797849C17A6FA5E00D76C46;
+			productRefGroup = 279784A617A6FA5E00D76C46 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				279784A417A6FA5E00D76C46 /* AuraTracker */,
+				279784D017A6FA5E00D76C46 /* AuraTrackerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		279784A317A6FA5E00D76C46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279784B317A6FA5E00D76C46 /* InfoPlist.strings in Resources */,
+				279784BB17A6FA5E00D76C46 /* Default.png in Resources */,
+				279784BD17A6FA5E00D76C46 /* Default@2x.png in Resources */,
+				279784BF17A6FA5E00D76C46 /* Default-568h@2x.png in Resources */,
+				279784C217A6FA5E00D76C46 /* MainStoryboard_iPhone.storyboard in Resources */,
+				279784C517A6FA5E00D76C46 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		279784CE17A6FA5E00D76C46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279784DD17A6FA5E00D76C46 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		279784CF17A6FA5E00D76C46 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		279784A117A6FA5E00D76C46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279784B517A6FA5E00D76C46 /* main.m in Sources */,
+				279784B917A6FA5E00D76C46 /* auraAppDelegate.m in Sources */,
+				279784C817A6FA5E00D76C46 /* auraMasterViewController.m in Sources */,
+				279784CB17A6FA5E00D76C46 /* auraDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		279784CC17A6FA5E00D76C46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279784E017A6FA5E00D76C46 /* AuraTrackerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		279784D717A6FA5E00D76C46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 279784A417A6FA5E00D76C46 /* AuraTracker */;
+			targetProxy = 279784D617A6FA5E00D76C46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		279784B117A6FA5E00D76C46 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279784B217A6FA5E00D76C46 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		279784C017A6FA5E00D76C46 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279784C117A6FA5E00D76C46 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		279784C317A6FA5E00D76C46 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279784C417A6FA5E00D76C46 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		279784DB17A6FA5E00D76C46 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279784DC17A6FA5E00D76C46 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		279784E117A6FA5E00D76C46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		279784E217A6FA5E00D76C46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		279784E417A6FA5E00D76C46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AuraTracker/AuraTracker-Prefix.pch";
+				INFOPLIST_FILE = "AuraTracker/AuraTracker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		279784E517A6FA5E00D76C46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AuraTracker/AuraTracker-Prefix.pch";
+				INFOPLIST_FILE = "AuraTracker/AuraTracker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		279784E717A6FA5E00D76C46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AuraTracker.app/AuraTracker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AuraTracker/AuraTracker-Prefix.pch";
+				INFOPLIST_FILE = "AuraTrackerTests/AuraTrackerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		279784E817A6FA5E00D76C46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AuraTracker.app/AuraTracker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AuraTracker/AuraTracker-Prefix.pch";
+				INFOPLIST_FILE = "AuraTrackerTests/AuraTrackerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		279784A017A6FA5E00D76C46 /* Build configuration list for PBXProject "AuraTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279784E117A6FA5E00D76C46 /* Debug */,
+				279784E217A6FA5E00D76C46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		279784E317A6FA5E00D76C46 /* Build configuration list for PBXNativeTarget "AuraTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279784E417A6FA5E00D76C46 /* Debug */,
+				279784E517A6FA5E00D76C46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		279784E617A6FA5E00D76C46 /* Build configuration list for PBXNativeTarget "AuraTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279784E717A6FA5E00D76C46 /* Debug */,
+				279784E817A6FA5E00D76C46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2797849D17A6FA5E00D76C46 /* Project object */;
+}

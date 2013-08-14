@@ -1,0 +1,17 @@
+function makeDropDownBtn(choices, default){
+var feature = $('<td> </td>');
+var btn = $('button').attr('type', 'button')
+                     .attr('data-toggle', 'dropdown')
+                     .addClass('btn btn-xs btn-default dropdown-toggle')
+                     .html(default + '<span class="caret"></span>');
+
+  var dropdown = $('<div></div>').addClass('btn-group btn-xs');
+              .html('<ul class="dropdown-menu"></ul>');
+  for(var i in choices){
+    var choice = $('<li><a href="#"> '+ choices[i] +'</a></li>')
+    dropdown.append(choice);
+  }
+                feature.append(btn).append(dropdown);
+}
+default = 0;
+choices = ['<%= image_tag "uniform.png", :class => "dist"%> Uniform,' '<%= image_tag "normal.png", :class => "dist"%> Normal'];

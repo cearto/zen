@@ -1,0 +1,102 @@
+// Place all the styles related to the voxelgml controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html{
+	width: 100%;
+	height: 100%;
+}
+body{
+	width: 100%;
+	height: 100%;
+}
+.panel{
+	display: inline-block;
+	border-radius: 0px;	
+	height: -moz-calc(100% - 50px);
+    height: -webkit-calc(100% - 50px);
+    height: calc(100% - 50px);
+    margin-bottom: 0px;
+}
+.navbar{
+	margin-bottom: 0px;
+}
+
+#sidepanel{
+	width: 20%;
+	float: right;
+}
+#viewport{
+	float: left;	
+	width: 80%;
+	padding: 0px;
+	overflow: hidden;
+}
+.tab-pane{
+	padding: 15px;
+}
+.tabbable, div.tab-content, #viewport-panel{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.input-group-addon img, .dropdown-menu img, button img{
+	display: inline-block;
+	height: 17px;
+}
+
+canvas{
+	/*border: 1px solid black;*/
+	image-rendering: optimizeSpeed;             // Older versions of FF
+	image-rendering: -moz-crisp-edges;          // FF 6.0+
+	image-rendering: -webkit-optimize-contrast; // Webkit
+	image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+	image-rendering: optimize-contrast;         // Possible future browsers.
+	-ms-interpolation-mode: nearest-neighbor;   // IE
+}
+canvas.fullscreen{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	/*width: 100%;
+	height: 100%;*/
+	background: white;
+}
+button.fullscreen{
+	position: fixed !important;
+	top: -3px !important;
+	right: 5px !important;
+	z-index: 200 !important;
+	border-radius: 3px !important;
+}
+
+button.btn-xs{
+	margin-top: -2px;
+}
+.dist{
+	height: 60%;
+	max-height: 15px;
+}
+
+
+/* Table Styling */
+table{
+	width: 100%;
+}
+th, td{
+	font-size: 0.8em;
+	padding: 0px 6px;
+	border: 1px #CCC solid;
+}
+
+#feature-list, #component-list{
+	height: 40%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+table .dropdown-toggle{
+	border: none;
+	font-size: 0.9em;
+	font-weight: normal;
+}
