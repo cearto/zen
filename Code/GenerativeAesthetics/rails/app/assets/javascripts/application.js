@@ -16,7 +16,9 @@
 //= require bootstrap
 //= require three.min
 //= require stats.min
-//= require generate.js
+//= require Graphics.js
+//= require GML.js
+//= require GMLGUI.js
 
 Object.size = function(obj) {
     var size = 0, key;
@@ -25,3 +27,9 @@ Object.size = function(obj) {
     }
     return size;
 };
+
+function addClickHandler(elem, type, func, ret, self) {
+  elem.addEventListener(type, function(e) {
+      func(e, self);
+  }, ret);
+}
