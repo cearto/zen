@@ -19,6 +19,13 @@
     $('#clear-all').click(removeAllComponents);
     $('#tab2').click(GUI.loadJSON);
     $('#tab1').click(GUI.loadCanvas);
+    $('#file-open').click(GUI.loadOpenMenu);
+    $('#savegml').click(JSONLoader.saveFile);
+    $('#close-popup').click(function(){
+      $('#overlay').hide();
+      $('#popup').hide();
+    });
+
   });
 
 /* INTERACTION HANDLERS */
@@ -40,7 +47,19 @@ function removeAllComponents(){
 
 }
 </script>
-
+<div class="alert alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <span><strong>Warning!</strong> Best check yo self, you're not looking too good.</span>
+</div>
+<div id='overlay'></div>
+<div id='popup'>
+  <div id='saved_files' class="list-group">
+    <a href="#" class="list-group-item active">
+      LOAD FILE
+      <span id='close-popup' class="badge">x</span>
+    </a>
+  </div>
+</div> 
 <div class="navbar">
   <a href="#" class="navbar-brand">AuraGML</a>
 
@@ -53,12 +72,12 @@ function removeAllComponents(){
         <li><a href="#"><%= image_tag 'cylinder.png'%> Cylinder </a></li>
         <li><a href="#">Save as STL</a></li>
         <li class="divider"></li>
-        <li><a href="#">Save as JSGML</a></li>
+        <li><a  href="#">Save as JSGML</a></li>
       </ul>
   </div>
 
   <div class="btn-group pull-right">
-    <button type="button" class="btn btn-default navbar-btn">Save</button>
+    <button type="button" class="btn btn-default navbar-btn">Actions</button>
       <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
@@ -66,10 +85,11 @@ function removeAllComponents(){
      <button id='fullscreen' type="button" class="btn btn-default navbar-btn"><%= image_tag 'fullscreen.png'%></button>
   	  
   	  <ul class="dropdown-menu">
+        <li><a id='file-open' href="#">Open</a></li>
   	    <li><a href="#">Save as PNG</a></li>
   	    <li><a href="#">Save as STL</a></li>
   	    <li class="divider"></li>
-  	    <li><a href="#">Save as JSGML</a></li>
+  	    <li><a id='savegml' href="#">Save as JSGML</a></li>
   	  </ul>
   	</div>
   </div>

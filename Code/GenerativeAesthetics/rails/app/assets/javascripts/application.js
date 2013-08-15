@@ -19,6 +19,7 @@
 //= require Graphics.js
 //= require GML.js
 //= require GUI.js
+//= require JSONLoader.js
 
 Object.size = function(obj) {
     var size = 0, key;
