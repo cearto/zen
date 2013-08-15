@@ -18,7 +18,7 @@
 //= require stats.min
 //= require Graphics.js
 //= require GML.js
-//= require GMLGUI.js
+//= require GUI.js
 
 Object.size = function(obj) {
     var size = 0, key;

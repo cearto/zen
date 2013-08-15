@@ -1,7 +1,8 @@
 <script>
   var g = new Graphics();
+  var gml = new GML();
+
   $(function(){
-    
     g.init();
     g.animate();
     $('#fullscreen').click(function(){
@@ -15,8 +16,29 @@
 
       //onWindowResize();
     });
-    $('#clear-all').click(clearAll);
+    $('#clear-all').click(removeAllComponents);
+    $('#tab2').click(GUI.loadJSON);
+    $('#tab1').click(GUI.loadCanvas);
   });
+
+/* INTERACTION HANDLERS */
+function addComponent(voxel){
+  gml.addComponent(voxel); // Markup
+  GUI.addComponent(voxel); //GUI
+  g.scene.add( voxel.mesh ); //Graphics
+}
+
+function removeComponent(intersect){
+  voxel = g.removeComponent(intersect);
+  GUI.removeComponent(voxel);
+  gml.removeComponent(voxel)
+}
+function removeAllComponents(){
+  g.removeAll(); 
+  GUI.removeComponents();
+  gml.removeComponents();
+
+}
 </script>
 
 <div class="navbar">
@@ -56,14 +78,14 @@
   <div id='viewport' class="panel">
   <div class="tabbable"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#tab1" data-toggle="tab"> Viewport </a></li>
-      <li><a href="#tab2" data-toggle="tab"> Model </a></li>
+      <li class="active"><a id='tab1' href="#tab1" data-toggle="tab"> Viewport </a></li>
+      <li><a href="#tab2" id='tab2' data-toggle="tab"> Model </a></li>
     </ul>
     <div class="tab-content">
       <div id='viewport-panel' class="tab-pane active" id="tab1">
       </div>
       <div class="tab-pane" id="tab2">
-         <div class="well">  <p> JS </p> </div>
+         <textarea class="well">  <p> JS </p> </textarea>
       </div>
     </div>
   </div>
@@ -74,12 +96,14 @@
       <button id='clear-all' type="button" class="btn btn-default btn-xs"> Clear All </button>
    </div>
    </div>
-   <div id='component-list'><h5> Compnents </h5> </div>
-   <div id='attachment-list'><h5> Attachments </h5> </div>
+   <h5 class='list-heading'> Components </h5>
+   <div id='component-list'> </div>
+   <h5 class='list-heading'> Attachments </h5> 
+   <div id='attachment-list'></div>
 
-   <hr class='divider'>   
-   <div id='feature-list'>  
-    <h5> Features </h5>
+   <h5 class='list-heading'> Features </h5> 
+   <div id='feature-list' >  
+    
       <table>
         <tr>
           <th> Name </th>
