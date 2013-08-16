@@ -1,4 +1,6 @@
 GenerativeAesthetics::Application.routes.draw do
+  get "scene/creator"
+
   get "voxelgml/view"
 
   # The priority is based upon order of creation:

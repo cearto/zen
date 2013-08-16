@@ -15,4 +15,9 @@ class VoxelgmlController < ApplicationController
   def saved_files
   	render :json => Dir["public/json/*"]
   end 
+  def load_file
+  	fn = params['filename']
+  	contents = File.read(fn)
+  	render :json => JSON.parse(contents)
+  end
 end

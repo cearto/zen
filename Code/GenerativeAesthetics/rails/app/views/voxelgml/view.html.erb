@@ -25,9 +25,18 @@
       $('#overlay').hide();
       $('#popup').hide();
     });
-
+    
   });
-
+function openMenuClick(){
+  console.log("Opening");
+  var filename = $(this).attr('name');
+  GUI.alert("Opening", filename);
+  $.get('/voxelgml/load_file?filename=' + filename, function(data){
+    gml = new GML();
+    gml.loadJSON(data);
+    g.loadScene(gml);
+  });
+}
 /* INTERACTION HANDLERS */
 function addComponent(voxel){
   gml.addComponent(voxel); // Markup
@@ -85,7 +94,7 @@ function removeAllComponents(){
      <button id='fullscreen' type="button" class="btn btn-default navbar-btn"><%= image_tag 'fullscreen.png'%></button>
   	  
   	  <ul class="dropdown-menu">
-        <li><a id='file-open' href="#">Open</a></li>
+        <li><a id='file-open' href="#">Load</a></li>
   	    <li><a href="#">Save as PNG</a></li>
   	    <li><a href="#">Save as STL</a></li>
   	    <li class="divider"></li>
@@ -117,12 +126,14 @@ function removeAllComponents(){
    </div>
    </div>
    <h5 class='list-heading'> Components </h5>
-   <div id='component-list'> </div>
-   <h5 class='list-heading'> Attachments </h5> 
-   <div id='attachment-list'></div>
+      <div id='component-list'> </div>
+      <h5 class='list-heading'> Attachments </h5> 
+      <div id='attachment-list'></div>
 
-   <h5 class='list-heading'> Features </h5> 
-   <div id='feature-list' >  
+      <h5 class='list-heading'> Features </h5> 
+      <div id='feature-list' >  
+
+      
     
       <table>
         <tr>
