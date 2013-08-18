@@ -1,0 +1,2462 @@
+[
+	{
+		"name": "Cube 0",
+		"type": "Cube",
+		"geometry": {
+			"id": 2,
+			"uuid": "620AE644-5D30-4EF3-A48B-B8630DF8D416",
+			"name": "Cube 0",
+			"vertices": [
+				{
+					"x": 25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": 25
+				}
+			],
+			"colors": [],
+			"normals": [],
+			"faces": [
+				{
+					"a": 0,
+					"b": 2,
+					"c": 3,
+					"d": 1,
+					"normal": {
+						"x": 1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 0,
+					"centroid": {
+						"x": 25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 6,
+					"c": 7,
+					"d": 5,
+					"normal": {
+						"x": -1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 1,
+					"centroid": {
+						"x": -25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 5,
+					"c": 0,
+					"d": 1,
+					"normal": {
+						"x": 0,
+						"y": 1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 2,
+					"centroid": {
+						"x": 0,
+						"y": 25,
+						"z": 0
+					}
+				},
+				{
+					"a": 7,
+					"b": 6,
+					"c": 3,
+					"d": 2,
+					"normal": {
+						"x": 0,
+						"y": -1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 3,
+					"centroid": {
+						"x": 0,
+						"y": -25,
+						"z": 0
+					}
+				},
+				{
+					"a": 5,
+					"b": 7,
+					"c": 2,
+					"d": 0,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 4,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": 25
+					}
+				},
+				{
+					"a": 1,
+					"b": 3,
+					"c": 6,
+					"d": 4,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": -1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 5,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": -25
+					}
+				}
+			],
+			"faceUvs": [
+				[]
+			],
+			"faceVertexUvs": [
+				[
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					]
+				]
+			],
+			"morphTargets": [],
+			"morphColors": [],
+			"morphNormals": [],
+			"skinWeights": [],
+			"skinIndices": [],
+			"lineDistances": [],
+			"boundingBox": null,
+			"boundingSphere": {
+				"center": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"radius": 43.30127018922193
+			},
+			"hasTangents": false,
+			"dynamic": true,
+			"verticesNeedUpdate": false,
+			"elementsNeedUpdate": false,
+			"uvsNeedUpdate": false,
+			"normalsNeedUpdate": false,
+			"tangentsNeedUpdate": false,
+			"colorsNeedUpdate": false,
+			"lineDistancesNeedUpdate": false,
+			"buffersNeedUpdate": false,
+			"width": 50,
+			"height": 50,
+			"depth": 50,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		},
+		"intersect": {
+			"object": {
+				"name": [
+					""
+				],
+				"faceIndex": [
+					null
+				]
+			}
+		},
+		"position": {
+			"x": 271.07291640472624,
+			"y": 1.0000000000752607,
+			"z": -62.9837640314538
+		}
+	},
+	{
+		"name": "Cube 1",
+		"type": "Cube",
+		"geometry": {
+			"id": 3,
+			"uuid": "75F52047-67D7-41AE-B35E-2A3FB2965761",
+			"name": "Cube 1",
+			"vertices": [
+				{
+					"x": 25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": 25
+				}
+			],
+			"colors": [],
+			"normals": [],
+			"faces": [
+				{
+					"a": 0,
+					"b": 2,
+					"c": 3,
+					"d": 1,
+					"normal": {
+						"x": 1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 0,
+					"centroid": {
+						"x": 25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 6,
+					"c": 7,
+					"d": 5,
+					"normal": {
+						"x": -1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 1,
+					"centroid": {
+						"x": -25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 5,
+					"c": 0,
+					"d": 1,
+					"normal": {
+						"x": 0,
+						"y": 1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 2,
+					"centroid": {
+						"x": 0,
+						"y": 25,
+						"z": 0
+					}
+				},
+				{
+					"a": 7,
+					"b": 6,
+					"c": 3,
+					"d": 2,
+					"normal": {
+						"x": 0,
+						"y": -1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 3,
+					"centroid": {
+						"x": 0,
+						"y": -25,
+						"z": 0
+					}
+				},
+				{
+					"a": 5,
+					"b": 7,
+					"c": 2,
+					"d": 0,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 4,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": 25
+					}
+				},
+				{
+					"a": 1,
+					"b": 3,
+					"c": 6,
+					"d": 4,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": -1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 5,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": -25
+					}
+				}
+			],
+			"faceUvs": [
+				[]
+			],
+			"faceVertexUvs": [
+				[
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					]
+				]
+			],
+			"morphTargets": [],
+			"morphColors": [],
+			"morphNormals": [],
+			"skinWeights": [],
+			"skinIndices": [],
+			"lineDistances": [],
+			"boundingBox": null,
+			"boundingSphere": {
+				"center": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"radius": 43.30127018922193
+			},
+			"hasTangents": false,
+			"dynamic": true,
+			"verticesNeedUpdate": false,
+			"elementsNeedUpdate": false,
+			"uvsNeedUpdate": false,
+			"normalsNeedUpdate": false,
+			"tangentsNeedUpdate": false,
+			"colorsNeedUpdate": false,
+			"lineDistancesNeedUpdate": false,
+			"buffersNeedUpdate": false,
+			"width": 50,
+			"height": 50,
+			"depth": 50,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		},
+		"intersect": {
+			"object": {
+				"name": [
+					"Cube 0"
+				],
+				"faceIndex": [
+					null
+				]
+			}
+		},
+		"position": {
+			"x": 281.4791046801556,
+			"y": 14.166378557983876,
+			"z": -48.99999999990655
+		}
+	},
+	{
+		"name": "Cube 2",
+		"type": "Cube",
+		"geometry": {
+			"id": 4,
+			"uuid": "1856C997-622D-43AD-92D4-A86FE1FF1DD8",
+			"name": "Cube 2",
+			"vertices": [
+				{
+					"x": 25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": 25
+				}
+			],
+			"colors": [],
+			"normals": [],
+			"faces": [
+				{
+					"a": 0,
+					"b": 2,
+					"c": 3,
+					"d": 1,
+					"normal": {
+						"x": 1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 0,
+					"centroid": {
+						"x": 25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 6,
+					"c": 7,
+					"d": 5,
+					"normal": {
+						"x": -1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 1,
+					"centroid": {
+						"x": -25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 5,
+					"c": 0,
+					"d": 1,
+					"normal": {
+						"x": 0,
+						"y": 1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 2,
+					"centroid": {
+						"x": 0,
+						"y": 25,
+						"z": 0
+					}
+				},
+				{
+					"a": 7,
+					"b": 6,
+					"c": 3,
+					"d": 2,
+					"normal": {
+						"x": 0,
+						"y": -1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 3,
+					"centroid": {
+						"x": 0,
+						"y": -25,
+						"z": 0
+					}
+				},
+				{
+					"a": 5,
+					"b": 7,
+					"c": 2,
+					"d": 0,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 4,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": 25
+					}
+				},
+				{
+					"a": 1,
+					"b": 3,
+					"c": 6,
+					"d": 4,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": -1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 5,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": -25
+					}
+				}
+			],
+			"faceUvs": [
+				[]
+			],
+			"faceVertexUvs": [
+				[
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					]
+				]
+			],
+			"morphTargets": [],
+			"morphColors": [],
+			"morphNormals": [],
+			"skinWeights": [],
+			"skinIndices": [],
+			"lineDistances": [],
+			"boundingBox": null,
+			"boundingSphere": {
+				"center": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"radius": 43.30127018922193
+			},
+			"hasTangents": false,
+			"dynamic": true,
+			"verticesNeedUpdate": false,
+			"elementsNeedUpdate": false,
+			"uvsNeedUpdate": false,
+			"normalsNeedUpdate": false,
+			"tangentsNeedUpdate": false,
+			"colorsNeedUpdate": false,
+			"lineDistancesNeedUpdate": false,
+			"buffersNeedUpdate": false,
+			"width": 50,
+			"height": 50,
+			"depth": 50,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		},
+		"intersect": {
+			"object": {
+				"name": [
+					"Cube 1"
+				],
+				"faceIndex": [
+					null
+				]
+			}
+		},
+		"position": {
+			"x": 292.24307842814227,
+			"y": 25.43355939381945,
+			"z": 0.9999999998713065
+		}
+	},
+	{
+		"name": "Cube 3",
+		"type": "Cube",
+		"geometry": {
+			"id": 5,
+			"uuid": "C9590099-6EF8-4077-90BB-48816EA8C20E",
+			"name": "Cube 3",
+			"vertices": [
+				{
+					"x": 25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": 25
+				}
+			],
+			"colors": [],
+			"normals": [],
+			"faces": [
+				{
+					"a": 0,
+					"b": 2,
+					"c": 3,
+					"d": 1,
+					"normal": {
+						"x": 1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 0,
+					"centroid": {
+						"x": 25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 6,
+					"c": 7,
+					"d": 5,
+					"normal": {
+						"x": -1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 1,
+					"centroid": {
+						"x": -25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 5,
+					"c": 0,
+					"d": 1,
+					"normal": {
+						"x": 0,
+						"y": 1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 2,
+					"centroid": {
+						"x": 0,
+						"y": 25,
+						"z": 0
+					}
+				},
+				{
+					"a": 7,
+					"b": 6,
+					"c": 3,
+					"d": 2,
+					"normal": {
+						"x": 0,
+						"y": -1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 3,
+					"centroid": {
+						"x": 0,
+						"y": -25,
+						"z": 0
+					}
+				},
+				{
+					"a": 5,
+					"b": 7,
+					"c": 2,
+					"d": 0,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 4,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": 25
+					}
+				},
+				{
+					"a": 1,
+					"b": 3,
+					"c": 6,
+					"d": 4,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": -1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 5,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": -25
+					}
+				}
+			],
+			"faceUvs": [
+				[]
+			],
+			"faceVertexUvs": [
+				[
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					]
+				]
+			],
+			"morphTargets": [],
+			"morphColors": [],
+			"morphNormals": [],
+			"skinWeights": [],
+			"skinIndices": [],
+			"lineDistances": [],
+			"boundingBox": null,
+			"boundingSphere": {
+				"center": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"radius": 43.30127018922193
+			},
+			"hasTangents": false,
+			"dynamic": true,
+			"verticesNeedUpdate": false,
+			"elementsNeedUpdate": false,
+			"uvsNeedUpdate": false,
+			"normalsNeedUpdate": false,
+			"tangentsNeedUpdate": false,
+			"colorsNeedUpdate": false,
+			"lineDistancesNeedUpdate": false,
+			"buffersNeedUpdate": false,
+			"width": 50,
+			"height": 50,
+			"depth": 50,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		},
+		"intersect": {
+			"object": {
+				"name": [
+					"Cube 2"
+				],
+				"faceIndex": [
+					null
+				]
+			}
+		},
+		"position": {
+			"x": 296.5060788942766,
+			"y": 18.485321982003256,
+			"z": 50.99999999992292
+		}
+	},
+	{
+		"name": "Cube 4",
+		"type": "Cube",
+		"geometry": {
+			"id": 6,
+			"uuid": "16AEECC8-667F-4312-B3CA-63186A999C1A",
+			"name": "Cube 4",
+			"vertices": [
+				{
+					"x": 25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": 25
+				},
+				{
+					"x": 25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": 25,
+					"z": 25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": -25
+				},
+				{
+					"x": -25,
+					"y": -25,
+					"z": 25
+				}
+			],
+			"colors": [],
+			"normals": [],
+			"faces": [
+				{
+					"a": 0,
+					"b": 2,
+					"c": 3,
+					"d": 1,
+					"normal": {
+						"x": 1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": 1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 0,
+					"centroid": {
+						"x": 25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 6,
+					"c": 7,
+					"d": 5,
+					"normal": {
+						"x": -1,
+						"y": 0,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						},
+						{
+							"x": -1,
+							"y": 0,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 1,
+					"centroid": {
+						"x": -25,
+						"y": 0,
+						"z": 0
+					}
+				},
+				{
+					"a": 4,
+					"b": 5,
+					"c": 0,
+					"d": 1,
+					"normal": {
+						"x": 0,
+						"y": 1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": 1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 2,
+					"centroid": {
+						"x": 0,
+						"y": 25,
+						"z": 0
+					}
+				},
+				{
+					"a": 7,
+					"b": 6,
+					"c": 3,
+					"d": 2,
+					"normal": {
+						"x": 0,
+						"y": -1,
+						"z": 0
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						},
+						{
+							"x": 0,
+							"y": -1,
+							"z": 0
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 3,
+					"centroid": {
+						"x": 0,
+						"y": -25,
+						"z": 0
+					}
+				},
+				{
+					"a": 5,
+					"b": 7,
+					"c": 2,
+					"d": 0,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": 1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.7215686274509804,
+						"b": 0.7568627450980392
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 4,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": 25
+					}
+				},
+				{
+					"a": 1,
+					"b": 3,
+					"c": 6,
+					"d": 4,
+					"normal": {
+						"x": 0,
+						"y": 0,
+						"z": -1
+					},
+					"vertexNormals": [
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						},
+						{
+							"x": 0,
+							"y": 0,
+							"z": -1
+						}
+					],
+					"color": {
+						"r": 0,
+						"g": 0.6588235294117647,
+						"b": 0.8823529411764706
+					},
+					"vertexColors": [],
+					"vertexTangents": [],
+					"materialIndex": 5,
+					"centroid": {
+						"x": 0,
+						"y": 0,
+						"z": -25
+					}
+				}
+			],
+			"faceUvs": [
+				[]
+			],
+			"faceVertexUvs": [
+				[
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					],
+					[
+						{
+							"x": 0,
+							"y": 1
+						},
+						{
+							"x": 0,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 0
+						},
+						{
+							"x": 1,
+							"y": 1
+						}
+					]
+				]
+			],
+			"morphTargets": [],
+			"morphColors": [],
+			"morphNormals": [],
+			"skinWeights": [],
+			"skinIndices": [],
+			"lineDistances": [],
+			"boundingBox": null,
+			"boundingSphere": {
+				"center": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"radius": 43.30127018922193
+			},
+			"hasTangents": false,
+			"dynamic": true,
+			"verticesNeedUpdate": false,
+			"elementsNeedUpdate": false,
+			"uvsNeedUpdate": false,
+			"normalsNeedUpdate": false,
+			"tangentsNeedUpdate": false,
+			"colorsNeedUpdate": false,
+			"lineDistancesNeedUpdate": false,
+			"buffersNeedUpdate": false,
+			"width": 50,
+			"height": 50,
+			"depth": 50,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		},
+		"intersect": {
+			"object": {
+				"name": [
+					"Cube 2"
+				],
+				"faceIndex": [
+					null
+				]
+			}
+		},
+		"position": {
+			"x": 285.8332404652727,
+			"y": 51.000000000049226,
+			"z": 14.259038225048016
+		}
+	}
+]

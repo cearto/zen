@@ -25,6 +25,7 @@
       $('#overlay').hide();
       $('#popup').hide();
     });
+    GUI.generateCanvas();
     
   });
 function openMenuClick(){
@@ -56,6 +57,8 @@ function removeAllComponents(){
 
 }
 </script>
+
+
 <div class="alert alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
  <span><strong>Warning!</strong> Best check yo self, you're not looking too good.</span>
@@ -86,7 +89,7 @@ function removeAllComponents(){
   </div>
 
   <div class="btn-group pull-right">
-    <button type="button" class="btn btn-default navbar-btn">Actions</button>
+    <button type="button" id='file-open' class="btn btn-default navbar-btn">Load</button>
       <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
@@ -112,11 +115,14 @@ function removeAllComponents(){
     </ul>
     <div class="tab-content">
       <div id='viewport-panel' class="tab-pane active" id="tab1">
-      </div>
+      
+     <!--  <div id='preview-panel'>
+      </div> -->
+    </div>
       <div class="tab-pane" id="tab2">
          <textarea class="well">  <p> JS </p> </textarea>
       </div>
-    </div>
+    
   </div>
   </div> 
   <div id='sidepanel' class="panel">

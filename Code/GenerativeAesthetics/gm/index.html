@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://joostn.github.io/OpenJsCad/processfile.html -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <script src="js/lightgl.js"></script>
+    <script src="js/csg.js"></script>
+    <script src="js/openjscad.js"></script>
+    <script src="js/aura.js"></script>
+    <script src="js/generative_model.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/openjscad.css" type="text/css">
+    <link rel="stylesheet" href="css/custom.css" type="text/css">
+    <script type="text/javascript">
+       $(function(){
+         gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
+         setupDragDrop();
+       }); 
+    </script>
+    <title>AuraGML</title>
+    </head>
+<body>
+  
+  <!-- USER INTERFACE  -->
+  <div id="filedropzone">
+    <div id="filedropzone_empty" style="display: none;">Drop your .jscad file here</div>
+    <div id="filedropzone_filled" style="display: block;">
+      <span id="currentfile">Current file: test.jscad</span>
+      <div id="filebuttons">
+         <button id="getstlbutton" style="display:none" onclick="getStl();">Get STL</button>
+         <button onclick="parseFile(true,false);">Debug (see below)</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="viewer">
+     <div class="viewer">
+        <canvas></canvas>
+     </div>
+  </div>
+
+  <div id="preview"></div> 
+  <script type="text/javascript">  
+    var model = new GM($('#preview'));
+    $(function(){
+      model.sample();
+    })
+  </script>
+
+</body>
+</html>
