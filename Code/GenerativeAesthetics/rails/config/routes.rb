@@ -1,4 +1,6 @@
 GenerativeAesthetics::Application.routes.draw do
+  get "gm/view"
+
   get "scene/creator"
 
   get "voxelgml/view"

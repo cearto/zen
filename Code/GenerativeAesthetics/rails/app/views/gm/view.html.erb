@@ -1,0 +1,54 @@
+
+<script type="text/javascript">
+   $(function(){
+    
+    $.get('/resources/test.jscad', function(data){
+      console.log(data);
+      gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
+     setupDragDrop();
+      gProcessor.setJsCad(data, '/resources/test.jscad');
+    });
+     
+   }); 
+</script>
+  
+<!-- USER INTERFACE  -->
+<header> 
+  <span id='logo'> Generative Model </span>
+  <nav>
+    <a href="#">Open</a>
+    <a href="#">Save</a>
+
+         <button id="getstlbutton" onclick="getStl();">Get STL</button>
+         <button style="display:none" onclick="parseFile(true,false);">Debug (see below)</button>
+   
+  </nav>
+  <div class="statusdiv" style="display: block;"><span>Ready.</span><div style="float: right;"><button >Abort</button><select ><option>Element #1</option></select><select style="display: inline;"><option value="stl">STL</option><option value="x3d">X3D</option></select><button style="display: inline;">Generate STL</button><a ></a></div></div>
+    <div id="filedropzone">
+    <div id="filedropzone_empty" style="display: none;">Drop your .jscad file here</div>
+    <div id="filedropzone_filled" style="display: block;">
+      <span id="currentfile">Current file: test.jscad</span>
+      
+    </div>
+  </div>
+</header>
+<div id="main">
+
+
+  <div id="viewer">
+     <div class="viewer">
+      
+        <canvas></canvas>
+     </div>
+  </div>
+</div>
+
+<div id="preview"></div> 
+<script type="text/javascript">  
+  var model = new GM($('#preview'));
+  $(function(){
+    model.sample();
+    
+  })
+</script>
+

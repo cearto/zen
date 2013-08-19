@@ -797,7 +797,7 @@ OpenJsCad.Processor.prototype = {
     this.downloadOutputFileLink = document.createElement("a");
     this.statusbuttons.appendChild(this.downloadOutputFileLink);
     this.parametersdiv = document.createElement("div");
-    this.parametersdiv.className = "parametersdiv";
+    this.parametersdiv.className = "parameters";
     var headerdiv = document.createElement("div");
     headerdiv.innerText = "Parameters:";
     headerdiv.className = "header";
@@ -982,7 +982,7 @@ OpenJsCad.Processor.prototype = {
   // script: javascript code
   // filename: optional, the name of the .jscad file
   setJsCad: function(script, filename) {
-    if(!filename) filename = "openjscad.jscad";
+    if(!filename) filename = "resources/test.jscad";
     filename = filename.replace(/\.jscad$/i, "");
     this.abort();
     this.clearViewer();
@@ -1101,6 +1101,7 @@ OpenJsCad.Processor.prototype = {
         that.setRenderedObjects(obj);
         that.processing = false;
         that.statusspan.innerHTML = "Ready.";
+        model.sample();
       }
       catch(e)
       {

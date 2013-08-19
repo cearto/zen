@@ -12,15 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lightgl
+//= require csg
+//= require openjscad
+//= require aura
+//= require generative_model
+
+
 // require_tree .
-//= require bootstrap
-//= require three.min.js
+// require bootstrap
+// require three.min.js
 // require Three
-//= require stats.min
-//= require Graphics.js
-//= require GML.js
-//= require GUI.js
-//= require JSONLoader.js
+// require stats.min
+// require Graphics.js
+// require GML.js
+// require GUI.js
+// require JSONLoader.js
 
 Object.size = function(obj) {
     var size = 0, key;

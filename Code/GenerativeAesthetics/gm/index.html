@@ -7,8 +7,9 @@
     <script src="js/csg.js"></script>
     <script src="js/openjscad.js"></script>
     <script src="js/aura.js"></script>
-    <script src="js/generative_model.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/generative_model.js"></script>
+
     <link rel="stylesheet" href="css/openjscad.css" type="text/css">
     <link rel="stylesheet" href="css/custom.css" type="text/css">
     <script type="text/javascript">
@@ -23,7 +24,7 @@
   
   <!-- USER INTERFACE  -->
   <div id="filedropzone">
-    <div id="filedropzone_empty" style="display: none;">Drop your .jscad file here</div>
+    <div id="filedropzone_empty" >Drop your .jscad file here</div>
     <div id="filedropzone_filled" style="display: block;">
       <span id="currentfile">Current file: test.jscad</span>
       <div id="filebuttons">
@@ -35,6 +36,7 @@
 
   <div id="viewer">
      <div class="viewer">
+        <div class="statusdiv" style="display: block;"><span>Ready.</span><div style="float: right;"><button >Abort</button><select ><option>Element #1</option></select><select style="display: inline;"><option value="stl">STL</option><option value="x3d">X3D</option></select><button style="display: inline;">Generate STL</button><a ></a></div></div>
         <canvas></canvas>
      </div>
   </div>
