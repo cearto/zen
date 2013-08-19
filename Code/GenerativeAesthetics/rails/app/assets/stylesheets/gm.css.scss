@@ -5,15 +5,41 @@
 /* OPENSCAD */
 
 canvas { cursor: move; }
+/* FILEZONE */
 
+#filedropzone {
+  width: 18%;
+  float: right;
 
-
-.statusdiv {
-  width: 800px;
-  position: absolute;
-  top: 0px;
-  z-index: 20;
+  border: 2px dashed #bbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 3px;
+  color: black;
+ 
+  overflow: hidden;
+  font-size: 0.7em;
+  margin: 0 20px;
+  text-align: center;
 }
+
+#filedropzone_empty {
+  text-align: center;
+  color: #bbb;
+}
+
+#filedropzone_filled {
+  color: black;
+  display: none;
+}
+#status{
+  float: right;
+  width: 20%;
+  height: 100%;
+}
+
+
 /* DEFAULT */
 body {
   font: 14px/20px 'Helvetica Neue Light', HelveticaNeue-Light, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -106,7 +132,7 @@ header span#logo{
 }
 nav{
   position: relative;
-  width: 40%;
+  width: 15%;
   height: 100%;
   float: left;
 }
@@ -126,31 +152,7 @@ nav a:hover{
   background: #999;
   color: white;
 }
-/* FILEZONE */
-#filedropzone {
-  border: 2px dashed #bbb;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  padding: 3px;
-  color: black;
-  width: 18%;
-  overflow: hidden;
-  float: right;
-  font-size: 0.7em;
-  margin: 0 20px;
-  text-align: center;
-}
 
-#filedropzone_empty {
-  text-align: center;
-  color: #bbb;
-}
-
-#filedropzone_filled {
-  color: black;
-  display: none;
-}
 
 
 

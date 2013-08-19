@@ -18,12 +18,8 @@
   <nav>
     <a href="#">Open</a>
     <a href="#">Save</a>
-
-         <button id="getstlbutton" onclick="getStl();">Get STL</button>
-         <button style="display:none" onclick="parseFile(true,false);">Debug (see below)</button>
-   
   </nav>
-  <div class="statusdiv" style="display: block;"><span>Ready.</span><div style="float: right;"><button >Abort</button><select ><option>Element #1</option></select><select style="display: inline;"><option value="stl">STL</option><option value="x3d">X3D</option></select><button style="display: inline;">Generate STL</button><a ></a></div></div>
+  
     <div id="filedropzone">
     <div id="filedropzone_empty" style="display: none;">Drop your .jscad file here</div>
     <div id="filedropzone_filled" style="display: block;">
@@ -31,6 +27,7 @@
       
     </div>
   </div>
+  <div id="status"></div>
 </header>
 <div id="main">
 

@@ -820,7 +820,7 @@ OpenJsCad.Processor.prototype = {
     };
     this.parametersdiv.appendChild(parseParametersButton);
     this.enableItems();    
-    this.containerdiv.appendChild(this.statusdiv);
+    $('#status').append(this.statusdiv);
     this.containerdiv.appendChild(this.errordiv);
     this.containerdiv.appendChild(this.parametersdiv);
     this.clearViewer();
@@ -1249,7 +1249,10 @@ OpenJsCad.Processor.prototype = {
     var dirname = "OpenJsCadOutput1_"+parseInt(Math.random()*1000000000, 10)+"."+extension;
     var extension = this.selectedFormatInfo().extension;
     var filename = this.getFilenameForRenderedObject()+"."+extension;
+    filename = 'test_1.stl';
+    console.log(filename);
     var that = this;
+    console.log(that.currentObjectToBlob());
     window.requestFileSystem(TEMPORARY, 20*1024*1024, function(fs){
         fs.root.getDirectory(dirname, {create: true, exclusive: true}, function(dirEntry) {
             that.outputFileDirEntry = dirEntry;
