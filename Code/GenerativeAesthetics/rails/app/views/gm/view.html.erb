@@ -1,22 +1,44 @@
 
 <script type="text/javascript">
-   $(function(){
-    
-    $.get('/resources/test.jscad', function(data){
-      console.log(data);
-      gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
-     setupDragDrop();
-      gProcessor.setJsCad(data, '/resources/test.jscad');
+  var model = new GM($('#preview'), '/resources/openjscadorg.jscad');
+  var resource_base = "/";
+  $(function(){
+    gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
+    setupDragDrop();
+    $('#file-open').click(GUI.loadOpenMenu);
+    $('#close-popup').click(function(){
+      $('#overlay').hide();
+      $('#popup').hide();  
     });
-     
-   }); 
+    model.load();
+  });
+
+
+function openMenuClick(){
+  var filename = resource_base + $(this).attr('name');
+  GUI.alert("Opening", filename);    
+  model.load(filename); 
+  $('#close-popup').click();
+}; 
 </script>
-  
+<div class="alert alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <span><strong>Warning!</strong> Best check yo self, you're not looking too good.</span>
+</div>
+<div id='overlay'></div>
+<div id='popup'>
+  <div id='saved_files' class="list-group">
+    <a href="#" class="list-group-item active">
+      LOAD FILE
+      <span id='close-popup' class="badge">x</span>
+    </a>
+  </div>
+</div>
 <!-- USER INTERFACE  -->
 <header> 
   <span id='logo'> Generative Model </span>
   <nav>
-    <a href="#">Open</a>
+    <a id='file-open' href="#">Open</a>
     <a href="#">Save</a>
   </nav>
   
@@ -41,11 +63,4 @@
 </div>
 
 <div id="preview"></div> 
-<script type="text/javascript">  
-  var model = new GM($('#preview'));
-  $(function(){
-    model.sample();
-    
-  })
-</script>
 

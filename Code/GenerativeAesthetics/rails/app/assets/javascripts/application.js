@@ -15,8 +15,9 @@
 //= require lightgl
 //= require csg
 //= require openjscad
-//= require aura
 //= require generative_model
+//= require aura
+
 
 
 // require_tree .
@@ -26,8 +27,8 @@
 // require stats.min
 // require Graphics.js
 // require GML.js
-// require GUI.js
-// require JSONLoader.js
+//= require GUI.js
+//= require JSONLoader.js
 
 Object.size = function(obj) {
     var size = 0, key;

@@ -1,6 +1,6 @@
 OpenJsCad = function() {
 };
-
+var loaded = false;
 OpenJsCad.log = function(txt) {
   var timeInMs = Date.now();
   var prevtime = OpenJsCad.log.prevLogTime;
@@ -93,7 +93,6 @@ OpenJsCad.Viewer = function(containerelement, width, height, initialdepth) {
   ');
   var glContextAttributes = { preserveDrawingBuffer: true };
   var context = gl.canvas.getContext("experimental-webgl", glContextAttributes);
-  console.log(context);
   containerelement.appendChild(gl.canvas);  
 
   var _this=this;
@@ -719,7 +718,7 @@ OpenJsCad.Processor.prototype = {
     viewerdiv.className = "viewer";
     viewerdiv.style.width = this.viewerwidth + "px";
     viewerdiv.style.height = this.viewerheight + "px";
-    viewerdiv.style.backgroundColor = "rgb(200,200,200)";
+    viewerdiv.style.backgroundColor = "white";
     this.containerdiv.appendChild(viewerdiv);
     this.viewerdiv = viewerdiv;
     try
@@ -770,40 +769,45 @@ OpenJsCad.Processor.prototype = {
     this.errorpre = document.createElement("pre"); 
     this.errordiv.appendChild(this.errorpre);
     this.statusdiv = document.createElement("div");
-    this.statusdiv.className = "statusdiv";
-    //this.statusdiv.style.width = this.viewerwidth + "px";
-    this.statusspan = document.createElement("span");
-    this.statusbuttons = document.createElement("div");
-    this.statusbuttons.style.float = "right";
-    this.statusdiv.appendChild(this.statusspan);
-    this.statusdiv.appendChild(this.statusbuttons);
-    this.abortbutton = document.createElement("button");
-    this.abortbutton.innerHTML = "Abort";
-    this.abortbutton.onclick = function(e) {
-      that.abort();
-    };
-    this.statusbuttons.appendChild(this.abortbutton);
+    
+      this.statusdiv.className = "statusdiv";
+      //this.statusdiv.style.width = this.viewerwidth + "px";
+      this.statusspan = document.createElement("span");
+      this.statusspan.className = 'state';
+      this.statusbuttons = document.createElement("div");
+      this.statusbuttons.style.float = "right";
+      this.statusdiv.appendChild(this.statusspan);
+      this.statusdiv.appendChild(this.statusbuttons);
+      this.abortbutton = document.createElement("button");
+      this.abortbutton.innerHTML = "Abort";
+      this.abortbutton.onclick = function(e) {
+        that.abort();
+      };
+      this.statusbuttons.appendChild(this.abortbutton);
 
-    this.renderedElementDropdown = document.createElement("select");
-    this.renderedElementDropdown.onchange = function(e) {
-      that.setSelectedObjectIndex(that.renderedElementDropdown.selectedIndex);
-    };
-    this.renderedElementDropdown.style.display = "none";
-    this.statusbuttons.appendChild(this.renderedElementDropdown);
+      this.renderedElementDropdown = document.createElement("select");
+      this.renderedElementDropdown.onchange = function(e) {
+        that.setSelectedObjectIndex(that.renderedElementDropdown.selectedIndex);
+      };
+      this.renderedElementDropdown.style.display = "none";
+      this.statusbuttons.appendChild(this.renderedElementDropdown);
 
-    this.formatDropdown = document.createElement("select");
-    this.formatDropdown.onchange = function(e) {
-      that.currentFormat = that.formatDropdown.options[that.formatDropdown.selectedIndex].value;
-      that.updateDownloadLink();
-    };
-    this.statusbuttons.appendChild(this.formatDropdown);
-    this.generateOutputFileButton = document.createElement("button");
-    this.generateOutputFileButton.onclick = function(e) {
-      that.generateOutputFile();
-    };
-    this.statusbuttons.appendChild(this.generateOutputFileButton);
-    this.downloadOutputFileLink = document.createElement("a");
-    this.statusbuttons.appendChild(this.downloadOutputFileLink);
+      this.formatDropdown = document.createElement("select");
+      this.formatDropdown.onchange = function(e) {
+        that.currentFormat = that.formatDropdown.options[that.formatDropdown.selectedIndex].value;
+        that.updateDownloadLink();
+      };
+      this.statusbuttons.appendChild(this.formatDropdown);
+      this.generateOutputFileButton = document.createElement("button");
+      this.generateOutputFileButton.setAttribute('id', 'output');
+      this.generateOutputFileButton.onclick = function(e) {
+        console.log('Clicked ouput');
+        that.generateOutputFile();
+      };
+      this.statusbuttons.appendChild(this.generateOutputFileButton);
+      this.downloadOutputFileLink = document.createElement("a");
+      this.statusbuttons.appendChild(this.downloadOutputFileLink);
+
     this.parametersdiv = document.createElement("div");
     this.parametersdiv.className = "parameters";
     var headerdiv = document.createElement("div");
@@ -816,11 +820,22 @@ OpenJsCad.Processor.prototype = {
     var parseParametersButton = document.createElement("button");
     parseParametersButton.innerHTML = "Update";
     parseParametersButton.onclick = function(e) {
-      that.rebuildSolid();
+      that.rebuildSolid(false);
     };
     this.parametersdiv.appendChild(parseParametersButton);
-    this.enableItems();    
-    $('#status').append(this.statusdiv);
+
+    var parseParametersGenButton = document.createElement("button");
+    parseParametersGenButton.innerHTML = "Generate";
+    parseParametersGenButton.onclick = function(e) {
+      that.rebuildSolid(true);
+    };
+    this.parametersdiv.appendChild(parseParametersGenButton);
+    this.enableItems();
+   // if($('#status').children().length == 0){
+    $('#status').children().remove();
+      $('#status').append(this.statusdiv);
+   // }
+    
     this.containerdiv.appendChild(this.errordiv);
     this.containerdiv.appendChild(this.parametersdiv);
     this.clearViewer();
@@ -1014,7 +1029,7 @@ OpenJsCad.Processor.prototype = {
     {
       this.script = script;
       this.filename = filename;
-      this.rebuildSolid();
+      this.rebuildSolid(false);
     }
     else
     {
@@ -1022,7 +1037,12 @@ OpenJsCad.Processor.prototype = {
       if(this.onchange) this.onchange();
     }
   },
-  
+  getGeneratedParamValues: function(){
+    var random = Math.random();
+    var params = this.getParamValues();
+    params.numTeeth = parseInt(random * 20) + 1;
+    return params;
+  },
   getParamValues: function()
   {
     var paramValues = {};
@@ -1069,16 +1089,21 @@ OpenJsCad.Processor.prototype = {
     return paramValues;
   },
     
-  rebuildSolid: function()
+  rebuildSolid: function(generate)
   {
     this.abort();
     this.setError("");
     this.clearViewer();
     this.processing = true;
-    this.statusspan.innerHTML = "Processing, please wait...";
+    $('#status .state').html("Processing...");
     this.enableItems();
     var that = this;
-    var paramValues = this.getParamValues();
+    var paramValues;
+    if(!generate)
+      paramValues = this.getParamValues();
+    else
+      paramValues = this.getGeneratedParamValues();
+    
     var useSync = this.debugging;
     var options = {};
 
@@ -1090,12 +1115,12 @@ OpenJsCad.Processor.prototype = {
         if(err)
         {
           that.setError(err);
-          that.statusspan.innerHTML = "Error.";
+          $('#status .state').html("Error.");
         }
         else
         {
           that.setRenderedObjects(obj);
-          that.statusspan.innerHTML = "Ready.";
+          $('#status .state').html("Ready");
         }
         that.enableItems();
         if(that.onchange) that.onchange();
@@ -1108,7 +1133,7 @@ OpenJsCad.Processor.prototype = {
         var obj = OpenJsCad.parseJsCadScriptSync(this.script, paramValues, this.debugging);
         that.setRenderedObjects(obj);
         that.processing = false;
-        that.statusspan.innerHTML = "Ready.";
+       $('#status .state').html("Ready.");
       }
       catch(e)
       {
@@ -1119,7 +1144,7 @@ OpenJsCad.Processor.prototype = {
           errtxt = e.toString();
         }
         that.setError(errtxt);
-        that.statusspan.innerHTML = "Error.";
+        $('#status .state').html("Error.");
       }
       that.enableItems();
       if(that.onchange) that.onchange();
@@ -1155,10 +1180,12 @@ OpenJsCad.Processor.prototype = {
 
   generateOutputFile: function() {
     this.clearOutputFile();
+    console.log(this.hasValidCurrentObject);
     if(this.hasValidCurrentObject)
     {
       try
       {
+        console.log('successful rentry');
         this.generateOutputFileFileSystem();
       }
       catch(e)
@@ -1250,7 +1277,6 @@ OpenJsCad.Processor.prototype = {
     var extension = this.selectedFormatInfo().extension;
     var filename = this.getFilenameForRenderedObject()+"."+extension;
     filename = 'test_1.stl';
-    console.log(filename);
     var that = this;
     console.log(that.currentObjectToBlob());
     window.requestFileSystem(TEMPORARY, 20*1024*1024, function(fs){

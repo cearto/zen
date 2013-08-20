@@ -3,7 +3,8 @@
 // @date = 18 Aug 2013
 
 
-function GM(preview){
+function GM(preview, filename){
+	this.filename = filename;
 	this.preview = preview;
 	this.sample = function(){
 	  var canvas = $('canvas');
@@ -11,6 +12,15 @@ function GM(preview){
 	  //var gi = $('<img></img>').attr('src', img.src);
 	  //console.log(gi);
 	  //this.preview.append(gi);
+	}
+	this.load = function(filename){
+		if(!filename) filename = this.filename;
+		else this.filename = filename;
+		$.get(filename, function(data){
+			gProcessor = new OpenJsCad.Processor($('#viewer')[0]);
+			gProcessor.setJsCad(data, filename);
+			model.sample();
+		})
 	}
 }
 
@@ -20,3 +30,4 @@ function convertCanvasToImage(canvas) {
 	$('#preview').append(image);
 	return image;
 }
+

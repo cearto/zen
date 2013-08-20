@@ -13,7 +13,10 @@ class VoxelgmlController < ApplicationController
   	render :json => params
   end
   def saved_files
-  	render :json => Dir["public/json/*"]
+    files = Dir["public/resources/*.jscad"]
+    files.collect!{|f| f.split('/')[1..-1].join('/')}
+  	render :json => files
+
   end 
   def load_file
   	fn = params['filename']

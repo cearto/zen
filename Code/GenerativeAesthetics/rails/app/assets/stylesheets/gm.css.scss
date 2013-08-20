@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* OPENSCAD */
-
 canvas { cursor: move; }
+
 /* FILEZONE */
 
 #filedropzone {
@@ -33,12 +33,17 @@ canvas { cursor: move; }
   color: black;
   display: none;
 }
+
+/* STATUS */
 #status{
   float: right;
   width: 20%;
   height: 100%;
 }
 
+#statusdiv{
+  display: block;
+}
 
 /* DEFAULT */
 body {
@@ -66,16 +71,14 @@ a { color: inherit; }
 .viewer{
   width: 100%;
   height: 100%;
-  background: rgb(200, 200, 200);
 }
 canvas{
   width: 100%;
   height: 100%;
+  background: white;
 }
 
-#statusdiv{
-  display: block;
-}
+
 
 /*PREVIEW CSS*/
 
@@ -84,7 +87,7 @@ canvas{
     height: 20%;
     position: fixed;
     bottom: 0;
-    background: white;
+    background: #EEE;
   }
   #preview img{
     margin-top: 8px;
@@ -96,18 +99,21 @@ canvas{
 
 /*PARAMETERS DIV */
 .parameters {
+  font-size: 0.8em;
   width: 20%;
   position: fixed;
   right: 0;
   bottom: 0;
-  background: #DDD;
-  padding: 10px 6px;
-  border: 1px solid rgb(200,200,200);
+  background: #EEE;
+  padding: 20px;
+  /*border: 1px solid rgb(200,200,200);*/
   z-index: 10;
   height: -moz-calc(100% - 34px);
   height: -webkit-calc(100% - 34px);
   height: -o-calc(100% - 34px);
   height: calc(100% - 34px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .parameters .header {
@@ -119,7 +125,7 @@ header{
   position: fixed;
   top: 0;
   width: 100%;
-  background: #CCC;
+  background: #DDD;
 
   padding: 5px 0px;
 }
@@ -137,7 +143,7 @@ nav{
   float: left;
 }
 
-nav a{
+nav a, #status button{
   color: white;
   text-decoration: none;
   display: inline-block;
@@ -145,9 +151,11 @@ nav a{
   font-size: 0.6em;
   padding: 4px 10px;
   border-radius: 3px;
-  background: #AAA;
+  background: #BBB;
+  border: 1px #AAA;
+  margin-left: 5px;
 }
-nav a:hover{
+nav a:hover, button:hover{
   text-decoration: none;
   background: #999;
   color: white;
@@ -169,3 +177,32 @@ nav a:hover{
   height: calc(80% - 34px);
 }
 
+/*OPEN MENU*/
+
+#overlay{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.2;
+  z-index: 200;
+}
+#popup{
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  overflow-y: scroll;
+  border-radius: 3px;
+  background: white;
+  z-index: 300;
+  width: 40%;
+  height: 40%; 
+}
+
+#output{
+  z-index: 200;
+}

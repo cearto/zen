@@ -78,12 +78,12 @@ GUI.loadOpenMenu = function(){
   $('#overlay').show();
   $('#popup').show();
   $('#saved_files').children().not('.active').remove();
-  JSONLoader.updateFileCount(function(data){
+    JSONLoader.updateFileCount(function(data){
     var filename, node;
     console.log(data);
     numFiles = data.length;
     for(var i in data){
-      filename = data[i].split('/')[2].split('.')[0];
+      filename = data[i].split('/')[1].split('.')[0];
       console.log(filename);
       node = $('<a></a>').addClass('list-group-item')
                         .html(filename)
