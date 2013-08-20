@@ -19,7 +19,7 @@ OpenJsCad.log = function(txt) {
   }
   else throw new Error("Cannot log");
 };
-
+var cnv = null;
 // A viewer is a WebGL canvas that lets the user view a mesh. The user can
 // tumble it around by dragging the mouse.
 OpenJsCad.Viewer = function(containerelement, width, height, initialdepth) {
@@ -27,6 +27,7 @@ OpenJsCad.Viewer = function(containerelement, width, height, initialdepth) {
   //var glContextAttributes = { preserveDrawingBuffer: true };
   //gl = $('canvas')[0].getContext("experimental-webgl", glContextAttributes);
   this.gl = gl;
+  cnv = gl.canvas;
   this.angleX = -60;
   this.angleY = 0;
   this.angleZ = -45;
@@ -554,6 +555,7 @@ OpenJsCad.parseJsCadScriptASync = function(script, mainParameters, options, call
         var resulttype = e.data.result.class;
         var result = OpenJsCad.resultFromCompactBinary(e.data.result);
         callback(null, result);
+        model.sample();
       }
       else if(e.data.cmd == "error")
       {

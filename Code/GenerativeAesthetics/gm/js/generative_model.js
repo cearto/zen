@@ -8,9 +8,7 @@ function GM(preview){
 	this.sample = function(){
 	  var canvas = $('canvas');
 	  var img = convertCanvasToImage(canvas);
-	  var gi = $('<img></img>').attr('src', img.src);
-	  console.log(gi);
-	  this.preview.append(gi);
+	  this.preview.append(img);
 	}
 }
 

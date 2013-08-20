@@ -1088,6 +1088,7 @@ OpenJsCad.Processor.prototype = {
         {
           that.setRenderedObjects(obj);
           that.statusspan.innerHTML = "Ready.";
+          //model.sample();
         }
         that.enableItems();
         if(that.onchange) that.onchange();
@@ -1101,7 +1102,7 @@ OpenJsCad.Processor.prototype = {
         that.setRenderedObjects(obj);
         that.processing = false;
         that.statusspan.innerHTML = "Ready.";
-        model.sample();
+        //model.sample();
       }
       catch(e)
       {

@@ -17,6 +17,7 @@
 //= require openjscad
 //= require generative_model
 //= require aura
+//= require htmltocanvas
 
 
 
