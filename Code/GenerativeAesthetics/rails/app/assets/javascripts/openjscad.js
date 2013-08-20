@@ -509,6 +509,7 @@ OpenJsCad.parseJsCadScriptSync = function(script, mainParameters, debugging) {
 OpenJsCad.parseJsCadScriptASync = function(script, mainParameters, options, callback) {
   // console.log('script');
   // console.log(script);
+  model.parameters = mainParameters; 
 
   var baselibraries = [
     "assets/csg.js",

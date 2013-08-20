@@ -17,10 +17,6 @@
 //= require openjscad
 //= require generative_model
 //= require aura
-//= require htmltocanvas
-
-
-
 // require_tree .
 // require bootstrap
 // require three.min.js
@@ -64,79 +60,15 @@ function circularJSON(structure){
 	return cjson;
 }
 
-/* Testing Script */
+function convertCanvasToImage(canvas) {
+	image = new Image();
+	image.src = canvas[0].toDataURL("image/png");	
+	return image;
+}
 
-function runTest(){
-	var saveVoxel = meshTest;
-	
-	/* CUSTOM STORAGE */
-	stored = gml.toJSON(false);
-	// unstored = gml.loadJSON(JSON.parse(stored));
-
-	//console.log("STORED GML");
-	
-	
-
-	// stored = new Object();
-	// stored.geometry = saveVoxel.geometry;
-	// stored.position = saveVoxel.position;
-	
-	// a = JSON.stringify(stored);
-
-
-	//a = circularJSON(saveVoxel);
-	// var unstored = JSON.parse(a);
-
-	// console.log("COMPARE");
-	
-	//unstored.geometry = new THREE.CubeGeometry(unstored.geometry.width, unstored.geometry.height, unstored.geometry.depth );
-	// unstored.geometry = $.extend(new THREE.CubeGeometry(), unstored.geometry);
-
-	// console.log( stored.geometry);
-	// console.log( new THREE.CubeGeometry(unstored.geometry.width, unstored.geometry.height, unstored.geometry.depth ) );
-	// console.log($.extend(new THREE.CubeGeometry(), unstored.geometry));
-	// console.log(unstored);
-	
-	// unstored.geometry = stored.geometry;
-	//unstored = stored;
-	// return;
-
-    // for ( var i = 0; i < unstored.geometry.faces.length; i ++ )
-    //     setHex(unstored.geometry.faces[ i ].color, 0x00A8e1 );
-    // /* Apply matte material */
-    // var material = new THREE.MeshLambertMaterial( { vertexColors: THREE.FaceColors } );
-    // unstored.mesh = new THREE.Mesh( unstored.geometry, material );
-
-    //  Snap to grid  
-    // unstored.mesh.position.x = Math.floor( unstored.position.x / 50 ) * 50 + 25;
-    // unstored.mesh.position.y = Math.floor( unstored.position.y / 50 ) * 50 + 25;
-    // unstored.mesh.position.z = Math.floor( unstored.position.z / 50 ) * 50 + 25;
-    // unstored.mesh.matrixAutoUpdate = false;
-    // unstored.mesh.updateMatrix();
-    
-	/* Removal */
-	// console.log('removedAll!');
-	g.removeAll();
-	GUI.removeComponents();
-	gml.removeComponents();
-
-	// g.scene.add(unstored.mesh);
-	
-
-	// console.log("LOADING GML");
-	gml.loadJSON(JSON.parse(stored));
-	console.log('Loaded ' + gml.getNumComponents() +" voxels.")
-	/* Addition */
-	console.log("Rendering GML");
-	var comp = gml.getComponents();
-	//var comp = [saveVoxel]
-	for(var i in comp){
-		gml.addComponent(comp[i]);
-		GUI.addComponent(comp[i]);
-		g.addElement(comp[i]);
-	}
-	
-
-
-	return ""//FINISHED TEST"
+function mapValue(value, dMin, dMax, tMin, tMax, isContinuous){
+	if(typeof(tMin)==='undefined') tMin = 0.0;
+	if(typeof(tMax)==='undefined') tMax = 1.0;
+	if(typeof(isContinuous)==='undefined')isContinuous = true;
+	return ((value - dMin)/(dMax - dMin)) * (tMax - tMin) + tMin
 }
