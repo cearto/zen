@@ -517,7 +517,7 @@ OpenJsCad.parseJsCadScriptASync = function(script, mainParameters, options, call
   ];
 
   var baseurl = 'http://localhost:3000/gm'//document.location.href.replace(/\?.*$/, '');
-  console.log(baseurl);
+  // console.log(baseurl);
   var openjscadurl = baseurl;
   if (options['openJsCadPath'] != null) {
     openjscadurl = OpenJsCad.makeAbsoluteUrl( options['openJsCadPath'], baseurl );
@@ -556,7 +556,8 @@ OpenJsCad.parseJsCadScriptASync = function(script, mainParameters, options, call
         var resulttype = e.data.result.class;
         var result = OpenJsCad.resultFromCompactBinary(e.data.result);
         callback(null, result);
-        model.sample();
+        if(gen)
+          model.sample();
       }
       else if(e.data.cmd == "error")
       {
@@ -700,11 +701,12 @@ OpenJsCad.Processor.convertToSolid = function(obj) {
   }
   return obj;
 };
-
+var ojc = null;
+var gen = false;
 OpenJsCad.Processor.prototype = {
   createElements: function() {
     var that = this;//for event handlers
-
+    ojc = that;
     while(this.containerdiv.children.length > 0)
     {
       this.containerdiv.removeChild(this.containerdiv.children[0]);
@@ -721,7 +723,7 @@ OpenJsCad.Processor.prototype = {
     viewerdiv.className = "viewer";
     viewerdiv.style.width = this.viewerwidth + "px";
     viewerdiv.style.height = this.viewerheight + "px";
-    viewerdiv.style.backgroundColor = "white";
+    viewerdiv.style.backgroundCoxlor = "white";
     this.containerdiv.appendChild(viewerdiv);
     this.viewerdiv = viewerdiv;
     try
@@ -828,11 +830,19 @@ OpenJsCad.Processor.prototype = {
     this.parametersdiv.appendChild(parseParametersButton);
 
     var parseParametersGenButton = document.createElement("button");
-    parseParametersGenButton.innerHTML = "Generate";
+    parseParametersGenButton.innerHTML = "Rand Generate";
     parseParametersGenButton.onclick = function(e) {
       that.rebuildSolid(true);
     };
     this.parametersdiv.appendChild(parseParametersGenButton);
+
+    var parseParametersGenSVMButton = document.createElement("button");
+    parseParametersGenSVMButton.innerHTML = "SVM Generate";
+    parseParametersGenSVMButton.onclick = function(e) {
+      that.rebuildSolidSVM();
+    };
+    this.parametersdiv.appendChild(parseParametersGenSVMButton);
+
     this.enableItems();
    // if($('#status').children().length == 0){
     $('#status').children().remove();
@@ -1020,6 +1030,7 @@ OpenJsCad.Processor.prototype = {
     try
     {
       this.paramDefinitions = OpenJsCad.getParamDefinitions(script);
+      model.paramDefinitions = this.paramDefinitions;
       this.createParamControls();
     }
     catch(e)
@@ -1040,10 +1051,16 @@ OpenJsCad.Processor.prototype = {
       if(this.onchange) this.onchange();
     }
   },
-  getGeneratedParamValues: function(){
+  getGeneratedParamValues: function(fv){
+
     var random = Math.random();
     var params = this.getParamValues();
-    params.numTeeth = parseInt(random * 20) + 1;
+    console.log(typeof(fv) == 'undefined');
+    //params = model.generate([0.2, 0, 1, 0.19839679358717435]);
+    if(typeof(fv) == 'undefined')
+      params = model.generate(model.random());
+    else
+      params = model.generate(fv);
     return params;
   },
   getParamValues: function()
@@ -1091,8 +1108,18 @@ OpenJsCad.Processor.prototype = {
     }
     return paramValues;
   },
-    
-  rebuildSolid: function(generate)
+  rebuildSolidSVM: function(){
+    var that = this;
+    $.ajax({
+       url: '/gm/generate',
+       success: function(data){
+            that.rebuildSolid(true, data[0]);
+       },
+       timeout: 2000 //in milliseconds
+    });
+    console.log('Complexity reached!');
+  },
+  rebuildSolid: function(generate, fv)
   {
     this.abort();
     this.setError("");
@@ -1102,11 +1129,22 @@ OpenJsCad.Processor.prototype = {
     this.enableItems();
     var that = this;
     var paramValues;
-    if(!generate)
+    if(!generate && typeof(fv) == 'undefined'){
+      gen = true;
       paramValues = this.getParamValues();
-    else
+    }
+    else if(generate && typeof(fv) != 'undefined'){
+      gen = true;
+      paramValues = this.getGeneratedParamValues(fv)
+    }
+    else if(typeof(fv) != 'undefined'){
+      gen = false;
+      paramValues = this.getGeneratedParamValues(fv)
+    }
+    else{
       paramValues = this.getGeneratedParamValues();
-    
+      gen = true;
+    }
     var useSync = this.debugging;
     var options = {};
 

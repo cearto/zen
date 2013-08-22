@@ -66,9 +66,10 @@ function convertCanvasToImage(canvas) {
 	return image;
 }
 
-function mapValue(value, dMin, dMax, tMin, tMax, isContinuous){
+function mapValue(value, dMin, dMax, isContinuous, tMin, tMax){
 	if(typeof(tMin)==='undefined') tMin = 0.0;
 	if(typeof(tMax)==='undefined') tMax = 1.0;
 	if(typeof(isContinuous)==='undefined')isContinuous = true;
-	return ((value - dMin)/(dMax - dMin)) * (tMax - tMin) + tMin
+	var val = ((value - dMin)/(dMax - dMin)) * (tMax - tMin) + tMin;
+	return isContinuous ? val : parseInt(val);
 }

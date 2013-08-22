@@ -109,3 +109,48 @@ GUI.generateCanvas = function(){
   }
 }
 /* GENERATIVE GUI HANDLER */
+GUI.makeRatingMenu = function(container, image, data, reload, rating, id){
+  if(typeof(reload) == "undefined") reload = true;
+  console.log(rating);
+  var overlay = $('<div></div>')
+            .click(function(){
+                var p = $(this).parent();
+                var rating = p[0].getAttribute('data-rating');
+
+              // toggle class on click
+              if(rating == 0) 
+               p[0].setAttribute('data-rating', 1);
+                else
+               p[0].setAttribute('data-rating', 0);
+
+               $(this).toggleClass('good');
+
+            });
+  if(rating == 1) overlay.addClass('good');
+  var c = $('<div></div>')
+            .addClass('sample')
+            .attr('data-fv', data.toString())
+            .append(image)
+            .attr('data-rating', rating)
+            .append(overlay)
+            .attr('data-id', id);
+  
+  if(reload){
+    var reload = $('<button>').html('Reload').click(function(){
+          ojc.rebuildSolid(false, data);
+        });
+    c.append(reload);
+  }
+  container.append(c);
+}
+GUI.extractData = function(sample){
+  sample = $(sample);
+  //console.log(sample);
+  var rating = parseInt(sample.attr('data-rating'));
+  var data = sample.attr('data-fv');
+  var id = parseInt(sample.attr('data-id'));
+  data = JSON.parse("[" + data + "]");
+  
+  var img = sample.children('img').attr('src');
+  return {'id': id, 'fv': data, 'rating': rating, 'img': img}
+}
