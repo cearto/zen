@@ -1,0 +1,190 @@
+
+<script>
+	$(function(){
+		loadResults();
+		$('button').click(function(){
+			$(this).html('TRAINING ...');
+			$.get('/canvas/train_svm', function(data){
+				$('button').html('TRAINED!');
+				loadResults();
+			});
+		});
+	});
+
+	function loadResults(){
+		loadPredictions($('#prev .predictions-0'), 0);
+		loadPredictions($('#prev .predictions-1'), 1);
+		$.get('/canvas/test_model', function(data){
+			console.log(data.precision);
+			$('#prev .precision').html(data.precision.toFixed(2));
+			$('#prev .recall').html(data.recall.toFixed(2));
+			
+		});
+	}
+	var scale = 0.2;
+	var generateLimit = 300;
+	var maxLoad = 12;
+	var loaded = {'0' : 0, '1': 0};
+
+
+	function loadPredictions(container, type){
+		container.children('canvas').remove();
+		loaded[type] = 0;
+		for(var i = 0; i < generateLimit; i++)
+			generate(container, type);
+	};
+
+
+	function featureVector(){
+	   this.rect = new HSL();
+	   this.outer = new HSL();
+	   this.inner = new HSL();
+	}
+
+	function HSL(){
+		var r = Math.random();
+		this.H = Math.floor(r * 360);
+		r = Math.random();
+		this.S = (Math.floor(r * 100));
+		r = Math.random();
+		this.L = (Math.floor(r * 100));	
+	}
+
+	HSL.prototype.toString = function(){
+			return "hsl("+this.H+","+this.S+"%,"+this.L+"%)";
+	}
+
+	var num = 0;
+	function generate(container, type){
+		var fv = new featureVector();
+		var canvas = $('<canvas width='+ (400 * scale) + ' height='+ (400 * scale) +'/>').attr('id', 'c' + num);
+		//console.log(JSON.stringify(fv));
+			  	
+		$.ajax({
+			  type: "POST",
+			  url: "/canvas/predict",
+			  data:{'aesthetic' : fv },
+			  success: function(data){
+			  	console.log('Processed:  ' +  JSON.stringify(data));
+			  	canvas.addClass(!data[0]?'beauty':'ugly');
+			  	if(data[0] == type){
+			  		console.log(JSON.stringify(loaded) + " " + maxLoad);
+			  		if(loaded[type] < maxLoad){
+				  		container.prepend(canvas);
+			  			loaded[type]++;
+			  			render(canvas, fv);
+			  		}
+			  	}
+				
+			  },
+			  dataType: "json"
+			});
+
+		
+		num ++;
+	}
+
+	function render(canvas, featureVector){
+		//	console.log("Rendered:");
+		//  console.log(JSON.stringify(featureVector));
+		
+		canvas.drawRect({
+		  fillStyle: featureVector.rect.toString(),
+		  x: 200 * scale, y: 200 * scale,
+		  width: 400 * scale,
+		  height: 400 * scale,
+		  fromCenter: true
+		});
+		
+		canvas.drawArc({
+		  fillStyle: featureVector.outer.toString(),
+		  x: 200 * scale, y: 200 * scale,
+		  radius: 180 * scale,
+		  fromCenter: true
+		});
+
+		canvas.drawArc({
+		  fillStyle: featureVector.inner.toString(),
+		  x: 200 * scale, y: 200 * scale,
+		  radius: 100 * scale,
+		  fromCenter: true
+		});
+	}
+</script>
+
+	<div class="grid_12">
+		<h1 style='text-align:center; padding: 30px 0; text-transform: uppercase;'> Preference learning </h1>
+	</div>
+	<div class="grid_12" id="slide1" data-slide="1" data-stellar-background-ratio="0.5">
+		<div class="container clearfix">
+			<div id="content" class="grid_6 alpha">
+				<div class="grid_12">
+				<h1> Logging Interface </h1>
+				<ul>
+					<li><a href='/canvas/index?t=0' target="_blank"> Logging Interface </a></li>
+					<li><a href='/canvas/log?t=0' target="_blank"> Log Viewer : Class 0</a></li>
+					<li><a href='/canvas/log?t=1' target="_blank"> Log Viewer : Class 1</a></li>
+				</ul>
+				</div>
+				<div class="grid_12"> 
+				<h1> Model Stats</h1>
+				<% @num.each do |k, v| %>
+				<div class="grid_7 alpha"> <%= k %> </div><div class="grid_5 omega"> <%= v %> </div>
+				<% end %>
+				<div class="grid_7 alpha"> Holdout </div><div class="grid_5 omega"> <%= @holdout %> </div>
+				<% @attr.each do |k, v| %>
+					<div class="grid_7 alpha"> <%= k.humanize %> </div><div  class="grid_5 omega"> <%= v %> </div>
+				<% end %>
+				<button> Retrain SVM </button>
+				</div>
+			</div>
+			<div  id='prev' class="grid_6 omega">
+				<h1> Previous Results </h1>
+				<h2> 2-fold Cross Validation </h2> 
+				<div class="grid_7 alpha"> Precision </div><div class="precision" class="grid_5 omega"> </div>
+				<div class="grid_7 alpha"> Recall </div><div class="recall" class="grid_5 omega"> </div>
+				<br/>
+				<h2> Sample Predictions </h2> 
+				<h3> Class 0 </h3> 
+				<div class="predictions-0 grid_12 alpha"> 
+					<a href='/canvas/predictions?t=0' target="_blank"> View More </a> - 
+					<a href="javascript:loadPredictions($('#prev .predictions-0'), 0);" target="_blank"> Reload </a>
+				</div>
+
+				<h3> Class 1 </h3> 
+				<div class="predictions-1 grid_12 alpha"> 
+					<a href='/canvas/predictions?t=1' target="_blank"> View More </a> -
+					<a href="javascript:loadPredictions($('#prev .predictions-1'), 1);" target="_blank"> Reload </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<style type="text/css">
+		button{
+			color: white;
+			background: #00A8E1;
+			border-radius: 10px;
+			padding: 15px 0px;
+			width: 60%;
+			border: none;
+			text-transform: uppercase;
+			font-size: 1.2em;
+			-webkit-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.75);
+			-moz-box-shadow:    1px 1px 10px rgba(50, 50, 50, 0.75);
+			box-shadow:         1px 1px 10px rgba(50, 50, 50, 0.75);
+			margin: 10px 20%;
+		}
+		button:hover{
+			background: #007ca6;
+		}
+		button:active{
+			background: #00506b;
+		}
+		span{
+			font-weight: bold;
+		}
+		h2{
+			width: 100%;
+		}
+	</style>

@@ -1,0 +1,29 @@
+<script type="text/javascript">
+	data = <%= @samples %>;
+	var model = new GM($('#preview'), '/resources/openjscadorg.jscad');
+	$(function(){
+		for(i in data){
+			console.log(data[i]);
+			img = $('<img/>').attr('src', data[i].img);
+			GUI.makeRatingMenu($('#preview'), img, data[i].fv, false, data[i].rating, data[i].id);
+		}
+
+	});
+
+
+</script>
+
+<div id='preview'> 
+
+</div>
+
+<style type="text/css">
+	#preview{
+		height: 100%;
+		width: 100%;
+		background: white;
+	}
+	#preview .sample{
+		width: 28% !important;
+	}
+</style>
