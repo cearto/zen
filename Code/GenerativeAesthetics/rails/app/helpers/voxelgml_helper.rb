@@ -1,2 +1,0 @@
-module VoxelgmlHelper
-end
