@@ -1,0 +1,31 @@
+#filedropzone {
+  border: 2px dashed #bbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 15px;
+  color: black;
+}
+
+#filedropzone_empty {
+  text-align: center;
+  color: #bbb;
+}
+
+#filedropzone_filled {
+  color: black;
+  display: none;
+}
+
+#filebuttons {
+  float: right;
+}
+
+canvas { cursor: move; }
+
+
+
+.statusdiv {
+  width: 800px;
+  margin-bottom: 10px;
+}

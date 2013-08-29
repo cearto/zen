@@ -1,0 +1,61 @@
+<script type="text/javascript">
+	data = <%= @samples %>;
+	var model = new GM($('#preview'), '/resources/openjscadorg.jscad');
+	$(function(){
+		for(i in data){
+			img = $('<img/>').attr('src', data[i].img);
+			GUI.makeRatingMenu($('#preview'), img, data[i].fv, false, data[i].rating, data[i].id);
+		}
+		$('#updatedb').click(function(){
+			model.updateDB();
+			$(this).html('Updated!');
+		});
+	});	
+</script>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation"><a class="navbar-brand" href="#">Data Log</a>
+	<p class="navbar-text pull-right"> 
+		<a  href='#' id='updatedb'> Update DB </a>
+		<a href='/gm/log?t=0' class='<%= params['t'] == '0' ? 'active': '' %>'> Type 0 </a>
+		<a href='/gm/log?t=1' class='<%= params['t'] == '1' ? 'active': '' %>'> Type 1 </a>
+		<a href='/gm/log?t=all' class='<%= params['t'] == 'all' ? 'active': '' %>' > All </a>
+	</p>
+</nav>
+
+<div id='preview'> </div>
+
+<style type="text/css">
+	.navbar a.navbar-brand{
+		background: none;
+	}
+	body, html{
+		width: 100% !important;
+		height: 100%;
+		padding: 0;
+		margin: 0 !important;
+		position: relative;
+		max-width: none !important;
+	}
+	#preview{
+		
+		display: block;
+		position: relative;
+		height: 100%;
+		width: 100%;
+		margin-top: 54px;
+		background: white;
+
+	}
+	#preview .sample{
+		width: 33.33% !important;
+		float: left;
+
+	}
+	nav.navbar{
+		background: #DDD;
+		width: 100%;
+		float: none;
+		height: auto;
+		margin-bottom: 0 !important;
+	}
+</style>
