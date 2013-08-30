@@ -708,6 +708,7 @@ OpenJsCad.Processor.prototype = {
   createElements: function() {
     var that = this;//for event handlers
     ojc = that;
+
     while(this.containerdiv.children.length > 0)
     {
       this.containerdiv.removeChild(this.containerdiv.children[0]);

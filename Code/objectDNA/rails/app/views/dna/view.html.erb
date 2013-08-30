@@ -1,0 +1,138 @@
+
+<script type="text/javascript">
+  data = <%= @samples %>;
+
+  var model = new GM($('#preview'), '/resources/openjscadorg.jscad');
+  var resource_base = "/";
+  $(function(){
+    gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
+    setupDragDrop();
+    $('#file-open').click(GUI.loadOpenMenu);
+    $('#expand').click(function(){
+      $(this).parent().toggleClass('expanded');
+    });
+    $('#close-popup').click(function(){
+      $('#overlay').hide();
+      $('#popup').hide();  
+    });
+        for(i in data){
+      img = $('<img/>').attr('src', data[i].img);
+      GUI.makeRatingMenu($('#preview'), img, data[i].fv, true, data[i].rating, data[i].id);
+    }
+    enableReproduction();
+    model.load();
+    $( "#slider" ).slider({
+      value:100,
+      min: 0,
+      step: 0.1,
+      max: 1.0,
+      
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.value );
+      }
+    });
+    $( "#amount" ).val( $( "#slider" ).slider( "value" ) );
+  });
+
+function enableReproduction(){
+  $('.sample').unbind().click(function(){
+    var parents = $('.parent');
+    var a = $(parents[0]);
+    var b = $(parents[1]);
+    a.html(b.html());
+    b.html($(this).clone());
+  });
+    $('#reproduce').click(function(){
+    var parents = $('.parent .sample');
+    var a = $(parents[0]);
+    var b = $(parents[1]);
+    if(a.html() == '' || b.html() == '') return;
+    var fvA = a[0].getAttribute('data-fv').split(',');
+    var fvB = b[0].getAttribute('data-fv').split(',');
+    var w = parseFloat($('#amount').val());
+    var fvC = average(fvA, fvB, 1-w, w);
+
+    console.log(fvC);
+    ojc.rebuildSolid(false, fvC);
+  });
+}
+
+
+function average(fvA, fvB, weightA, weightB){
+  if(typeof(weightA) == 'undefined') weightA = 0.5;
+  if(typeof(weightB) == 'undefined') weightB = 0.5;
+  fvC = []
+  console.log(weightB);
+  for(i in fvA)
+    fvC.push(weightA * parseFloat(fvA[i]) + weightB * parseFloat(fvB[i]));
+  return fvC;
+}
+function openMenuClick(){
+  var filename = resource_base + $(this).attr('name');
+  GUI.alert("Opening", filename);    
+  model.load(filename); 
+  $('#close-popup').click();
+}; 
+</script>
+<div class="alert alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+ <span><strong>Warning!</strong> Best check yo self, you're not looking too good.</span>
+</div>
+<div id='overlay'></div>
+<div id='popup'>
+  <div id='saved_files' class="list-group">
+    <a href="#" class="list-group-item active">
+      LOAD FILE
+      <span id='close-popup' class="badge">x</span>
+    </a>
+  </div>
+</div>
+<!-- USER INTERFACE  -->
+<header> 
+  <span id='logo'> Parametric </span>
+  <nav>
+    <a id='file-open' href="#">Open</a>
+    <a href="#">Save</a>
+  </nav>
+  
+    <div id="filedropzone">
+    <div id="filedropzone_empty" style="display: none;">Drop your .jscad file here</div>
+    <div id="filedropzone_filled" style="display: block;">
+      <span id="currentfile">Current file: test.jscad</span>
+      
+    </div>
+  </div>
+  <div id="status"></div>
+</header>
+
+
+
+<div id="side-panel">
+  <div id="parents">
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <span class='wrapper'>
+    <p>
+  <label for="amount">Weight</label>
+  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+</p>
+
+    <div id="slider"></div>
+</span>
+    <button id='reproduce'> Reproduce </button>
+
+  </div>
+  <div id="previewer">
+    <span> Viewer </span> 
+    <div id="viewer">
+      <div class="viewer">
+        <canvas id='canvas'></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="preview" class='expanded'>
+<!-- <button id="expand" class='pull-right'>Expand</button> -->
+</div> 
+

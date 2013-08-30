@@ -17,15 +17,8 @@
 //= require openjscad
 //= require generative_model
 //= require aura
-// require_tree .
-// require bootstrap
-// require three.min.js
-// require Three
-// require stats.min
-// require Graphics.js
-// require GML.js
 //= require GUI.js
-//= require JSONLoader.js
+//= require sliders.js
 
 Object.size = function(obj) {
     var size = 0, key;
