@@ -1,0 +1,78 @@
+Twebcamsave
+v5
+r1
+cCheck dependencies
+cCompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave normal x86_64
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c0000000051C37CD500000000000000AA
+t1371765973
+s170
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave
+t2
+s0
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o
+t2
+s0
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/webcamsave.LinkFileList
+c000000005240BBE4000000000000007D
+t1379974116
+s125
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp
+c000000005240BBC000000000000005E4
+t1379974080
+s1508
+i<iostream>
+
+CBuild AST from /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies06a18864f3f0b741^cb848b64f3f0b741^---0#1#0#--18"Check dependencies36"0E0CBE9B-2C83-4D34-9CEC-ACF680837D5A-
+
+CCompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s401666916.546912
+e401666917.390888
+r1
+xCompileC
+xbuild/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o
+x/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp541b8c64f3f0b741^d8106465f3f0b741^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp0000000000000000^2682"CompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-generated-files.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-own-target-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-all-target-headers.hmap -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-project-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/include -I/usr/local/include -I/usr/local/lib -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources/x86_64 -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources -F/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug -MMD -MT dependencies -MF /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.dia -c /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp -o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o36"5D7AF984-D07E-4A06-AFCA-B6D47622F7F2-
+
+CLd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave normal x86_64
+s401666917.397522
+e401666917.416232
+r0
+xLd
+x/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave
+xnormal
+xx86_64
+oUndefined symbols for architecture x86_64:
+o  "_cvCreateCameraCapture", referenced from:
+o      _main in main.o
+o  "_cvDestroyWindow", referenced from:
+o      _main in main.o
+o  "_cvNamedWindow", referenced from:
+o      _main in main.o
+o  "_cvQueryFrame", referenced from:
+o      _main in main.o
+o  "_cvReleaseCapture", referenced from:
+o      _main in main.o
+o  "_cvShowImage", referenced from:
+o      _main in main.o
+o  "_cvWaitKey", referenced from:
+o      _main in main.o
+old: symbol(s) not found for architecture x86_64
+oclang: error: linker command failed with exit code 1 (use -v to see invocation)
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Link /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsavedcd76565f3f0b741^118d6a65f3f0b741^-590"Undefined symbols for architecture x86_64:  "_cvCreateCameraCapture", referenced from:      _main in main.o  "_cvDestroyWindow", referenced from:      _main in main.o  "_cvNamedWindow", referenced from:      _main in main.o  "_cvQueryFrame", referenced from:      _main in main.o  "_cvReleaseCapture", referenced from:      _main in main.o  "_cvShowImage", referenced from:      _main in main.o  "_cvWaitKey", referenced from:      _main in main.old: symbol(s) not found for architecture x86_64clang: error: linker command failed with exit code 1 (use -v to see invocation)16(21%IDEActivityLogMessage2@42""_cvCreateCameraCapture", referenced from:-401666917#43#45#-2#-23%DVTTextDocumentLocation3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#88#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@36""_cvDestroyWindow", referenced from:-401666917#110#39#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#149#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@34""_cvNamedWindow", referenced from:-401666917#171#37#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#208#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@33""_cvQueryFrame", referenced from:-401666917#230#36#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#266#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@37""_cvReleaseCapture", referenced from:-401666917#288#40#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#328#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@32""_cvShowImage", referenced from:-401666917#350#35#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#385#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@30""_cvWaitKey", referenced from:-401666917#407#33#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@15"_main in main.o-401666917#440#22#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@43"Symbol(s) not found for architecture x86_64-401666917#462#48#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@65"Linker command failed with exit code 1 (use -v to see invocation)-401666917#510#80#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--0#0#0#--756"Ld build/Debug/webcamsave normal x86_64    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug -F/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug -filelist /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/webcamsave.LinkFileList -mmacosx-version-min=10.8 -stdlib=libc++ -o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave36"AF269ABA-EF2C-4BFE-B91D-6D3C6505E5BA-
+
