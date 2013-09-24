@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title> ICE RAYS </title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="svg/jquery.svg.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var g = new Grammar($('#content'));
+				g.create();
+			});
+			function Grammar(location){
+				this.location = location;
+				this.width = location.width();
+				this.height = location.height();
+				this.shapes = {'1': [[0, 0, this.width, this.height], [0, this.width, 0, this.height]]}
+				var that = this;
+				this.create = function(){
+					this.location.svg({onLoad: function(svg){
+						that.drawLevel(svg, 1);
+					}});
+				}
+				this.drawLevel = function(svg, level) { 
+				    var g = svg.group({stroke: 'rgb(200, 200, 200)', strokeWidth: 2});
+				    var level = this.shapes[level];
+				    for(var i in level)
+				    	 svg.line(g, level[i][0], level[i][1], level[i][2], level[i][3]); 				   
+				}
+			}
+			function Triangle(pt1, pt2, pt3){
+				this.A = pt1;
+				this.B = pt2;
+				this.C = pt3;
+				this.area = function(){
+					return Math.abs((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y)) / 2);
+				}
+				this.midpoint = function(side){
+					if(side == 'AB') 
+					if(side == 'BC')
+					if(side == 'AC')
+				}
+			}
+
+		</script>
+	</head>
+	<body>
+		<div id='content'></div>
+	</body>
+	<style>
+		body, html{
+			width: 100%;
+			height: 100%;
+			background-image: url('images/lightpaperfibers_@2X.png');
+		}
+		#content{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</html>
