@@ -1,0 +1,158 @@
+<script> 
+	//global variables
+	var stats, WIDTH, HEIGHT, ASPECT, NEAR, FAR, VIEW_ANGLE;
+	var renderer = new THREE.WebGLRenderer({ antialias: true } );
+	var scene = new THREE.Scene();
+	var camera, controls;
+	
+	var Z = 300;
+	var zoomLevel = 0.01;
+	var theta = 0;
+	var phi = 0;
+	var z;
+	
+	$(function(){
+		initOpenGL($('#scene'));
+		animate();
+		GUIActivateListeners();
+	});	
+
+</script>
+<div class="pure-g-r content" id="layout">
+    <div class="pure-u" id="nav">
+        <a href="#" class="nav-menu-button">Menu</a>
+
+        <div class="nav-inner">
+            <button class="pure-button primary-button list-button">Material</button>
+
+            <div class="pure-menu pure-menu-open">
+                <ul>
+                    <li ><a>Streams <span class="mesh-count">(2)</span></a></li>
+                    <li class='slider'><input name="zoom" type="range" min="0.0010" max="0.02" step="0.001" value="0.01"/><br/> <span>ZOOM: <em>0</em></span></li>
+                    <li class='slider'><input name="rotate-x" type="range" min="0" max="360" step="1" value="0"/><br/> <span>ROTATE: <em>0</em></span></li>
+                    
+                
+                    <li class="pure-menu-heading">REGIONS</li>
+                    <li ><a><span class="mesh-label-personal"></span>Top</a></li>
+                    <li ><a><span class="mesh-label-work"></span>Bottom</a></li>
+                    <li ><a><span class="mesh-label-travel"></span>Side</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="pure-u" id="list"></div>
+
+    <div class="pure-u-1" id="main">
+        <div class="mesh-content">
+            <div class="mesh-content-header pure-g">
+                <div class="pure-u-1-2">
+                    <h1 class="mesh-content-title">Sphere</h1>
+                    <p class="mesh-content-subtitle">
+                        From <a>Cesar Tirres</a> at <span>3:56pm, April 3, 2012</span>
+                    </p>
+                    <span id="pulldown"> &darr; </span>
+                </div>
+
+                <div class="pure-u-1-2 mesh-content-controls">
+                    <button class="pure-button secondary-button">Save</button>
+                    <button class="pure-button secondary-button">Revert</button>
+                    <button class="pure-button secondary-button">Print</button>
+                </div>
+            </div>
+
+            <div id="scene" class="mesh-content-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+	/*SECONDARY*/
+	#pulldown{
+		position: absolute;
+		width: 100%;
+		display: block;
+		text-align: center;
+		background: #CCC;
+		color: black;
+		bottom: 0;
+		margin: 0;
+		left: 0;
+		font-size: 8pt;
+	}
+	.mesh-content-header{
+		top: 0;
+		left: 0;
+		position: relative;
+		z-index: 100;
+		background: rgba(255, 255, 255, 0.9);
+	}
+	#scene{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: calc(100% - 150px);
+		margin-left: 0;
+		margin-right: 0;
+		padding: 0;
+	}
+	#main{
+		width: calc(100% - 150px);
+		position: fixed;
+		margin-left: 0;
+		top: 0;
+		right: 150px;
+	}
+	#nav{
+		margin-left: 0;
+		width: 150px;
+		position: fixed;
+		top: 0;
+		right: 0;
+	}
+	#list{
+		position: fixed;
+		top: 0;
+		right: 150px;
+		margin-left: 0;
+		z-index: 200;
+		background: white;
+		display: none;
+	}
+	#list.active{
+		display: block;
+	}
+	/*SLIDERS*/
+	.slider{
+		text-align: center;
+		text-transform: uppercase;
+		font-size: 8pt;
+		color: white;
+	}
+	.pure-menu-button{
+		margin-left: 5%;
+	}
+	.pure-button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+	.pure-button-toggle {
+            background: rgb(202, 60, 60); /* this is a maroon */
+     }
+	/*BASE CSS*/
+	html, body{
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	#main, #layout{
+		height: 100%;
+	}
+	#container{
+		width: 100%;
+		height: 100%;
+	}
+</style>

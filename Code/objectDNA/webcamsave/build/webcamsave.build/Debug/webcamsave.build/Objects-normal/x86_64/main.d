@@ -26,4 +26,5 @@ dependencies: \
   /usr/local/include/opencv2/highgui/highgui.hpp \
   /usr/local/include/opencv2/contrib/contrib.hpp \
   /usr/local/include/opencv2/contrib/retina.hpp \
-  /usr/local/include/opencv2/contrib/openfabmap.hpp
+  /usr/local/include/opencv2/contrib/openfabmap.hpp \
+  /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.h

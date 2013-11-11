@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		276010AE180F25C80052FC96 /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276010AC180F25C80052FC96 /* utility.cpp */; };
+		276010D7180F33C90052FC96 /* libopencv_highgui.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 276010D5180F33C90052FC96 /* libopencv_highgui.2.4.3.dylib */; };
+		276010D8180F33C90052FC96 /* libopencv_core.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 276010D6180F33C90052FC96 /* libopencv_core.2.4.3.dylib */; };
+		276010DA180F366E0052FC96 /* libopencv_imgproc.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 276010D9180F366E0052FC96 /* libopencv_imgproc.2.4.3.dylib */; };
 		276FD5D217F0F33700291F63 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276FD5D117F0F33700291F63 /* main.cpp */; };
 		276FD5D417F0F33700291F63 /* webcamsave.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 276FD5D317F0F33700291F63 /* webcamsave.1 */; };
-		276FD5DD17F0F3A200291F63 /* libopencv_core.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 276FD5DB17F0F3A200291F63 /* libopencv_core.2.4.3.dylib */; };
-		276FD5DE17F0F3A200291F63 /* libopencv_highgui.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 276FD5DC17F0F3A200291F63 /* libopencv_highgui.2.4.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,11 +29,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		276010AC180F25C80052FC96 /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
+		276010AD180F25C80052FC96 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		276010D5180F33C90052FC96 /* libopencv_highgui.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_highgui.2.4.3.dylib; sourceTree = "<group>"; };
+		276010D6180F33C90052FC96 /* libopencv_core.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_core.2.4.3.dylib; sourceTree = "<group>"; };
+		276010D9180F366E0052FC96 /* libopencv_imgproc.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_imgproc.2.4.3.dylib; sourceTree = "<group>"; };
 		276FD5CE17F0F33700291F63 /* webcamsave */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = webcamsave; sourceTree = BUILT_PRODUCTS_DIR; };
 		276FD5D117F0F33700291F63 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		276FD5D317F0F33700291F63 /* webcamsave.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = webcamsave.1; sourceTree = "<group>"; };
-		276FD5DB17F0F3A200291F63 /* libopencv_core.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_core.2.4.3.dylib; sourceTree = "<group>"; };
-		276FD5DC17F0F3A200291F63 /* libopencv_highgui.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_highgui.2.4.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,8 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				276FD5DD17F0F3A200291F63 /* libopencv_core.2.4.3.dylib in Frameworks */,
-				276FD5DE17F0F3A200291F63 /* libopencv_highgui.2.4.3.dylib in Frameworks */,
+				276010D7180F33C90052FC96 /* libopencv_highgui.2.4.3.dylib in Frameworks */,
+				276010D8180F33C90052FC96 /* libopencv_core.2.4.3.dylib in Frameworks */,
+				276010DA180F366E0052FC96 /* libopencv_imgproc.2.4.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				276FD5D117F0F33700291F63 /* main.cpp */,
+				276010AC180F25C80052FC96 /* utility.cpp */,
+				276010AD180F25C80052FC96 /* utility.h */,
 				276FD5D317F0F33700291F63 /* webcamsave.1 */,
 			);
 			path = webcamsave;
@@ -76,8 +84,9 @@
 		276FD5DA17F0F36B00291F63 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
-				276FD5DB17F0F3A200291F63 /* libopencv_core.2.4.3.dylib */,
-				276FD5DC17F0F3A200291F63 /* libopencv_highgui.2.4.3.dylib */,
+				276010D9180F366E0052FC96 /* libopencv_imgproc.2.4.3.dylib */,
+				276010D5180F33C90052FC96 /* libopencv_highgui.2.4.3.dylib */,
+				276010D6180F33C90052FC96 /* libopencv_core.2.4.3.dylib */,
 			);
 			name = OpenCV;
 			sourceTree = "<group>";
@@ -134,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				276FD5D217F0F33700291F63 /* main.cpp in Sources */,
+				276010AE180F25C80052FC96 /* utility.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +259,7 @@
 				276FD5D917F0F33700291F63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

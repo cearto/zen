@@ -3,6 +3,7 @@ v5
 r1
 cCheck dependencies
 cCompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
 cLd /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave normal x86_64
 
 N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
@@ -16,39 +17,91 @@ t1358593783
 s6714
 
 N/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave
-t1379974282
-s9540
-
-N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave
-t1379974180
-s9540
+t1381957475
+s11452
 
 N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o
-t1379974282
-s6580
+t2
+s0
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.o
+t1381957455
+s4304
 
 N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/webcamsave.LinkFileList
-c000000005240BBE4000000000000007D
-t1379974116
-s125
+c00000000525EF9C600000000000000FD
+t1381956038
+s253
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_calib3d.2.4.3.dylib
+c0000000052407F9C00000000000A4DC0
+t1379958684
+s675264
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_contrib.2.4.3.dylib
+c0000000052407F9D00000000000F64E8
+t1379958685
+s1008872
 
 N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_core.2.4.3.dylib
 c0000000052407F9B0000000000239438
 t1379958683
 s2331704
 
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_core.dylib
+c00000000523FD34B0000000000238410
+t1379914571
+s2327568
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_features2d.2.4.3.dylib
+c0000000052407F9C00000000000B8528
+t1379958684
+s754984
+
 N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_highgui.2.4.3.dylib
 c0000000052407F9C00000000002389FC
 t1379958684
 s2329084
 
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_highgui.dylib
+c00000000523FD34400000000002389FC
+t1379914564
+s2329084
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_imgproc.2.4.3.dylib
+c0000000052407F9C000000000021691C
+t1379958684
+s2189596
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_java.dylib
+c0000000052407FA100000000000E6438
+t1379958689
+s943160
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/libopencv_ml.2.4.3.dylib
+c0000000052407F9C000000000007A830
+t1379958684
+s501808
+
 N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp
-c000000005240BDC70000000000000645
-t1379974599
-s1605
+c00000000525F008C0000000000000852
+t1381957772
+s2130
 i<iostream>
 i<opencv2/opencv.hpp>
+i<opencv2/highgui/highgui.hpp>
 i"string.h"
+i"utility.h"
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp
+c00000000525EFE070000000000000539
+t1381957127
+s1337
+
+N/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.h
+c00000000525EFF4900000000000001BD
+t1381957449
+s445
 
 N/usr/local/include/opencv2/calib3d/calib3d.hpp
 c00000000507F376A00000000000092FD
@@ -188,13 +241,16 @@ s2416
 CBuild AST from /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp
 r0
 
+CBuild AST from /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp
+r0
+
 CCheck dependencies
 r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies52ba589ff6f0b741^40865e9ff6f0b741^---0#1#0#--18"Check dependencies36"4414EF15-D26D-49BA-9DA7-1C9F7C1FDC55-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciese162d90c380fb841^99bcd90c380fb841^---0#1#0#--18"Check dependencies36"BECF95BC-AF53-4FA1-91BE-11329C4C1203-
 
 CCompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s401667743.371135
-e401667744.295105
+s403650572.853795
+e403650573.728112
 r1
 xCompileC
 xbuild/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o
@@ -203,25 +259,33 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cppec185f9ff6f0b741^bd8b4ba0f6f0b741^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp0000000000000000^2662"CompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-generated-files.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-own-target-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-all-target-headers.hmap -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-project-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/include -I/usr/local/include -I/usr/local/lib -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources/x86_64 -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources -F/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -MMD -MT dependencies -MF /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.dia -c /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp -o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o36"B2E54895-0129-473F-99D0-B46DEFCAA647-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp28b6da0c380fb841^4965ba0d380fb841^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp0000000000000000^2662"CompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o webcamsave/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-generated-files.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-own-target-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-all-target-headers.hmap -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-project-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/include -I/usr/local/include -I/usr/local/lib -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources/x86_64 -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources -F/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -MMD -MT dependencies -MF /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.dia -c /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/main.cpp -o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/main.o36"D6B64145-78A7-4D88-B088-7282458616BE-
+
+CCompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s403650254.736631
+e403650255.598095
+r1
+xCompileC
+xbuild/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.o
+x/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp4ab8bcce360fb841^b01c99cf360fb841^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp0000000000000000^2680"CompileC build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.o webcamsave/utility.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-generated-files.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-own-target-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-all-target-headers.hmap -iquote /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/webcamsave-project-headers.hmap -I/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/include -I/usr/local/include -I/usr/local/lib -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources/x86_64 -I/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/DerivedSources -F/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -MMD -MT dependencies -MF /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.d --serialize-diagnostics /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.dia -c /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/webcamsave/utility.cpp -o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/utility.o36"1E7C49D1-C0A8-48AF-B13B-21E2F9873F61-
 
 CLd /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave normal x86_64
-s401667744.308261
-e401667744.343197
-r1
+s403650573.735098
+e403650573.753855
+r0
 xLd
 x/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave
 xnormal
 xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Link /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave300d4fa0f6f0b741^40de57a0f6f0b741^---0#0#0#--861"Ld /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave normal x86_64    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -L/Users/cearto/Repos/zen/Code/objectDNA/webcamsave -F/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -filelist /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/webcamsave.LinkFileList -mmacosx-version-min=10.8 -stdlib=libc++ -lopencv_core.2.4.3 -lopencv_highgui.2.4.3 -o /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave36"42142ACE-979C-4878-A682-7C68D7C08611-
-
-CLd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave normal x86_64
-s401666980.071685
-e401666980.090596
-r1
-xLd
-x/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Link /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave166d12a4f3f0b741^6e3117a4f3f0b741^---0#0#0#--851"Ld build/Debug/webcamsave normal x86_64    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug -L/Users/cearto/Repos/zen/Code/objectDNA/webcamsave -F/Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug -filelist /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/webcamsave.LinkFileList -mmacosx-version-min=10.8 -stdlib=libc++ -lopencv_core.2.4.3 -lopencv_highgui.2.4.3 -o /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/Debug/webcamsave36"10B8BBF1-F012-4A4E-BF35-EEC83FE1058B-
+oUndefined symbols for architecture x86_64:
+o  "cv::imread(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int)", referenced from:
+o      setup() in main.o
+old: symbol(s) not found for architecture x86_64
+oclang: error: linker command failed with exit code 1 (use -v to see invocation)
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Link /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave8941bc0d380fb841^0dfcc00d380fb841^-327"Undefined symbols for architecture x86_64:  "cv::imread(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int)", referenced from:      setup() in main.old: symbol(s) not found for architecture x86_64clang: error: linker command failed with exit code 1 (use -v to see invocation)4(21%IDEActivityLogMessage2@129""cv::imread(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int)", referenced from:-403650573#43#132#-2#-23%DVTTextDocumentLocation3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@17"Setup() in main.o-403650573#175#24#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@43"Symbol(s) not found for architecture x86_64-403650573#199#48#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@65"Linker command failed with exit code 1 (use -v to see invocation)-403650573#247#80#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--0#0#0#--884"Ld /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave normal x86_64    cd /Users/cearto/Repos/zen/Code/objectDNA/webcamsave    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -L/Users/cearto/Repos/zen/Code/objectDNA/webcamsave -F/Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe -filelist /Users/cearto/Repos/zen/Code/objectDNA/webcamsave/build/webcamsave.build/Debug/webcamsave.build/Objects-normal/x86_64/webcamsave.LinkFileList -mmacosx-version-min=10.8 -stdlib=libc++ -lopencv_highgui.2.4.3 -lopencv_core.2.4.3 -lopencv_imgproc.2.4.3 -o /Users/cearto/Repos/zen/Code/objectDNA/ColorSyringe/webcamsave36"AA6E8B15-80FD-4F34-A9B5-B0070F71CCB0-
 
