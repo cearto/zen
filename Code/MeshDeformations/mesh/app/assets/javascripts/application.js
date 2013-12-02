@@ -17,3 +17,24 @@
 
 
 function cl(val){ console.log(val);}
+// Array.prototype.clone = function() {
+// 	return this.slice(0);
+// };
+
+Array.max = function( array ){
+    return Math.max.apply( Math, array );
+};
+
+Array.max2 = function( array ){
+	var max = Number.MIN_VALUE;
+	for(var i in array)
+		if(array[i] > max)
+			max = array[i];
+    return max;
+};
+
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}

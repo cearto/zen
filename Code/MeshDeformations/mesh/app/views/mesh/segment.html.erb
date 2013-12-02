@@ -2,6 +2,9 @@
 	//global variables
 	var stats, WIDTH, HEIGHT, ASPECT, NEAR, FAR, VIEW_ANGLE;
 	var renderer = new THREE.WebGLRenderer({ antialias: true } );
+	var operationData = <%= @operations %>;
+	var regions = <%= @seg %>;
+	var pca = <%= @pca %>;
 	var scene = new THREE.Scene();
 	var camera, controls;
 	
@@ -13,45 +16,27 @@
 	
 	$(function(){
 		initOpenGL($('#scene'));
-		animate();
 		GUIActivateListeners();
+		animate();
 	});	
 
 </script>
 <div class="pure-g-r content" id="layout">
     <div class="pure-u" id="nav">
-        <a href="#" class="nav-menu-button">Menu</a>
-
-        <div class="nav-inner">
-            <button class="pure-button primary-button list-button">Material</button>
-
-            <div class="pure-menu pure-menu-open">
-                <ul>
-                    <li ><a>Streams <span class="mesh-count">(2)</span></a></li>
-                    <li class='slider'><input name="zoom" type="range" min="0.0010" max="0.02" step="0.001" value="0.01"/><br/> <span>ZOOM: <em>0</em></span></li>
-                    <li class='slider'><input name="rotate-x" type="range" min="0" max="360" step="1" value="0"/><br/> <span>ROTATE: <em>0</em></span></li>
-                    
-                
-                    <li class="pure-menu-heading">REGIONS</li>
-                    <li ><a><span class="mesh-label-personal"></span>Top</a></li>
-                    <li ><a><span class="mesh-label-work"></span>Bottom</a></li>
-                    <li ><a><span class="mesh-label-travel"></span>Side</a></li>
-                </ul>
-            </div>
-        </div>
+        
     </div>
 
     <div class="pure-u" id="list"></div>
 
     <div class="pure-u-1" id="main">
         <div class="mesh-content">
-            <div class="mesh-content-header pure-g">
+            <div id="info-bar" class="mesh-content-header pure-g">
                 <div class="pure-u-1-2">
                     <h1 class="mesh-content-title">Sphere</h1>
                     <p class="mesh-content-subtitle">
-                        From <a>Cesar Tirres</a> at <span>3:56pm, April 3, 2012</span>
+                        From <a>Cesar Torres</a> at <span>3:56pm, April 3, 2012</span>
                     </p>
-                    <span id="pulldown"> &darr; </span>
+                   
                 </div>
 
                 <div class="pure-u-1-2 mesh-content-controls">
@@ -67,19 +52,96 @@
         </div>
     </div>
 </div>
+ <span id="pulldown"> <%= image_tag '/icons/gear.png', :class => "shadow"%> </span>
 <style>
+	.swatch-button:hover{
+		-webkit-box-shadow: 1px 1px 8px rgba(50, 50, 50, 0.3);
+		-moz-box-shadow:    1px 1px 8px rgba(50, 50, 50, 0.3);
+		box-shadow:         1px 1px 8px rgba(50, 50, 50, 0.3);
+	}
+	.swatch-button.selected{
+		border: #AAA 1px solid;
+		margin: 0.2% 0.6% !important;
+	}
+	.icon-button{
+		border: #AAA 1px solid;
+	}
+	.icon-button:hover{
+		background: white;
+	}
+	.icon-button:active{
+		background: #AAA;
+	}
+	#objnav, #matview{
+		margin-bottom: 20px;
+	}
+	.ui-span{
+		padding: 0 4px;
+
+	}
+	br{
+		display: block;		
+		margin: 10px 0;
+	}
+	.ui-link{
+		font-size: 10pt;
+		padding: 8px 8px;
+		border-radius: 2px;
+		color: black;
+
+	}
+	.ui-link:hover, .ui-link.selected-mat{
+		background: #fff;
+	}
+	div.mesh-item{
+		padding: 0.25em 1em;
+		cursor: pointer;
+	}
+	div.mesh-item:hover, .selected{
+		background: rgba(255,255, 255, 0.8);
+	}
+	.ui-heading{
+		background: #333;
+		color: white;
+		width: 109%;
+		padding: 4px 0;
+		margin: -8px -8px 8px -8px;
+		font-size: 8pt;
+		font-weight: normal;
+	}
+.clearfix{
+	clear: both;
+}
+	button.icon{
+		width: 15px;
+		height: 50px;
+	}
+	button.icon img{
+		height: 100%;
+	}
 	/*SECONDARY*/
 	#pulldown{
 		position: absolute;
-		width: 100%;
+		width: 30px;
 		display: block;
 		text-align: center;
-		background: #CCC;
 		color: black;
-		bottom: 0;
+		top: 10px;
 		margin: 0;
-		left: 0;
+		left: 10px;
 		font-size: 8pt;
+	}
+	#pulldown img{
+		width: 100%;
+		padding: 8px;
+		background: #EEE;
+		border-radius: 50px;
+	}
+	#pulldown img:hover{
+		background: #FFF;
+	}
+	#pulldown img:active{
+		background: #DDD;
 	}
 	.mesh-content-header{
 		top: 0;
@@ -92,29 +154,29 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: calc(100% - 150px);
+		width: calc(100% - 320px);
 		margin-left: 0;
 		margin-right: 0;
 		padding: 0;
 	}
 	#main{
-		width: calc(100% - 150px);
+		width: calc(100% - 320px);
 		position: fixed;
 		margin-left: 0;
 		top: 0;
-		right: 150px;
+		right: 320px;
 	}
 	#nav{
 		margin-left: 0;
-		width: 150px;
+		width: 260px;
 		position: fixed;
 		top: 0;
-		right: 0;
+		right: 30px;
 	}
 	#list{
 		position: fixed;
 		top: 0;
-		right: 150px;
+		right: 260px;
 		margin-left: 0;
 		z-index: 200;
 		background: white;
@@ -155,4 +217,31 @@
 		width: 100%;
 		height: 100%;
 	}
-</style>
+	#info-bar{
+		background: none;
+		left: 5%;
+		top: -20px;
+		width: calc(100% - 200px);
+		border: none;
+	}
+	/* SCENE STYLE */
+	body{
+		background: #adadad; /* Old browsers */
+		background: -moz-linear-gradient(45deg, #adadad 0%, #d3d2d1 21%, #ffffff 46%, #f2f2ed 69%, #c4c4c0 90%, #a5a5a2 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#adadad), color-stop(21%,#d3d2d1), color-stop(46%,#ffffff), color-stop(69%,#f2f2ed), color-stop(90%,#c4c4c0), color-stop(100%,#a5a5a2)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* IE10+ */
+		background: linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#adadad', endColorstr='#a5a5a2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+	.shadow{
+		-webkit-box-shadow: 1px 1px 8px rgba(50, 50, 50, 0.3);
+		-moz-box-shadow:    1px 1px 8px rgba(50, 50, 50, 0.3);
+		box-shadow:         1px 1px 8px rgba(50, 50, 50, 0.3);
+	}
+	#pulldown img.setting-on{
+		border: #00A8e1 2px solid;
+		background: #FFF;
+	}
+		</style>

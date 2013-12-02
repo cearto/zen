@@ -21,15 +21,16 @@ a {
 #nav {
     margin-left:-500px; /* "left col (nav + list)" width */
     width:150px;
-    background: rgb(37, 42, 58);
+    /*background: rgb(37, 42, 58);*/
     text-align: center;
     padding: 2em 0;
 }
 
 #list {
-    margin-left: -350px;
-    width:350px;
+    margin-left: -225px;
+    width:225px;
     border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
 }
 
 /* HELPER CLASSES */
@@ -82,25 +83,13 @@ a {
         color: rgb(75, 113, 151);
     }
 
-    .mesh-label-personal,
-    .mesh-label-work,
-    .mesh-label-travel {
+    .mesh-label {
         width: 15px;
         height: 15px;
         display: inline-block;
         margin-right: 0.5em;
         border-radius: 3px;
     }
-    .mesh-label-personal {
-        background: #ffc94c;
-    }
-    .mesh-label-work {
-        background: #41ccb4;
-    }
-    .mesh-label-travel {
-        background: #40c365;
-    }
-
 
 
 

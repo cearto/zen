@@ -7,3 +7,6 @@
 //= require STLLoader
 //= require OFFLoader
 //= require meshgui
+//= require jquery.sparkline.min
+//= require datastream
+//= require deformation
