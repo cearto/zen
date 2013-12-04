@@ -10,21 +10,22 @@ function GUIFile(fileinfo){
 	//GUIMatSelect();
 }
 function GUIStreams(){
-	convertColors();
+	
 	var heading = $('<h3></h3>').html('Streams').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'streams').append(heading);
 	var data = scene.userData.objects;
 	$('#nav').append(container);
 	render();
 }
+var dna;
 function GUIMatSelect( currentFile ){
 	var heading = $('<h3></h3>').html('View').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'matview').append(heading);
 	var n = parseInt(getURLParameter('n'));
-
+	
 	var wireMat = $('<a></a>').html('Wireframe').attr('href', 'segment?w=1&n=' + (n)).addClass('ui-link');
 	var solidMat = $('<a></a>').html('Solid').attr('href', 'segment?w=0&n=' + (n)).addClass('ui-link');
-	
+
 	if(getURLParameter('w') == 1)
 		wireMat.addClass('selected-mat');
 	else
@@ -43,35 +44,31 @@ function GUIFileNav( currentFile ){
 	if(n == 0) linkPrev.attr('disable', true);
 	if(n > 280) linkNext.attr('disable', true);
 
-	var fileName = $('<span></span>').html(currentFile).addClass('ui-span');
+	var fileName = $('<span></span>').addClass('ui-span');
+	file = $('<a></a>').html(currentFile).addClass('filename');
+	fileName.html(file);
 	container.append(linkPrev).append(fileName).append(linkNext).append('<h3></h3>');
 	var wireMat = $('<a></a>').html('Wireframe').attr('href', 'segment?w=1&n=' + (n)).addClass('ui-link');
 	var solidMat = $('<a></a>').html('Solid').attr('href', 'segment?w=0&n=' + (n)).addClass('ui-link');
+	dna = new DNA();
+	var generator = $('<a></a>').html('Generate').click(function(){
+		dna.generate();
+	}).addClass('ui-link');
 	
 	if(getURLParameter('w') == 1)
 		wireMat.addClass('selected-mat');
 	else
 		solidMat.addClass('selected-mat');
-	container.append(wireMat).append(solidMat);
+	container.append(wireMat).append(solidMat).append(generator);
 	container.append(clearfix.clone());
 	$('#nav').append(container);
 }
-function GUIRegions(){
-	convertColors();
+function GUIRegions(exfab){
+
 	var heading = $('<h3></h3>').html('Regions').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'regions').append(heading);
-	var data = scene.userData.objects;
-	var r;
-	for(var num in data){
-		for(var regid in data[num].regions){
-			var meshcolor = colors[regid];
-			r = new Region(container, num, regid, meshcolor['default'].getStyle());
-			highlightRegion(data[num].regions[regid], data[num].object.geometry, meshcolor['default']);	
-		}
-		data[num].object.geometry.colorsNeedUpdate = true;
-	}
+	for(var i in exfab.regions) exfab.regions[i].addGUI(container);
 	container.append(clearfix.clone());
-	// $('#nav').prepend(container);
 	$('#objnav').after(container);
 	render();
 }
@@ -130,6 +127,10 @@ function GUIActivateListeners(){
 				//$(this).html('&darr;');
 			}
 		});
+		$('#revert').click(function(){
+			activeDataStream.restoreState();
+		});
+		$('#save').click(saveFile);
 }
 
 /*************************************************************************************************************/

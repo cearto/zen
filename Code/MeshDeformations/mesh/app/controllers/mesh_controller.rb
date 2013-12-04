@@ -1,12 +1,21 @@
 require 'rubygems' 
 require 'csv'
 require 'json'
+
 class MeshController < ApplicationController
+  
+  #retrieve pca file for object file_num
   def pca file_num
-    data = JSON.parse(File.read("public/stl/pca/#{file_num}.pca"))['data'];
-    size = data["region"]["_ArraySize_"];
-    pc = data["region"]["_ArrayData_"].each_slice(size[0] * size[1]).to_a
-    pc.collect!{|p| p.each_slice(3).to_a}
+    begin
+      f = File.open("public/stl/pca/#{file_num}.pca")
+      data = JSON.parse(f.read())['data'];
+      size = data["region"]["_ArraySize_"];
+      pc = data["region"]["_ArrayData_"].each_slice(size[0] * size[1]).to_a
+      pc.collect!{|p| p.each_slice(3).to_a}
+      rescue then return [[0, 1, 0],[1, 0, 0],[0, 0, 1]];
+      ensure  f.close unless f.nil?
+    end
+    
     return pc
   end
 
@@ -18,10 +27,10 @@ class MeshController < ApplicationController
     @pca = pca(file_num).to_json.html_safe;
     @seg = seg("#{file_num}/#{file_num}_0.seg").to_json.html_safe;
   end
+
   def weather
     data = [];
-    CSV.foreach("public/data/232761.csv", :headers => true, :header_converters => 
-:symbol) do |row|
+    CSV.foreach("public/data/232761.csv", :headers => true, :header_converters => :symbol) do |row|
       data << row.to_hash;
     end
     data = data.group_by { |d| d[:station]}
@@ -46,5 +55,10 @@ class MeshController < ApplicationController
       index = index + 1
     end
     return seg.sort.collect{|s| s[1]}
+  end
+  def save
+    f = File.open("public/save#{params['filename']}", "w");
+    f.write(params['mesh']);
+    render :json => "/save/#{params['filename']}"
   end
 end

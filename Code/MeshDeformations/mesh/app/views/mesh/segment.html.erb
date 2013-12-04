@@ -15,11 +15,27 @@
 	var z;
 	
 	$(function(){
+		convertColors();
 		initOpenGL($('#scene'));
 		GUIActivateListeners();
 		animate();
 	});	
+	function ExpFab(obj, regions, pca){
+		this.object = obj;
+		
+		this.original = obj.geometry.vertices.slice(0);
+		for(var i in obj.geometry.vertices)	this.original[i] = this.original[i].clone();
+		
+		this.current = obj.geometry.vertices.slice(0);
+		for(var i in obj.geometry.vertices)	this.current[i] = this.current[i].clone();
+		
+		this.regions = [];
+		for(var i in regions) this.regions.push(new Region(this, i, regions[i], pca[i]));
+	
+		this.id = scene.userData.objects.length;
+	}
 
+	
 </script>
 <div class="pure-g-r content" id="layout">
     <div class="pure-u" id="nav">
@@ -40,8 +56,8 @@
                 </div>
 
                 <div class="pure-u-1-2 mesh-content-controls">
-                    <button class="pure-button secondary-button">Save</button>
-                    <button class="pure-button secondary-button">Revert</button>
+                    <button id='save' class="pure-button secondary-button">Save</button>
+                    <button id='revert' class="pure-button secondary-button">Revert</button>
                     <button class="pure-button secondary-button">Print</button>
                 </div>
             </div>

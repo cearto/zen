@@ -5,12 +5,14 @@ out_dir = strcat(stl_dir, 'pca/');
 stls = dir(stl_dir);
 segs = dir(seg_dir);
 stls = stls(4:end);
-segs = segs(4:end);
+segs = segs(3:end);
 
-for i=67:size(segs, 1)
-    display(i);
+for i=1:2%size(segs, 1)
+    display(num2str(i));
     regf = dir(strcat(seg_dir, segs(i).name));
     regf = strcat(seg_dir, segs(i).name, '/', regf(3).name);
+    display(strcat(stl_dir, stls(i).name));
+    display(regf);
     [f,v] = stlread(strcat(stl_dir, stls(i).name));
     [status, result] = system( ['wc -l ', regf] );
     numlines = sscanf(result, '%f %*c');
@@ -43,6 +45,7 @@ for i=67:size(segs, 1)
     %% EXPORT AS A JSON FILE
     a = struct('file', regf, 'region', princomps);
     json = savejson('data', a);
+    display(strcat(out_dir, segs(i).name,'.pca'));
     fid = fopen(strcat(out_dir, segs(i).name, '.pca'), 'w');
     fprintf(fid, json);
     fclose(fid);

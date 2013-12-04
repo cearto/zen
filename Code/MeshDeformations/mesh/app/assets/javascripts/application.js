@@ -17,9 +17,6 @@
 
 
 function cl(val){ console.log(val);}
-// Array.prototype.clone = function() {
-// 	return this.slice(0);
-// };
 
 Array.max = function( array ){
     return Math.max.apply( Math, array );

@@ -1,3 +1,12 @@
+var fileinfo;
+var cubeMaterial;
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////  VISUALS  ////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 function addNormal(p, n, type){
 	if(type)
 		lineMaterial = new THREE.LineBasicMaterial({
@@ -20,12 +29,12 @@ function addParticle(v, type){
 	if(type)
 	    pMaterial = new THREE.ParticleBasicMaterial({
 	      color: 0x00A8E1,
-	      size: 0.25
+	      size: 0.5
 	    });
 	else
 		pMaterial = new THREE.ParticleBasicMaterial({
 	      color: 0x333333,
-	      size: 0.25
+	      size: 0.5
 	    });
 
 	particles.dynamic = true;
@@ -36,119 +45,33 @@ function addParticle(v, type){
 	render();
 }
 
+
+function buildAxesPCA(centroid, pca_s ) {
+	length = 1000;
+    var axes = new THREE.Object3D();
+
+    axes.add( buildAxis( centroid.clone(), pca_s[0].clone().multiplyScalar(length), 0xd8292f, false ) ); // +X
+    axes.add( buildAxis( centroid.clone(), pca_s[0].clone().multiplyScalar(-length), 0xd8292f, true) ); // -X
+    axes.add( buildAxis( centroid.clone(), pca_s[1].clone().multiplyScalar(length), 0x00956e, false ) ); // +Y
+    axes.add( buildAxis( centroid.clone(), pca_s[1].clone().multiplyScalar(-length), 0x00956e, true ) ); // -Y
+    axes.add( buildAxis( centroid.clone(), pca_s[2].clone().multiplyScalar(length), 0x435cc8, false ) ); // +Z
+    axes.add( buildAxis( centroid.clone(), pca_s[2].clone().multiplyScalar(-length), 0x435cc8, true ) ); // -Z
+    // scene.add(axes);
+    // render();
+    return axes;
+}
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+///////////////////////////  LOADING ROUTINE  //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
-THREE.saveGeometryToObj = function (geometry) {
-var s = '';
-for (i = 0; i < geometry.vertices.length; i++) {
-    s+= 'v '+(geometry.vertices[i].x) + ' ' +
-    geometry.vertices[i].y + ' '+
-    geometry.vertices[i].z + '\n';
-}
-
-for (i = 0; i < geometry.faces.length; i++) {
-
-    s+= 'f '+ (geometry.faces[i].a+1) + ' ' +
-    (geometry.faces[i].b+1) + ' '+
-    (geometry.faces[i].c+1);
-
-    if (geometry.faces[i].d !== undefined) {
-        s+= ' '+ (geometry.faces[i].d+1);
-    }
-    s+= '\n';
-}
-
-return s;
-}
-function loadFile(scene){
-	var fileinfo;
-	if(getURLParameter('n') == '0')
-		fileinfo = loadCylinder(scene);
-	else
-		fileinfo = loadSTL(scene, '/stl/'+getURLParameter('n')+'.stl');
-	
-	GUIFile(fileinfo);
-	GUIRegions();
-	GUIOperations();
-	GUIStreams();
-	loadDataStreams($('#streams'));
-}
-
-function loadCylinder(scene){
-	var radius = 5, segments = 40,rings = 40, height=10;
-	var geom = new THREE.CylinderGeometry(radius, radius, height, rings, segments, false);
-	var object = new THREE.Mesh(geom, cubeMaterial);
-	cl(object);
-	object.overdraw = true;
-	object.geometry.dynamic = true;
-	object.normalizeMesh();
-
-	var cpy = object.geometry.vertices.slice(0);
-	for(var i in object.geometry.vertices)
-		cpy[i] = cpy[i].clone();
-	scene.userData.objects = [{'object':object, 'original': cpy, 'regions': extractRegions(object)}];
-	
-	GUIRegions();
-	scene.add(object);
-
-	return {'name' : 'Cylinder', 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
-}
-
-THREE.Mesh.prototype.rotate = function(){
-	var mesh = this;
-	var axis = new THREE.Vector3( - 1, 0, 0 );
-	var angle = Math.PI / 2;
-	var matrix = new THREE.Matrix4().makeRotationAxis( axis, angle );
-
-	var axis = new THREE.Vector3( 0, 1, 0 );
-	var angle = Math.PI/2;
-	var matrix2 = new THREE.Matrix4().makeRotationAxis( axis, angle );
-	var middle = new THREE.Vector3(0, 0.5, 0);
-	for(var i in mesh.geometry.vertices){
-		mesh.geometry.vertices[i].applyMatrix4(matrix);
-		mesh.geometry.vertices[i].applyMatrix4(matrix2);
-		mesh.geometry.vertices[i].subVectors(mesh.geometry.vertices[i], middle);
-	}
-}
-
-THREE.Mesh.prototype.normalizeMesh = function(){
-	var mesh = this;
-	var cpy2 = [];
-	mesh.geometry.mergeVertices()
-	for(var i in mesh.geometry.vertices)
-		cpy2[i] = mesh.geometry.vertices[i].clone();
-	var length = [];
-	for(var i in cpy2)
-		length[i] = cpy2[i].length();
-
-	var max = Array.max2(length);
-	
-	for(var i in cpy2)
-		cpy2[i].multiplyScalar(1.0/max);
-
-	mesh.geometry.vertices = cpy2;
-	// mesh.rotate();
-}
-
-function extractRegions(object){
-	// var regions = [[],[], []];
-	// n = object.geometry.faces.length;
-	// for(var i = 0; i < n-80; i++) regions[0].push('1\n');
-	// for(var i = n-80; i < n-40; i++) regions[1].push('2\n');
-	// for(var i = n-40; i < n; i++) regions[2].push(3);
-	// //// for(var i = 0; i < n; i++) regions[0].push(i);
-	// cl(regions[1].toString())
-	return regions;
-}
 
 function initOpenGL(container){
 
 	HEIGHT = $(window).height(),  WIDTH = $(window).width() - 260;
 	VIEW_ANGLE = 35 * 0.1, ASPECT = WIDTH / HEIGHT, NEAR = 0.1, FAR = 2000;
- 	
+ 	extendTHREE();
+ 	scene.userData.objects = [];
  	// Setup
 	renderer.setSize(WIDTH, HEIGHT);
 
@@ -160,9 +83,9 @@ function initOpenGL(container){
 	// Scene
 	loadFile(scene);
 	
-	axes = buildAxes( 1000 );
+	// axes = buildAxes( 1000 );
+	// scene.add(axes);
 	
-	scene.add(axes);
 	$(renderer.domElement).css({position: 'relative', left: '50%', 'margin-left': -WIDTH/2});
 	render();
 	$.get('/mesh/weather', function(data){
@@ -173,75 +96,58 @@ function initOpenGL(container){
 		w.load();
 		datastreams.push(w);
 	});
+
 }
 
-function loadOFF(scene, filename){
-	var loader = new THREE.OFFLoader();
-	loader.load(filename, function ( object ) {
-		var object = new THREE.Mesh( object.geometry, cubeMaterial );
-		
-		object.overdraw = true;
-		object.geometry.dynamic = true;
-		object.normalizeMesh();
+function saveFile(){
+	var filename = $('.filename').html();
+	$.ajax({
+	  type: "POST",
+	  url: '/mesh/save',
+	  data: {'filename': filename, 'mesh' : THREE.saveGeometryToObj(scene.children[3].geometry)},
+	  dataType: 'text'
+	}).done(function(data){
+		$('.filename').attr('href', data).html(filename + "_s");
+	});
+}
 
-		var cpy = object.geometry.vertices.slice(0);
-		for(var i in object.geometry.vertices)
-			cpy[i] = cpy[i].clone();
-		scene.userData.objects = [{'object':object, 'original': cpy, 'regions': extractRegions(object)}];
-		
+function loadFile(scene){
 	
-        scene.add( object );
-        render();
-        cl('OFF Loaded!');
-	} );
-	loader.load( filename );
-	return {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
-}	
-function loadSTL(scene, filename){
-	var loader = new THREE.STLLoader();
-    loader.addEventListener( 'load', function ( event ) {
-        var geometry = event.content;
-        var object = new THREE.Mesh( geometry, cubeMaterial );
-     
-		object.overdraw = true;
-		object.geometry.dynamic = true;
-		object.normalizeMesh();
-
-		var cpy = object.geometry.vertices.slice(0);
-		for(var i in object.geometry.vertices)
-			cpy[i] = cpy[i].clone();
-		scene.userData.objects = [{'object':object, 'original': cpy, 'regions': extractRegions(object)}];
-		
-		GUIRegions();
-        scene.add( object );
-        render();
-        cl('STL Loaded!');
-    } );
-    loader.load( filename );
-	return {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
+	// if(getURLParameter('n') == '0')
+	// 	fileinfo = loadCylinder(scene);
+	// else
+		fileinfo = THREE.loadSTL(scene, '/stl/'+getURLParameter('n')+'.stl');
+	
+	GUIFile(fileinfo);
+	// GUIRegions();
+	GUIOperations();
+	GUIStreams();
+	loadDataStreams($('#streams'));
 }
 
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-/*************************************************************************************************************/
-function highlightRegion(regionIndices, geom, color){
-	var faceIndices = ['a', 'b', 'c', 'd'];  
-	for(var i in regionIndices){
-		var face = geom.faces[ regionIndices[i] ];   
-		var numberOfSides = ( face instanceof THREE.Face3 ) ? 3 : 4;
+// function loadCylinder(scene){
+// 	var radius = 5, segments = 40,rings = 40, height=10;
+// 	var geom = new THREE.CylinderGeometry(radius, radius, height, rings, segments, false);
+// 	var object = new THREE.Mesh(geom, cubeMaterial);
+// 	cl(object);
+// 	object.overdraw = true;
+// 	object.geometry.dynamic = true;
+// 	object.normalizeMesh();
 
-		for( var j = 0; j < numberOfSides; j++ ){
-		    var vertexIndex = face[ faceIndices[ j ] ]; 
-		    face.vertexColors[ j ] = color;
-		}
-	}
-}
+// 	scene.userData.objects.push(new ExpFab(object, regions, pca));	
+// 	GUIRegions();
+// 	scene.add(object);
+
+// 	return {'name' : 'Cylinder', 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
+// }
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////  SCENE SETUP  ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 
 function setupLights(scene){
 	var pointLight = new THREE.PointLight(0xFFFFFF);
@@ -272,9 +178,7 @@ function animate() {
 	controls.update();
 }
 
-function render() {
-	renderer.render( scene, camera );
-}
+function render() { renderer.render( scene, camera );}
 
 
 function buildAxes( length ) {
@@ -300,20 +204,7 @@ function buildAxis( src, dst, colorHex, dashed ) {
         var axis = new THREE.Line( geom, mat, THREE.LinePieces );
         return axis;
 }
-function addSphere(scene){
-	
-	var radius = 0.25, segments = 40,rings = 40;
-	var geom = new THREE.SphereGeometry(radius, segments, rings);
-	var sphere = new THREE.Mesh(geom, cubeMaterial);
-	sphere.geometry.dynamic = true;
-	
-	testHighlight(sphere);
 
-	scene.add(sphere);
-	test = [];
-	for(var i = 0; i < sphere.geometry.vertices.length/2; i++) test.push(i);
-	MeshBalloon.transform(sphere, test, null, 1.5);
-}
 function addControls(){
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
 	controls.rotateSpeed = 1.0;
@@ -334,20 +225,134 @@ function addControls(){
 }
 
 
-function updateView(R, theta, phi, zoomFactor){
-	camera.fov = 300 *  zoomFactor;
-	camera.updateProjectionMatrix();
-	render();
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////  CALIBRATION AND LOADING FUNCTIONS   ////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+function extendTHREE(){
+	THREE.Mesh.prototype.rotate = function(){
+		var mesh = this;
+		var axis = new THREE.Vector3( - 1, 0, 0 );
+		var angle = Math.PI / 2;
+		var matrix = new THREE.Matrix4().makeRotationAxis( axis, angle );
 
-//var lambertMaterial = new THREE.MeshLambertMaterial({color: 0xCC0000});
-//var basicMaterial = new THREE.MeshBasicMaterial({color: 0xCCCCCC});
-//var groundMaterial = new THREE.MeshPhongMaterial( { ambient: 0xCCCCCC, color: 0xCCCCC, specular: 0x101010 } );
-var cubeMaterial;
-var materials = [cubeMaterial]//, lambertMaterial, basicMaterial, groundMaterial];
+		var axis = new THREE.Vector3( 0, 1, 0 );
+		var angle = Math.PI/2;
+		var matrix2 = new THREE.Matrix4().makeRotationAxis( axis, angle );
+		var middle = new THREE.Vector3(0, 0.5, 0);
+		for(var i in mesh.geometry.vertices){
+			mesh.geometry.vertices[i].applyMatrix4(matrix);
+			mesh.geometry.vertices[i].applyMatrix4(matrix2);
+			mesh.geometry.vertices[i].subVectors(mesh.geometry.vertices[i], middle);
+		}
+	}
+
+	THREE.Mesh.prototype.normalizeMesh = function(){
+		var mesh = this;
+		var cpy2 = [];
+		mesh.geometry.mergeVertices()
+		for(var i in mesh.geometry.vertices)
+			cpy2[i] = mesh.geometry.vertices[i].clone();
+		var length = [];
+		for(var i in cpy2)
+			length[i] = cpy2[i].length();
+
+		var max = Array.max2(length);
+		
+		for(var i in cpy2)
+			cpy2[i].multiplyScalar(1.0/max);
+
+		mesh.geometry.vertices = cpy2;
+		// mesh.rotate();
+	}
+
+	THREE.saveGeometryToObj = function (geometry) {
+		var s = '';
+		for (i = 0; i < geometry.vertices.length; i++) {
+		    s+= 'v '+(geometry.vertices[i].x) + ' ' +
+		    geometry.vertices[i].y + ' '+
+		    geometry.vertices[i].z + '\n';
+		}
+
+		for (i = 0; i < geometry.faces.length; i++) {
+
+		    s+= 'f '+ (geometry.faces[i].a+1) + ' ' +
+		    (geometry.faces[i].b+1) + ' '+
+		    (geometry.faces[i].c+1);
+
+		    if (geometry.faces[i].d !== undefined) {
+		        s+= ' '+ (geometry.faces[i].d+1);
+		    }
+		    s+= '\n';
+		}
+		return s;
+	}
+	THREE.loadOFF = function(scene, filename){
+		var loader = new THREE.OFFLoader();
+		loader.load(filename, function ( object ) {
+			var object = new THREE.Mesh( object.geometry, cubeMaterial );
+			
+			object.overdraw = true;
+			object.geometry.dynamic = true;
+			object.normalizeMesh();
+
+			scene.userData.objects.push(new ExpFab(object, regions, pca));	
+			
+		
+	        scene.add( object );
+	        render();
+	        cl('OFF Loaded!');
+		} );
+		loader.load( filename );
+		return {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
+	}	
+	THREE.loadSTL = function(scene, filename){
+		var loader = new THREE.STLLoader();
+	    loader.addEventListener( 'load', function ( event ) {
+	        var geometry = event.content;
+	        var object = new THREE.Mesh( geometry, cubeMaterial );
+	     
+			object.overdraw = true;
+			object.geometry.dynamic = true;
+			object.normalizeMesh();
+			var ex = new ExpFab(object, regions, pca);
+			cl(ex);
+			scene.userData.objects.push(ex);	
+			
+			GUIRegions(ex);
+	        scene.add( object );
+	        render();
+	        cl('STL Loaded!');
+	    } );
+	    loader.load( filename );
+		return {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
+	}
+
+}
 
  // function onWindowResize() {
  //        camera.aspect = window.innerWidth / window.innerHeight;
  //        camera.updateProjectionMatrix();
  //        renderer.setSize( window.innerWidth, window.innerHeight );
- //    }
+//  //    }
+
+// function updateView(R, theta, phi, zoomFactor){
+// 	camera.fov = 300 *  zoomFactor;
+// 	camera.updateProjectionMatrix();
+// 	render();
+// }
+// function addSphere(scene){
+	
+// 	var radius = 0.25, segments = 40,rings = 40;
+// 	var geom = new THREE.SphereGeometry(radius, segments, rings);
+// 	var sphere = new THREE.Mesh(geom, cubeMaterial);
+// 	sphere.geometry.dynamic = true;
+	
+// 	testHighlight(sphere);
+
+// 	scene.add(sphere);
+// 	test = [];
+// 	for(var i = 0; i < sphere.geometry.vertices.length/2; i++) test.push(i);
+// 	MeshBalloon.transform(sphere, test, null, 1.5);
+// }
