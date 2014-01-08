@@ -57,8 +57,15 @@ class MeshController < ApplicationController
     return seg.sort.collect{|s| s[1]}
   end
   def save
-    f = File.open("public/save#{params['filename']}", "w");
+    folder = "public/save/#{params['filename']}/";
+    # Dir.mkdir(folder);
+    FileUtils.mkdir(folder);
+    f = File.open("#{folder}#{params['filename']}.obj", "wb");
     f.write(params['mesh']);
-    render :json => "/save/#{params['filename']}"
+    f.close
+
+    value = `./public/save/meshconv #{folder}#{params['filename']}.obj -c stl`
+
+    render :json => "/save/#{params['filename']}/#{params['filename']}.stl"
   end
 end

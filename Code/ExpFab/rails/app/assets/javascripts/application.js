@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require three
 function toCanvasCoord(event){
   var c = $(renderer.domElement);
   return new THREE.Vector3(( (event.clientX - c.offset().left) / c.width() ) * 2 - 1, -( (event.clientY - c.offset().top)/ c.height() ) * 2 + 1, 0);
@@ -61,3 +60,13 @@ var invert = function (obj) {
 
   return h;
 };
+
+function decimalToHexString(number)
+{
+    if (number < 0)
+    {
+      number = 0xFFFFFFFF + number + 1;
+    }
+
+    return number.toString(16).toUpperCase();
+}

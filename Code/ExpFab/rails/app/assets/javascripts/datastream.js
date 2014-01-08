@@ -8,7 +8,6 @@ function Operation(container, name, icon, functionality){
 	functionality = function(){
 		var data = scene.userData.objects[0];
 		activeDataStream = datastreams[0];
-		activeDataStream.applyToOperation(0.1);
 		currentOperation = name;
 
 		var ampSlider = $(".op-slider[name='"+ currentOperation +"']");
@@ -71,8 +70,13 @@ function Region(exfab, regid, faces, pca){
 }
 
 Region.prototype.highlight = function (active, type){
-	var c;
-	c = !active ? this.color['default'] : this.color['selected'];
+	var c = this.color['selected'];
+	this.exfab.object.material.opacity = 1;
+	if(!active){	
+		c = this.color['default'];
+		this.exfab.object.material.opacity = 0.8;
+	}
+	
 	if(type == 'hover') c = !active ? this.color['default'] : this.color['hover'];
 	for(var faceIndex in this.faces){
 		var face = this.exfab.object.geometry.faces[this.faces[faceIndex]];
@@ -223,6 +227,7 @@ function GUINode(container, name, icon, functionality, isimage){
 			.append(name)
 			.addClass('list-button')
 			.attr('title', this.name)
+			.attr('name', this.name)
 			.css({
 				height: 45,
 				width : '20%',

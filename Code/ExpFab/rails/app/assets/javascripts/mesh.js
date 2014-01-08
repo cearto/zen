@@ -46,54 +46,30 @@ function addParticle(v, type){
 }
 
 var NONE = 0, DOWN = 1, UP = 2, DRAG = 3;
-THREE.ArrowHelper.prototype.state = NONE;
-THREE.ArrowHelper.prototype.colors = {"inactive" : 0xd8292f, "active": 0x991c20}; 
-THREE.ArrowHelper.prototype.click = function(){
-	if(this.state == DOWN){
-		this.state = UP;
-		this.setColor(this.colors["inactive"]);
-	}
-	else{
-		this.state = DOWN;
-		this.setColor(this.colors["active"]);
-	}
-	this.cone.geometry.colorsNeedUpdate = true;
-	this.line.geometry.colorsNeedUpdate = true;
-	render();
-}
 
 function buildAxesPCA(centroid, pca_s ) {
 	length = 1;
     // var axes = new THREE.Object3D();
     var axes = [];
+    var arrowScale  = 0.3;
     
-    var arrow = new THREE.ArrowHelper( pca_s[0].clone().normalize(), centroid.clone(), length, 0xd8292f );
+    var arrow = new THREE.ArrowHelper( pca_s[0].clone().normalize().multiplyScalar(arrowScale), centroid.clone(), length, 0xd8292f );
     arrow.colors = {"inactive" : 0xd8292f, "active": 0x991c20};
     arrow.cone.name = "0";
     // axes.add(arrow);
     axes.push(arrow);
     
-    arrow = new THREE.ArrowHelper( pca_s[1].clone().normalize(), centroid.clone(), length, 0x00956e );
+    arrow = new THREE.ArrowHelper( pca_s[1].clone().normalize().multiplyScalar(arrowScale), centroid.clone(), length, 0x00956e );
     arrow.colors = {"inactive" : 0x00956e, "active": 0x00c894}
     // axes.add(arrow);
     arrow.cone.name = "1";
     axes.push(arrow);
     
-    arrow = new THREE.ArrowHelper( pca_s[2].clone().normalize(), centroid.clone(), length, 0x435cc8 );
+    arrow = new THREE.ArrowHelper( pca_s[2].clone().normalize().multiplyScalar(arrowScale), centroid.clone(), length, 0x435cc8 );
     arrow.colors = {"inactive" : 0x435cc8, "active": 0x7e8fd9}
     // axes.add(arrow);
     arrow.cone.name = "2";
     axes.push(arrow);
-
-
-    // axes.add( buildAxis( centroid.clone(), pca_s[0].clone().multiplyScalar(length), 0xd8292f, false ) ); // +X
-    // axes.add( buildAxis( centroid.clone(), pca_s[0].clone().multiplyScalar(-length), 0xd8292f, true) ); // -X
-    // axes.add( buildAxis( centroid.clone(), pca_s[1].clone().multiplyScalar(length), 0x00956e, false ) ); // +Y
-    // axes.add( buildAxis( centroid.clone(), pca_s[1].clone().multiplyScalar(-length), 0x00956e, true ) ); // -Y
-    // axes.add( buildAxis( centroid.clone(), pca_s[2].clone().multiplyScalar(length), 0x435cc8, false ) ); // +Z
-    // axes.add( buildAxis( centroid.clone(), pca_s[2].clone().multiplyScalar(-length), 0x435cc8, true ) ); // -Z
-    // scene.add(axes);
-    // render();
     return axes;
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -103,6 +79,8 @@ function buildAxesPCA(centroid, pca_s ) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function initOpenGL(container){
+	convertColors();
+	var context = renderer.domElement.getContext("experimental-webgl", {preserveDrawingBuffer: true});
 
 	HEIGHT = $(window).height(),  WIDTH = $(window).width() - 260;
 	VIEW_ANGLE = 35 * 0.1, ASPECT = WIDTH / HEIGHT, NEAR = 0.1, FAR = 2000;
@@ -116,11 +94,12 @@ function initOpenGL(container){
 	setupLights(scene);
 	setupCamera(scene);
 	addControls();
-	cubeMaterial = new THREE.MeshPhongMaterial( { wireframe: getURLParameter('w') == '1', ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading, vertexColors: THREE.VertexColors, overdraw : true});
-	// cubeMaterial = new THREE.MeshBasicMaterial( { wireframe: getURLParameter('w') == '1', color: 0xffffff, shading: THREE.SmoothShading, vertexColors: THREE.VertexColors,  overdraw : true} );
+
+	cubeMaterial = new THREE.MeshPhongMaterial(defaultMaterialSettings);
 	// Scene
 	loadFile(scene);
-	
+
+	// CANONICAL AXES
 	// axes = buildAxes( 1000 );
 	// scene.add(axes);
 	
@@ -138,29 +117,20 @@ function initOpenGL(container){
 }
 
 function saveFile(){
-	var filename = $('.filename').html();
+	var filename = mainExpFab.filename;
 	$.ajax({
 	  type: "POST",
 	  url: '/mesh/save',
-	  data: {'filename': filename, 'mesh' : THREE.saveGeometryToObj(mainExpFab.object.geometry)},
+	  data: {'filename': filename + '_s', 'mesh' : THREE.saveGeometryToObj(mainExpFab.object.geometry)},
 	  dataType: 'text'
 	}).done(function(data){
-		$('.filename').attr('href', data).html(filename + "_s");
+		$('.filename').attr('href', data).html(filename + '_s');
+		mainExpFab.mgui.displayUIMessage("Model successfully saved. ", "<a href="+ data +"> Download Here </a>", true);    
 	});
 }
 
 function loadFile(scene){
-	
-	// if(getURLParameter('n') == '0')
-	// 	fileinfo = loadCylinder(scene);
-	// else
-		fileinfo = THREE.loadSTL(scene, '/stl/'+getURLParameter('n')+'.stl');
-	
-	GUIFile(fileinfo);
-	// GUIRegions();
-	GUIOperations();
-	GUIStreams();
-	loadDataStreams($('#streams'));
+	THREE.loadSTL(scene, '/stl/'+getURLParameter('n')+'.stl');
 }
 
 
@@ -177,6 +147,25 @@ function setupLights(scene){
 	pointLight.position.y = 200;
 	pointLight.position.z = 130;
 	scene.add(pointLight);
+
+	var pointLight2 = new THREE.PointLight(0xFFFFFF);
+	pointLight2.position.x = 10;
+	pointLight2.position.y = 200;
+	pointLight2.position.z = -130;
+
+	scene.add(pointLight2);
+
+	var pointLight3 = new THREE.PointLight(0xFFFFFF);
+	pointLight3.position.x = -100;
+	pointLight3.position.y = 200;
+	pointLight3.position.z = -130;
+	scene.add(pointLight3);
+
+	var pointLight4 = new THREE.PointLight(0xFFFFFF);
+	pointLight4.position.x = 10;
+	pointLight4.position.y = -200;
+	pointLight4.position.z = 130;
+	scene.add(pointLight4);
 }
 function addPlane(scene){
 	var plane = new THREE.Mesh( new THREE.PlaneGeometry( 4000, 800 ), basicMaterial );
@@ -253,6 +242,22 @@ function addControls(){
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 function extendTHREE(){
+	THREE.ArrowHelper.prototype.state = NONE;
+	THREE.ArrowHelper.prototype.colors = {"inactive" : 0xd8292f, "active": 0x991c20}; 
+	THREE.ArrowHelper.prototype.click = function(){
+		if(this.state == DOWN){
+			this.state = UP;
+			this.setColor(this.colors["inactive"]);
+		}
+		else{
+			this.state = DOWN;
+			this.setColor(this.colors["active"]);
+		}
+		this.cone.geometry.colorsNeedUpdate = true;
+		this.line.geometry.colorsNeedUpdate = true;
+		render();
+	}
+
 	THREE.Mesh.prototype.rotate = function(){
 		var mesh = this;
 		var axis = new THREE.Vector3( - 1, 0, 0 );
@@ -262,6 +267,7 @@ function extendTHREE(){
 		var axis = new THREE.Vector3( 0, 1, 0 );
 		var angle = Math.PI/2;
 		var matrix2 = new THREE.Matrix4().makeRotationAxis( axis, angle );
+		
 		var middle = new THREE.Vector3(0, 0.5, 0);
 		for(var i in mesh.geometry.vertices){
 			mesh.geometry.vertices[i].applyMatrix4(matrix);
@@ -269,24 +275,12 @@ function extendTHREE(){
 			mesh.geometry.vertices[i].subVectors(mesh.geometry.vertices[i], middle);
 		}
 	}
-
-	THREE.Mesh.prototype.normalizeMesh = function(){
-		var mesh = this;
-		var cpy2 = [];
-		mesh.geometry.mergeVertices()
-		for(var i in mesh.geometry.vertices)
-			cpy2[i] = mesh.geometry.vertices[i].clone();
+	THREE.Geometry.prototype.normalize = function(scale){
 		var length = [];
-		for(var i in cpy2)
-			length[i] = cpy2[i].length();
-
-		var max = Array.max2(length);
-		
-		for(var i in cpy2)
-			cpy2[i].multiplyScalar(1.0/max);
-
-		mesh.geometry.vertices = cpy2;
-		// mesh.rotate();
+		var v = this.vertices;
+		for(var i in v) length[i] = v[i].length();
+		var max = Array.max2(length) * (1/scale);
+		for(var i in v) v[i].multiplyScalar(1.0 / max);
 	}
 
 	THREE.saveGeometryToObj = function (geometry) {
@@ -310,44 +304,36 @@ function extendTHREE(){
 		}
 		return s;
 	}
-	THREE.loadOFF = function(scene, filename){
-		var loader = new THREE.OFFLoader();
-		loader.load(filename, function ( object ) {
-			var object = new THREE.Mesh( object.geometry, cubeMaterial );
-			
-			object.overdraw = true;
-			object.geometry.dynamic = true;
-			object.normalizeMesh();
-			mainExpFab = new ExpFab(object, regions, pca);
-			scene.userData.objects.push(mainExFab);	
-			
-		
-	        scene.add( object );
-	        render();
-	        cl('OFF Loaded!');
-		} );
-		loader.load( filename );
-		return {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
-	}	
+
 	THREE.loadSTL = function(scene, filename){
 		var loader = new THREE.STLLoader();
 	    loader.addEventListener( 'load', function ( event ) {
 	        var geometry = event.content;
-	        var object = new THREE.Mesh( geometry, cubeMaterial );
+	        smooth = geometry.clone();
+			//smooth.mergeVertices();
+			var modifier = new THREE.SubdivisionModifier(0);
+			modifier.modify( smooth );
+			
+			var object = new THREE.Mesh( smooth, cubeMaterial );
 	     
 			object.overdraw = true;
 			object.geometry.dynamic = true;
-			object.normalizeMesh();
-			mainExpFab = new ExpFab(object, regions, pca);
-			scene.userData.objects.push(mainExpFab);	
+			object.geometry.normalize(0.7);
 			
-			GUIRegions(mainExpFab);
+			mainExpFab = new ExpFab(object, regions, pca, filename);
+			mainExpFab.mgui.displayUIMessage("Loading model " + filename, '', false);
+			
+			scene.userData.objects.push(mainExpFab);	
+
 	        scene.add( object );
-	        render();
-	        cl('STL Loaded!');
+	        var fileinfo = {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'};
+	        mainExpFab.load(fileinfo);
+	       
+	    	render();
+	        
 	    } );
 	    loader.load( filename );
-		return {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'}
+		
 	}
 
 }

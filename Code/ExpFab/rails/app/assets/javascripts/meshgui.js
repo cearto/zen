@@ -1,9 +1,45 @@
 var datastreams = [];
 var operations = [];
 var clearfix = $('<br/>').addClass('clearfix');
+
+
+
+function MeshGUI(){
+	this.canvas = $('canvas')
+	this.message = $('#error');
+	this.messageText = $('#error h2');
+	this.messageSubText = $('#error-msg');
+	this.message.hide();
+	this.message.children('.x').click(function(){
+		$(this).parent().fadeOut();
+	});
+	this.gallery = new Gallery();
+	this.generateImage = function(){
+		var img    = this.canvas[0].toDataURL("image/png");
+		this.gallery.add(img);
+	}
+}
+function Gallery(){
+	this.container = $('#gallery');
+	this.wrapper = $('#gallery-wrapper');
+}
+Gallery.prototype.add = function(img){
+	var node = $('<div></div>').addClass('gallery-node');
+	var nodeImg = $('<img/>').attr('src', img);
+	node.append(nodeImg);
+	this.container.append(node);
+}
+MeshGUI.prototype.displayUIMessage = function(msg, smsg, persist){
+	this.messageText.html(msg);
+	this.messageSubText.html(smsg);
+	if(persist)	this.message.show().delay(2000);//.fadeOut();
+	else	this.message.show().delay(2000).fadeOut();
+}
+
 function GUIFile(fileinfo){
 	var bar = $('#info-bar .pure-u-1-2');
 	bar.children('.mesh-content-title').html(fileinfo['name']);
+	
 	var subtitle = "From <a>"+ fileinfo['author'] +"</a> at <span>"+ fileinfo['mtime'] +", "+ fileinfo['date'] + "</span>";
 	bar.children('.mesh-content-subtitle').html(subtitle);
 	GUIFileNav(fileinfo.name);
@@ -64,7 +100,6 @@ function GUIFileNav( currentFile ){
 	$('#nav').append(container);
 }
 function GUIRegions(exfab){
-
 	var heading = $('<h3></h3>').html('Regions').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'regions').append(heading);
 	for(var i in exfab.regions) exfab.regions[i].addGUI(container);
@@ -131,6 +166,13 @@ function GUIActivateListeners(){
 			activeDataStream.restoreState();
 		});
 		$('#save').click(saveFile);
+
+		// DIRECT MANIPULATION HANDLERS
+		$('canvas').mousemove(onDocumentOver);
+		$('canvas').click(onDocumentMouseClick);
+		$('canvas').mouseup(onDocumentMouseUp);
+		$('canvas').mousedown(onDocumentMouseDown);
+		$('#print').click(clean);
 }
 
 /*************************************************************************************************************/
@@ -188,4 +230,9 @@ function toggleList(){
 	$('#list').toggleClass('active');
 	for(var i in datastreams) datastreams[i].load();
 };
+
+function clean(){
+	$('#streams').hide();
+	$('#regions').hide();
+}
 

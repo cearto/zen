@@ -1,7 +1,9 @@
 
 weather = [];
 
+/* A mapping takes a range and maps it to datastream */
 function Mapping(){};
+
 Mapping.dsp = function(i,n, ds){
 	var param = parseFloat(i)/n;
 	return Mapping.linInterp(param, ds);
@@ -14,13 +16,16 @@ Mapping.linInterp = function(param, data){
 	index = parseInt(index);
 	return data[index] * (1-interp) +  data[index + 1] * (interp);
 }
-Mapping.square = function(param){ 
-	var s = param * 3 - 1;
-	return s * s;
-};
+
+// TODO: Add noise functions
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////  MESH DEFORMATIONS   /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 function balloon(original, mask, vprime, centroid,  majoraxis, ds, amp){
 	var yvectors = [];
@@ -33,7 +38,6 @@ function balloon(original, mask, vprime, centroid,  majoraxis, ds, amp){
 		yvectors.push(vr);
 	}
 
-
 	//DEFORM - BALLOON
 	var n = mask.length;
 	for(var i in mask){
@@ -43,19 +47,10 @@ function balloon(original, mask, vprime, centroid,  majoraxis, ds, amp){
 	}
 }
 function rotate(original, mask, vprime, centroid,  majoraxis, ds, amp){
-	
-	//DEFORM - SCALE
-	var n = mask.length;
-	for(var i in mask){ // for every vertice in region
-		var weight = majoraxis.clone();
-		weight.multiplyScalar( Mapping.dsp(i, n, ds) * amp );
-		// cl(weight);
-		vprime[mask[i]].addVectors(original[mask[i]], weight);
-	}
+	// TODO: Implement rotation operation
 }
 
 function scale(original, mask, vprime, centroid,  majoraxis, ds, amp){
-	
 	//DEFORM - SCALE
 	var n = mask.length;
 	for(var i in mask){ // for every vertice in region
@@ -67,8 +62,7 @@ function scale(original, mask, vprime, centroid,  majoraxis, ds, amp){
 }
 function normalize(arr){
 	var max = Math.max.apply(null, arr);
-	for(var i in arr)
-	arr[i] /= max;
+	for(var i in arr) arr[i] /= max;
 	return arr;
 }
 
@@ -112,7 +106,9 @@ function computeNormal(v1, v2){ return v1.clone().cross(v2).normalize();}
 //////////////////////////////  DNA.JS   ///////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
 var generateMode = false;
+
 function DNA(){
 	this.extract = function(){
 		headers = []; for(var i in operations) headers.push(operations[i].name);

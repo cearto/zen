@@ -1,3 +1,287 @@
-// Place all the styles related to the mesh controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.swatch-button:hover{
+	-webkit-box-shadow: 1px 1px 8px rgba(50, 50, 50, 0.3);
+	-moz-box-shadow:    1px 1px 8px rgba(50, 50, 50, 0.3);
+	box-shadow:         1px 1px 8px rgba(50, 50, 50, 0.3);
+}
+.swatch-button.selected{
+	border: #AAA 1px solid;
+	margin: 0.2% 0.6% !important;
+}
+.icon-button{
+	border: #AAA 1px solid;
+}
+.icon-button:hover{
+	background: white;
+}
+.icon-button:active{
+	background: #AAA;
+}
+#objnav, #matview{
+	margin-bottom: 20px;
+}
+.ui-span{
+	padding: 0 4px;
+
+}
+br{
+	display: block;		
+	margin: 10px 0;
+}
+.ui-link{
+	font-size: 10pt;
+	padding: 8px 8px;
+	border-radius: 2px;
+	color: black;
+
+}
+.ui-link:hover, .ui-link.selected-mat{
+	background: #fff;
+}
+div.mesh-item{
+	padding: 0.25em 1em;
+	cursor: pointer;
+}
+div.mesh-item:hover, .selected{
+	background: rgba(255,255, 255, 0.8);
+}
+.ui-heading{
+	background: #333;
+	color: white;
+	width: 109%;
+	padding: 4px 0;
+	margin: -8px -8px 8px -8px;
+	font-size: 8pt;
+	font-weight: normal;
+}
+.clearfix{
+clear: both;
+}
+button.icon{
+	width: 15px;
+	height: 50px;
+}
+button.icon img{
+	height: 100%;
+}
+/*SECONDARY*/
+#pulldown{
+	position: absolute;
+	width: 30px;
+	display: block;
+	text-align: center;
+	color: black;
+	top: 10px;
+	margin: 0;
+	left: 10px;
+	font-size: 8pt;
+}
+#pulldown img{
+	width: 60%;
+	padding: 6px;
+	position: relative;
+	margin-top: -3px;
+	background: #EEE;
+	border-radius: 50px;
+}
+#pulldown img:hover{
+	background: #FFF;
+}
+#pulldown img:active{
+	background: #DDD;
+}
+.mesh-content-header{
+	display: none;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	position: relative;
+	z-index: 100;
+	background: rgba(255, 255, 255, 0.9);
+}
+#gallery{
+	width: 100%;
+	height: calc(100% - 35px);
+	overflow-y: scroll;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: #ccc solid 1px;
+}
+#gallery-controls{
+	height: 15px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 10px 0;
+}
+#gallery-wrapper{
+	position: fixed;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+	z-index: 10;
+}
+.gallery-fullscreen{
+	top: 0;
+	left: 0;
+	width: calc(100% - 260px);
+	height: 100%;
+}
+.gallery-sidebar{
+	bottom: 0;
+	right: 0;
+	height: 50%;
+	width: 258px;
+}
+.gallery-sidebar .gallery-node{
+	width: calc(48% - 2px);
+	border-right: #ccc solid 1px;
+	border-bottom: #ccc solid 1px;
+	padding: 1%;
+	height: calc(31% - 2px);
+	display: inline-block;
+	float: left;
+}
+.gallery-fullscreen .gallery-node{
+	width: calc(18% - 2px);
+	border-left: #ccc solid 1px;
+	padding: 1%;
+	height: calc(23% - 2px);
+	display: inline-block;
+	float: left;
+}
+#gallery-node{
+	width: 100%;
+}
+#scene{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: calc(100% - 260px);
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+}
+#main{
+	width: calc(100% - 260px);
+	position: fixed;
+	margin-left: 0;
+	top: 0;
+	right: 320px;
+}
+#nav{
+	margin-left: 0;
+	width: 260px;
+	position: fixed;
+	top: 0;
+	right: 30px;
+}
+
+/*SLIDERS*/
+.slider{
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 8pt;
+	color: white;
+}
+.pure-menu-button{
+	margin-left: 5%;
+}
+.pure-button-secondary {
+        color: white;
+        border-radius: 4px;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+
+.pure-button-toggle {
+        background: rgb(202, 60, 60); /* this is a maroon */
+ }
+/*BASE CSS*/
+html, body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+#main, #layout{
+	height: 100%;
+}
+
+.dg.ac{
+	z-index: 100 !important;
+}
+#container{
+	width: 100%;
+	height: 100%;
+}
+#info-bar{
+	background: none;
+	left: 5%;
+	top: -20px;
+	width: calc(100% - 200px);
+	border: none;
+}
+/* SCENE STYLE */
+body{
+}
+
+.gray{
+	background: #adadad; /* Old browsers */
+	background: -moz-linear-gradient(45deg, #adadad 0%, #d3d2d1 21%, #ffffff 46%, #f2f2ed 69%, #c4c4c0 90%, #a5a5a2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#adadad), color-stop(21%,#d3d2d1), color-stop(46%,#ffffff), color-stop(69%,#f2f2ed), color-stop(90%,#c4c4c0), color-stop(100%,#a5a5a2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* IE10+ */
+	background: linear-gradient(45deg, #adadad 0%,#d3d2d1 21%,#ffffff 46%,#f2f2ed 69%,#c4c4c0 90%,#a5a5a2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#adadad', endColorstr='#a5a5a2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}	
+.shadow{
+	-webkit-box-shadow: 1px 1px 8px rgba(50, 50, 50, 0.3);
+	-moz-box-shadow:    1px 1px 8px rgba(50, 50, 50, 0.3);
+	box-shadow:         1px 1px 8px rgba(50, 50, 50, 0.3);
+}
+#pulldown img.setting-on{
+	border: #00A8e1 2px solid;
+	background: #FFF;
+}
+#canvas{
+	cursor: pointer;
+}
+#error{
+	display: none;
+	padding: 20px 16px 12px 16px;
+	position: absolute;
+	top: -10px;
+	left: 60px;
+	width: calc(100% - 360px);
+	background: #ffe669;
+	border: 1px solid #CCC;
+	border-radius: 8px;
+}
+#error .x{
+	background: #8a7823;
+	color: #ffe669;
+	border-radius: 10px;
+	padding: 1px 6px;
+	float: right;
+	position: relative;
+	cursor: pointer;
+}
+
+.x:hover{
+	background: #333 !important;
+}
+#error h2{
+	font-size: 10pt;
+	display: inline;
+}
+#error-msg{
+	font-size: 8pt;	
+}
+button{
+	color: #eee;
+	border: none;
+	font: 11px 'Lucida Grande', sans-serif !important;
+	text-shadow: 0 -1px 0 #111;
+	background: black;
+}
