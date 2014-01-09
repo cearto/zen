@@ -1,5 +1,5 @@
 %% SETUP DIRECTORIES
-stl_dir = '../mesh/public/stl/';
+stl_dir = '../rails/public/stl/';
 seg_dir = strcat(stl_dir, 'seg/');
 out_dir = strcat(stl_dir, 'pca/');
 stls = dir(stl_dir);
@@ -7,7 +7,7 @@ segs = dir(seg_dir);
 stls = stls(4:end);
 segs = segs(3:end);
 
-for i=1:2%size(segs, 1)
+for i=159:159%size(segs, 1)
     display(num2str(i));
     regf = dir(strcat(seg_dir, segs(i).name));
     regf = strcat(seg_dir, segs(i).name, '/', regf(3).name);
@@ -40,8 +40,12 @@ for i=1:2%size(segs, 1)
         vertices = f(faces);
         data = v(vertices, :);
         [coeff, eigValueDiag] = princomp(data);
-        princomps(:, :, j) = coeff;
+        x = coeff(:, 1)';
+        yz = null(x)';
+        xyz = [x; yz]';
+        princomps(:, :, j) = eye(3);
     end
+    princomps
     %% EXPORT AS A JSON FILE
     a = struct('file', regf, 'region', princomps);
     json = savejson('data', a);

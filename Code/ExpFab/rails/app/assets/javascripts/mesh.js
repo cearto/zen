@@ -48,24 +48,24 @@ function addParticle(v, type){
 var NONE = 0, DOWN = 1, UP = 2, DRAG = 3;
 
 function buildAxesPCA(centroid, pca_s ) {
-	length = 1;
+	length = 0.8;
     // var axes = new THREE.Object3D();
     var axes = [];
     var arrowScale  = 0.3;
-    
-    var arrow = new THREE.ArrowHelper( pca_s[0].clone().normalize().multiplyScalar(arrowScale), centroid.clone(), length, 0xd8292f );
+
+    var arrow = new THREE.ArrowHelper( pca_s[0].clone().multiplyScalar(arrowScale), centroid.clone(), length, 0xd8292f );
     arrow.colors = {"inactive" : 0xd8292f, "active": 0x991c20};
     arrow.cone.name = "0";
     // axes.add(arrow);
     axes.push(arrow);
     
-    arrow = new THREE.ArrowHelper( pca_s[1].clone().normalize().multiplyScalar(arrowScale), centroid.clone(), length, 0x00956e );
+    arrow = new THREE.ArrowHelper( pca_s[1].clone().multiplyScalar(arrowScale), centroid.clone(), length, 0x00956e );
     arrow.colors = {"inactive" : 0x00956e, "active": 0x00c894}
     // axes.add(arrow);
     arrow.cone.name = "1";
     axes.push(arrow);
     
-    arrow = new THREE.ArrowHelper( pca_s[2].clone().normalize().multiplyScalar(arrowScale), centroid.clone(), length, 0x435cc8 );
+    arrow = new THREE.ArrowHelper( pca_s[2].clone().multiplyScalar(arrowScale), centroid.clone(), length, 0x435cc8 );
     arrow.colors = {"inactive" : 0x435cc8, "active": 0x7e8fd9}
     // axes.add(arrow);
     arrow.cone.name = "2";
@@ -314,7 +314,7 @@ function extendTHREE(){
 	    loader.addEventListener( 'load', function ( event ) {
 	        var geometry = event.content;
 	        smooth = geometry.clone();
-			//smooth.mergeVertices();
+			smooth.mergeVertices();
 			var modifier = new THREE.SubdivisionModifier(0);
 			modifier.modify( smooth );
 			
