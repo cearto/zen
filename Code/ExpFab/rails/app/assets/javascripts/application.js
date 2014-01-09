@@ -13,6 +13,66 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var mainExpFab;
+// SCENE VARIABLES
+var camera, controls, projector;
+var stats, WIDTH, HEIGHT, ASPECT, NEAR, FAR, VIEW_ANGLE;
+var Z = 300; var zoomLevel = 0.01; var theta = 0; var phi = 0;
+
+var xaxis = new THREE.Vector3(1, 0, 0);
+var yaxis = new THREE.Vector3(0, 1, 0);
+var zaxis = new THREE.Vector3(0, 0, 1);
+
+// MOUSE EVENTS
+var down  = new THREE.Vector3(0, 0, 0);
+var up  = new THREE.Vector3(0, 0, 0);
+var current  = new THREE.Vector3(0, 0, 0);
+var originalAxisLength = 1;
+var activeAxis = null;
+var activeOperation = '';
+
+// SCENE VARIABLES
+var scene = new THREE.Scene();
+var renderer = new THREE.WebGLRenderer({ antialias: true,  preserveDrawingBuffer: true } );
+
+
+var defaultMaterialSettings = { 
+    wireframe: false, 
+    //ambient: 0x030303, 
+    color: 0xdddddd, // gray 
+    specular: 0x0000, //white
+    shininess: 30, 
+    shading: THREE.FlatShading, 
+    vertexColors: THREE.VertexColors, 
+    overdraw : true,
+    transparent: true,
+    opacity: 0.5
+};
+
+var defaultColor = 0x777777;
+var hoverColor = 0xAAAAAA;
+var downColor = 0xAAAAAA;
+
+colors = [{'selected': 0xffc94c, 'active':0xffd87f, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, //yellow
+      {'selected':0x41ccb4, 'active': 0x69d7c4, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // light green
+      {'selected':0x40c365, 'active': 0x67cf84, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // green
+      {'selected': 0xDB4090, 'active':0xe36ba9, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // pink
+      {'selected':0x00a8e1, 'active': 0x62d7ff, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // blue
+      {'selected':0xd82727, 'active': 0xe05252, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // red
+      {'selected':0xebb114, 'active': 0xefc143, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // orange
+      {'selected':0x542c54, 'active': 0x542c54, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // purple
+      {'selected': 0xffc94c, 'active':0xffd87f, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, //yellow
+      {'selected':0x41ccb4, 'active': 0x69d7c4, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // light green
+      {'selected':0x40c365, 'active': 0x67cf84, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // green
+      {'selected': 0xDB4090, 'active':0xe36ba9, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // pink
+      {'selected':0x00a8e1, 'active': 0x62d7ff, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // blue
+      {'selected':0xd82727, 'active': 0xe05252, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // red
+      {'selected':0xebb114, 'active': 0xefc143, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // orange
+      {'selected':0x542c54, 'active': 0x542c54,  'default': defaultColor, 'hover': hoverColor, 'down': downColor}// purple
+];
+
+
 function toCanvasCoord(event){
   var c = $(renderer.domElement);
   return new THREE.Vector3(( (event.clientX - c.offset().left) / c.width() ) * 2 - 1, -( (event.clientY - c.offset().top)/ c.height() ) * 2 + 1, 0);

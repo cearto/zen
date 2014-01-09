@@ -1,155 +1,17 @@
 <script> 
-//global variables
-
-var camera, controls, projector;
-var stats, WIDTH, HEIGHT, ASPECT, NEAR, FAR, VIEW_ANGLE;
-var Z = 300; var zoomLevel = 0.01; var theta = 0; var phi = 0;
-
-
-var xaxis = new THREE.Vector3(1, 0, 0);
-var yaxis = new THREE.Vector3(0, 1, 0);
-var zaxis = new THREE.Vector3(0, 0, 1);
-
-// MOUSE EVENTS
-var down  = new THREE.Vector3(0, 0, 0);
-var up  = new THREE.Vector3(0, 0, 0);
-var current  = new THREE.Vector3(0, 0, 0);
-var originalAxisLength = 1;
-var activeAxis = null;
-var activeOperation = '';
-
-
+// MODEL DATA
 var pca = <%= @pca %>;
 var regions = <%= @seg %>;
 var invRegions = invert(regions);
 var operationData = <%= @operations %>;
 
-var gui = new dat.GUI();
-var scene = new THREE.Scene();
-var renderer = new THREE.WebGLRenderer({ antialias: true,  preserveDrawingBuffer: true } );
-
-
-var mainExpFab;
-var defaultMaterialSettings = { 
-      wireframe: false, 
-      //ambient: 0x030303, 
-      color: 0xdddddd, // gray 
-      specular: 0x0000, //white
-      shininess: 30, 
-      shading: THREE.FlatShading, 
-      vertexColors: THREE.VertexColors, 
-      overdraw : true,
-      transparent: true,
-      opacity: 0.5
-    };
-//{
-//   wireframe: false, 
-//   ambient: 0x030303, 
-//   color: 0xdddddd, 
-//   specular: 0x009900, 
-//   shininess: 30, 
-//   shading: THREE.FlatShading, 
-//   vertexColors: THREE.VertexColors, 
-//   //overdraw : true,
-//   transparent: true,
-//   opacity: 0.1 
-// };
-
 $(function(){
-	initOpenGL($('#scene'));
-  $('#screenshot').click(function(){
-    mainExpFab.mgui.generateImage();
+	initOpenGL($('#scene'), {
+    "success" : function(){},
+    "error" : function(){}
   });
-  $('#fullscreen').click(function(){
-    var gal = mainExpFab.mgui.gallery.wrapper;
-    if(gal.hasClass('gallery-sidebar')){
-      gal.removeClass('gallery-sidebar').addClass('gallery-fullscreen');
-      $(this).html('Sidebar');
-    }
-    else{
-      mainExpFab.mgui.gallery.wrapper.removeClass('gallery-fullscreen').addClass('gallery-sidebar');
-      $(this).html('Fullscreen');
-    }
-
-  });
-	// TODO: Add "Unable to load error"
 });	
 
-function ExpFab(obj, regions, pca, filepath){
-  var filesplit = filepath.split('/');
-  this.filename = filesplit[filesplit.length-1].split('.stl')[0]; 
-  //scene variables
-	this.object = obj;
-  this.color = defaultMaterialSettings.color;
-  this.wireframe = defaultMaterialSettings.wireframe;
-  this.shininess = defaultMaterialSettings.shininess;
-	
-  // deformation variables
-  this.operation = 'None';
-
-
-	this.original = obj.geometry.clone().vertices;
-  this.current = obj.geometry.clone().vertices;
-	
-	this.regions = [];
-	for(var i in regions) this.regions.push(new Region(this, i, regions[i], pca[i]));
-	
-	this.id = scene.userData.objects.length;
-  this.mgui = new MeshGUI();
-}
-ExpFab.prototype.load = function(fileinfo) {
-  var that = this;
-  
-  var fileControl = gui.add(mainExpFab, 'filename');
-  var wireframeControl = gui.add(mainExpFab, 'wireframe');
-	var colorControl = gui.addColor(mainExpFab, 'color');
-  //var shininessControl = gui.add(mainExpFab, 'shininess');
-  
-  var operationControl = gui.add(mainExpFab, 'operation', ['None', 'Balloon', 'Translate']);
-
-
-  wireframeControl.onChange(function(value) {
-    that.object.material.wireframe = value;
-    render();
-  });
-  // shininessControl.onChange(function(value) {
-  //   that.object.material.shininess = value;
-  //   render();
-  // });  
-  colorControl.onChange(function(value) {
-    // cl(decimalToHexString(value));
-    var nColor  =  decimalToHexString(value);
-    if(nColor[0] != "#") nColor = "#" + nColor;
-    that.object.material.color = new THREE.Color(nColor);
-    render();
-  });
-
-  operationControl.onChange(function(value){
-    //TODO change name
-    if(value == 'Translate') value = 'Scale';
-    activeOperation = value; 
-
-    
-    $(".op[name='"+ value +"x']").click();
-    $(".op[name='"+ value +"y']").click();
-    $(".op[name='"+ value +"z']").click();
-   
-  });
-
- 
-
-	GUIActivateListeners();
-  
-  GUIStreams();
-  GUIOperations();
-  GUIFile(fileinfo);
-  GUIRegions(mainExpFab);
-  loadDataStreams($('#streams'));
-  animate();
-  $("#nav").hide();
-
-  mainExpFab.mgui.displayUIMessage("Model successfully loaded. ", fileinfo['name'], true);     
-};
 
 function userRay(event){
 	var c = $(renderer.domElement);
@@ -158,155 +20,107 @@ function userRay(event){
 	return new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize());
 }
 
-function onDocumentOver(event){
-	event.preventDefault();
-	controls.enabled = !(event.metaKey);
-    if(!(event.altKey || event.metaKey)) return;
-   
-    var ray = userRay(event);
-    var all = scene.children;
-	cones  = [], objects = [];
+function inputEvent(event){
+  if(event.objfn == null) event.objfn = function(regid){};
+  if(event.axesfn == null) event.axesfn = function(regid, axesfn){};
+  if(event.mainfn == null) event.mainfn = function(){};
 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.ArrowHelper) cones.push(all[i].cone); 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.Mesh) objects.push(all[i]);
+  event.preventDefault();
+  controls.enabled = !(event.metaKey);
+  if(!(event.altKey || event.metaKey)) { gui = $('.region').mouseleave(); return; };
 
-    var intersects = ray.intersectObjects(objects);
-  	var axesintersects = ray.intersectObjects(cones);
-  	if(activeAxis != null){
-	  	current = toCanvasCoord(event);
-	  	var regid = selectedRegions2(mainExpFab)[0];
-	  	var origin = mainExpFab.regions[regid].centroid.clone();
-	  	var displacement = current.clone().subVectors(current, origin);
-	  	var originaldisplacement = down.clone().subVectors(down, origin);
-  		var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
-  		activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
-  		var scale = (displacement.length() - originaldisplacement.length());
-  		cl("S:" + (scale * 5));
+  var ray = userRay(event);
+  var all = scene.children;
+  cones  = [], objects = [];
 
-  		$(".op-slider[name='"+ currentOperation +"']").val(larger * scale * (1/displacement.length()) * 5).change();
-  	}
-  	if(axesintersects.length > 0){
-  		render();
-  		return;
-  	}
+  for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.ArrowHelper) cones.push(all[i].cone); 
+  for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.Mesh) objects.push(all[i]);
+  var selected = {'objects' : ray.intersectObjects(objects), 'axes' : ray.intersectObjects(cones)};
 
-    if (intersects.length > 0 ) {
-    	
-    	var regid = invRegions[intersects[0].faceIndex];
-        gui = $('.region[data-r="'+ regid +'"]').mouseenter();
-        $('.region').not(gui).mouseleave();
-     }
-	else	
-        gui = $('.region').mouseleave();
-	
-	render();
-	
+  if(activeAxis != null){
+    var regid = selectedRegions2(mainExpFab)[0];
+    event.mainfn(event, regid);
+  }
+
+  if(selected.axes.length > 0){
+    var regid = selectedRegions2(mainExpFab)[0];
+    var pcaid = parseInt(selected.axes[0].object.name);
+    event.axesfn(regid, pcaid);
+  }
+  
+  if ( selected.objects.length > 0 ) {
+      var regid = invRegions[selected.objects[0].faceIndex];
+      event.objfn(regid);
+  }
+  render();
 }
+
 function onDocumentMouseClick(event) {
-	event.preventDefault();
-	
-	if(!(event.altKey || event.metaKey)) return;
-
-	var ray = userRay(event);
-    var all = scene.children;
-	cones  = [], objects = [];
-
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.ArrowHelper) cones.push(all[i].cone); 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.Mesh) objects.push(all[i]);
-
-    var intersects = ray.intersectObjects(objects);
-  	var axesintersects = ray.intersectObjects(cones);
-  	if(axesintersects.length > 0){
-  		render();
-  		return;
-  	}
-  	if ( intersects.length > 0 ) {
-	    var regid = invRegions[intersects[0].faceIndex];
-	    gui = $('.region[data-r="'+ regid +'"]').click();
-		render();
-	}
+  event.objfn = function(regid){ $('.region[data-r="'+ regid +'"]').click(); };
+	var selected = inputEvent(event);
 }
 
+function onDocumentOver(event){
+  event.objfn =  function(regid){
+    gui = $('.region[data-r="'+ regid +'"]').mouseenter();
+    $('.region').not(gui).mouseleave();
+  };
+
+  event.mainfn = function(event, regid){
+    current = toCanvasCoord(event);
+    var origin = mainExpFab.regions[regid].centroid.clone();
+    var displacement = current.clone().subVectors(current, origin);
+    var originaldisplacement = down.clone().subVectors(down, origin);
+    var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
+    activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
+    var scale = (displacement.length() - originaldisplacement.length());
+    cl("S:" + (scale * 5));
+    $(".op-slider[name='"+ currentOperation +"']").val(larger * scale * (1/displacement.length()) * 5).change();
+  };
+
+  var selected = inputEvent(event);
+
+}
 
 function onDocumentMouseDown(event) {
-    event.preventDefault();
-    if(!(event.altKey || event.metaKey)) return;
+  event.axesfn = function(regid, pcaid){
+    activeRegion = mainExpFab.regions[regid];
+    activeAxis = activeRegion.pca_lines[pcaid];
+    activeDataStream = datastreams[0];
+    activeDataStream.saveState();
 
-    var ray = userRay(event);
-    var all = scene.children;
-	cones  = [], objects = [];
+    if(pcaid == 0) currentOperation = activeOperation + 'x';
+    else if(pcaid == 1) currentOperation = activeOperation + 'y';
+    else if(pcaid == 2) currentOperation = activeOperation + 'z';
 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.ArrowHelper) cones.push(all[i].cone); 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.Mesh) objects.push(all[i]);
-
-    var intersects = ray.intersectObjects(objects);
-  	var axesintersects = ray.intersectObjects(cones);
-
-  	if(axesintersects.length > 0){
-  		var regid = selectedRegions2(mainExpFab)[0];
-  		var pcaid = parseInt(axesintersects[0].object.name);
-  		var activeRegion = mainExpFab.regions[regid];
-  		activeAxis = activeRegion.pca_lines[pcaid];
-  		activeDataStream = datastreams[0];
-  		activeDataStream.saveState();
-
-  		if(pcaid == 0)
-  			currentOperation = activeOperation + 'x';
-  		else if(pcaid == 1)
-  			currentOperation = activeOperation + 'y';
-  		else if(pcaid == 2)
-  			currentOperation = activeOperation + 'z';
-
-
-  		activeAxis.click();
-  		
-  		down = toCanvasCoord(event);
-
-  		
-  		render();
-  		return;
-  	}
-  	if ( intersects.length > 0 ) {
-	    
-	}
+    activeAxis.click();
+    down = toCanvasCoord(event);
+  };
+  var selected = inputEvent(event);
 }
+
 function onDocumentMouseUp(event) {
-    event.preventDefault();
-    if(!(event.altKey || event.metaKey)) return;
 
-    var ray = userRay(event);
-    var all = scene.children;
-	cones  = [], objects = [];
+  event.axesfn = function(regid, pcaid){ mainExpFab.regions[regid].pca_lines[pcaid].click();};
+  var selected = inputEvent(event);
 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.ArrowHelper) cones.push(all[i].cone); 
-    for(var i in all) if(all[i] !== undefined && all[i] instanceof THREE.Mesh) objects.push(all[i]);
+ 
+  event.mainfn = function(event, regid){
+    up = toCanvasCoord(event);
+    current = toCanvasCoord(event);
 
-    var intersects = ray.intersectObjects(objects);
-  	var axesintersects = ray.intersectObjects(cones);
-  	
-  	
-	up = toCanvasCoord(event);
-  		  	current = toCanvasCoord(event);
-	  	var regid = selectedRegions2(mainExpFab)[0];
-	  	var origin = mainExpFab.regions[regid].centroid.clone();
-	  	var displacement = current.clone().subVectors(current, origin);
-	  	var originaldisplacement = down.clone().subVectors(down, origin);
-  		var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
-  		activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
-  		down = up;
-  	activeAxis = null;
-  	if(axesintersects.length > 0){
-  		var regid = selectedRegions2(mainExpFab)[0];
-  		var pcaid = parseInt(axesintersects[0].object.name);
-  		mainExpFab.regions[regid].pca_lines[pcaid].click();
+    var origin = mainExpFab.regions[regid].centroid.clone();
+    var displacement = current.clone().subVectors(current, origin);
+    
+    var originaldisplacement = down.clone().subVectors(down, origin);
+    var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
+    activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
 
-  		render();
-  		return;
-  	}
-  	if ( intersects.length > 0 ) {
-	    
-	}
+    down = up;
+  }
+  activeAxis = null;
 }	
+
 </script>
 
 <div class="pure-g-r content" id="layout">
@@ -314,21 +128,9 @@ function onDocumentMouseUp(event) {
 
     <div class="pure-u-1" id="main">
         <div class="mesh-content">
-            <div id="info-bar" class="mesh-content-header pure-g">
-                <div class="pure-u-1-2">
-                    <h1 class="mesh-content-title">Sphere</h1>
-                    <p class="mesh-content-subtitle">
-                        From <a>Cesar Torres</a> at <span>3:56pm, April 3, 2012</span>
-                    </p>
-                </div>
-
-                <div class="pure-u-1-2 mesh-content-controls">
-                    <!-- <button id='save' class="pure-button secondary-button">Save</button> -->
-                    <button id='revert' class="pure-button secondary-button">Revert</button>
-                    <button class="pure-button secondary-button" id='print'>Print</button>
-                </div>
-            </div>
+            
             <div id='gallery-wrapper' class='gallery-sidebar'>
+              
               <div id='gallery' ></div>
               
               <div id='gallery-controls'>
@@ -337,9 +139,8 @@ function onDocumentMouseUp(event) {
                 <button id='save'>Export STL</button>
               </div>
             </div>
-            <div id="scene" class="mesh-content-body">
 
-            </div>
+            <div id="scene" class="mesh-content-body"></div>
         </div>
     </div>
 </div>

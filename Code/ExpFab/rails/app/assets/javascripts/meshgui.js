@@ -173,6 +173,21 @@ function GUIActivateListeners(){
 		$('canvas').mouseup(onDocumentMouseUp);
 		$('canvas').mousedown(onDocumentMouseDown);
 		$('#print').click(clean);
+		$('#screenshot').click(function(){
+			mainExpFab.mgui.generateImage();
+		});
+		
+		$('#fullscreen').click(function(){
+			var gal = mainExpFab.mgui.gallery.wrapper;
+			if(gal.hasClass('gallery-sidebar')){
+				gal.removeClass('gallery-sidebar').addClass('gallery-fullscreen');
+				$(this).html('Sidebar');
+			}
+			else{
+				mainExpFab.mgui.gallery.wrapper.removeClass('gallery-fullscreen').addClass('gallery-sidebar');
+				$(this).html('Fullscreen');
+			}
+		});
 }
 
 /*************************************************************************************************************/
@@ -184,27 +199,7 @@ function GUIActivateListeners(){
 /*************************************************************************************************************/
 /*************************************************************************************************************/
 /*************************************************************************************************************/
-var defaultColor = 0x777777;
-var hoverColor = 0xAAAAAA;
-var downColor = 0xAAAAAA;
 
-colors = [{'selected': 0xffc94c, 'active':0xffd87f, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, //yellow
-			{'selected':0x41ccb4, 'active': 0x69d7c4, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // light green
-			{'selected':0x40c365, 'active': 0x67cf84, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // green
-			{'selected': 0xDB4090, 'active':0xe36ba9, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // pink
-			{'selected':0x00a8e1, 'active': 0x62d7ff, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // blue
-			{'selected':0xd82727, 'active': 0xe05252, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // red
-			{'selected':0xebb114, 'active': 0xefc143, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // orange
-			{'selected':0x542c54, 'active': 0x542c54, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // purple
-			{'selected': 0xffc94c, 'active':0xffd87f, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, //yellow
-			{'selected':0x41ccb4, 'active': 0x69d7c4, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // light green
-			{'selected':0x40c365, 'active': 0x67cf84, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // green
-			{'selected': 0xDB4090, 'active':0xe36ba9, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // pink
-			{'selected':0x00a8e1, 'active': 0x62d7ff, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // blue
-			{'selected':0xd82727, 'active': 0xe05252, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // red
-			{'selected':0xebb114, 'active': 0xefc143, 'default': defaultColor, 'hover': hoverColor, 'down': downColor}, // orange
-			{'selected':0x542c54, 'active': 0x542c54,  'default': defaultColor, 'hover': hoverColor, 'down': downColor}// purple
-];
 
 
 
