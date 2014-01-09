@@ -178,6 +178,10 @@ function addPlane(scene){
 
 function setupCamera(){
 	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+ 	// var width = ASPECT; 
+ 	// var height = ASPECT / width; 
+	//camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, NEAR, FAR );
+	
 	camera.up = new THREE.Vector3(0,1,0);
 	camera.position.set( 20, 0.5, 3 );
 	camera.lookAt(scene.position);
