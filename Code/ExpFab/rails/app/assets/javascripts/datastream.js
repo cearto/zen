@@ -40,62 +40,74 @@ function Operation(container, name, icon, functionality){
 /*************************************************************************************************************/
 /*************************************************************************************************************/
 
-function Region(exfab, regid, faces, pca){
-	this.exfab = exfab;
+function Region(expfab, regid, faces, pca){
+	this.expfab = expfab;
 
 	this.regid = regid;
 	this.color = colors[regid];
 	this.faces = faces;
 	this.pca = [];
+
 	for(var i in pca) this.pca.push(new THREE.Vector3(pca[i][0], pca[i][1], pca[i][2]));
 
+	this.vertices = null;
+	this.centroid = null;
+
+	this.updateVertices();
+	this.updateCentroid();
+
+	this.highlight(false);
+
+	this.pca_lines = buildAxesPCA(this.centroid, this.pca); 
+	this.params = {
+		"x_hat": this.centroid,
+		"v": this.expfab.current, 
+		"vp": this.expfab.object.geometry.vertices, 
+		"m": this.vertices, 
+	};
+}
+Region.prototype.updateVertices = function(){
 	this.vertices = [];
-	for(var faceIndex in faces){
-		var face = this.exfab.object.geometry.faces[faces[faceIndex]];
+	for(var faceIndex in this.faces){
+		var face = this.expfab.object.geometry.faces[this.faces[faceIndex]];
 		vertexIndex = face['a']; this.vertices.push(vertexIndex);
 		vertexIndex = face['b']; this.vertices.push(vertexIndex);
 		vertexIndex = face['c']; this.vertices.push(vertexIndex);
 	}
-	this.centroid = [];
-
-		
+}
+Region.prototype.updateCentroid = function(){
 	var mask = this.vertices;
 	this.centroid = new THREE.Vector3(0, 0, 0);
-	for(var j in this.vertices) this.centroid.add(this.exfab.original[this.vertices[j]]);
-	this.centroid.divideScalar(mask.length);
-	
-	this.highlight(false);
-
-	this.pca_lines = buildAxesPCA(this.centroid, this.pca); 
+	for(var j in this.vertices) this.centroid.add(this.expfab.original[this.vertices[j]]);
+		this.centroid.divideScalar(mask.length);
 }
-
 Region.prototype.highlight = function (active, type){
 	var c = this.color['selected'];
-	this.exfab.object.material.opacity = 1;
+	this.expfab.object.material.opacity = 1;
 	if(!active){	
 		c = this.color['default'];
-		this.exfab.object.material.opacity = 0.8;
+		this.expfab.object.material.opacity = 0.8;
 	}
 	
 	if(type == 'hover') c = !active ? this.color['default'] : this.color['hover'];
 	for(var faceIndex in this.faces){
-		var face = this.exfab.object.geometry.faces[this.faces[faceIndex]];
+		var face = this.expfab.object.geometry.faces[this.faces[faceIndex]];
 		face.vertexColors[0] = c;
 		face.vertexColors[1] = c;
 		face.vertexColors[2] = c;
 	}
-	this.exfab.object.geometry.colorsNeedUpdate = true; render();
+	this.expfab.object.geometry.colorsNeedUpdate = true; render();
 }
 
 Region.prototype.addGUI = function(container){
 	var node = GUINode(container, "R" + this.regid, this.color['default'].getStyle(), null, false);
 	var that = this;
-	node.attr('data-n', this.exfab.id).attr('data-r', this.regid).addClass('region').click(function(){
+	node.attr('data-n', this.expfab.id).attr('data-r', this.regid).addClass('region').click(function(){
 			var id = parseInt($(this).attr('data-n'));
 			var regid = parseInt($(this).attr('data-r'));
 			var meshcolor = colors[regid];
-			var obj = that.exfab.object;
-			var reg = that.exfab.regions;
+			var obj = that.expfab.object;
+			var reg = that.expfab.regions;
 			var others = selectedRegions2(mainExpFab).length;
 
 			if(! ($(this).hasClass('selected'))){
@@ -125,8 +137,8 @@ Region.prototype.addGUI = function(container){
 			var id = parseInt($(this).attr('data-n'));
 			var regid = parseInt($(this).attr('data-r'));
 			var meshcolor = colors[regid];
-			var obj = that.exfab.object;
-			var reg = that.exfab.regions;
+			var obj = that.expfab.object;
+			var reg = that.expfab.regions;
 			
 				that.highlight(true, 'hover');
 				
@@ -136,8 +148,8 @@ Region.prototype.addGUI = function(container){
 			var id = parseInt($(this).attr('data-n'));
 			var regid = parseInt($(this).attr('data-r'));
 			var meshcolor = colors[regid];
-			var obj = that.exfab.object;
-			var reg = that.exfab.regions;
+			var obj = that.expfab.object;
+			var reg = that.expfab.regions;
 			
 			that.highlight(false, 'hover');
 			
@@ -153,35 +165,16 @@ Region.prototype.addGUI = function(container){
 }
 
 Region.prototype.transform = function(ds, amp){
-	var original = this.exfab.current;
-	var vprime = this.exfab.object.geometry.vertices;
-	var mask = this.vertices;//selectedMask(original,  this.exfab.object);
-	
-	var xaxis = this.pca[0].clone();
-	var yaxis = this.pca[1].clone();
-	var zaxis = this.pca[2].clone();
-	
-	if(currentOperation == 'Balloonx'){
-		balloon(original, mask, vprime, this.centroid, xaxis, ds, amp);
-	}
-	else if (currentOperation == 'Balloony'){
-		balloon(original, mask, vprime, this.centroid, yaxis, ds, amp);
-	}
-	else if (currentOperation == 'Balloonz'){
-		balloon(original, mask, vprime, this.centroid, zaxis, ds, amp);
-	}
-	else if(currentOperation == "Scalex"){
-		scale(original, mask, vprime, this.centroid, xaxis, ds, amp);
-	}
-	else if(currentOperation == "Scaley"){
-		scale(original, mask, vprime, this.centroid, yaxis, ds, amp);
-	}
-	else if(currentOperation == "Scalez"){
-		scale(original, mask, vprime, this.centroid, zaxis, ds, amp);
-	}
+	this.params.scale = function(i, n){ return Mapping.dsp(i, n, ds) * amp };
 
-	this.exfab.object.geometry.verticesNeedUpdate = true;
-	
+	if(activeOperation == 'Balloon')
+		balloon(this.params);
+	else if(activeOperation == "Scale")
+		scale(this.params);
+	else if(activeOperation == "Rotate")
+		rotate(this.params);
+
+	this.expfab.object.geometry.verticesNeedUpdate = true;
 	render();
 }	
 

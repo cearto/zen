@@ -67,6 +67,7 @@ function onDocumentOver(event){
   };
 
   event.mainfn = function(event, regid){
+    cl(activeRegion);
     current = toCanvasCoord(event);
     var origin = mainExpFab.regions[regid].centroid.clone();
     var displacement = current.clone().subVectors(current, origin);
@@ -86,12 +87,10 @@ function onDocumentMouseDown(event) {
   event.axesfn = function(regid, pcaid){
     activeRegion = mainExpFab.regions[regid];
     activeAxis = activeRegion.pca_lines[pcaid];
+    activeRegion.params.axis = activeRegion.pca[pcaid];
+    cl(activeRegion);
     activeDataStream = datastreams[0];
     activeDataStream.saveState();
-
-    if(pcaid == 0) currentOperation = activeOperation + 'x';
-    else if(pcaid == 1) currentOperation = activeOperation + 'y';
-    else if(pcaid == 2) currentOperation = activeOperation + 'z';
 
     activeAxis.click();
     down = toCanvasCoord(event);

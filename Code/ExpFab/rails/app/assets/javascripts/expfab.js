@@ -26,7 +26,7 @@ ExpFab.prototype.load = function(fileinfo) {
   var fileControl = this.dgui.add(mainExpFab, 'filename');
   var wireframeControl = this.dgui.add(mainExpFab, 'wireframe');
 	var colorControl = this.dgui.addColor(mainExpFab, 'color');
-  var operationControl = this.dgui.add(mainExpFab, 'operation', ['None', 'Balloon', 'Translate']);
+  var operationControl = this.dgui.add(mainExpFab, 'operation', ['None', 'Balloon', 'Translate', 'Rotate']);
 
 
   wireframeControl.onChange(function(value) {

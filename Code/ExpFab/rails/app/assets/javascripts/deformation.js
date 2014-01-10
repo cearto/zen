@@ -27,39 +27,54 @@ Mapping.linInterp = function(param, data){
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function balloon(original, mask, vprime, centroid,  majoraxis, ds, amp){
+function balloon(t){
 	var yvectors = [];
 
 	// yvectors = i X (C - Vr) 
-	for(var i in original){
-		var vr = original[i].clone();
-		vr.sub(centroid);		
-		vr.projectOnVector(majoraxis);
+	for(var i in t.v){
+		var vr = t.v[i].clone();
+		vr.sub(t.x_hat);		
+		vr.projectOnVector(t.axis);
 		yvectors.push(vr);
 	}
 
 	//DEFORM - BALLOON
-	var n = mask.length;
-	for(var i in mask){
-		var weight = original[mask[i]].clone().sub(yvectors[mask[i]].clone().add(centroid));
-		weight.multiplyScalar( Mapping.dsp(i, n, ds) * amp );
-		vprime[mask[i]].addVectors(original[mask[i]], weight);
+	var n = t.m.length;
+
+	for(var i in t.m){
+		var k = t.m[i];
+		var w = t.v[k]
+				.clone()
+				.sub(yvectors[k]
+						.clone()
+						.add(t.x_hat)
+					);
+
+		w.multiplyScalar( t.scale(i, n) );
+		t.vp[k].addVectors(t.v[k], w);
 	}
+
 }
-function rotate(original, mask, vprime, centroid,  majoraxis, ds, amp){
-	// TODO: Implement rotation operation
+// V => V'
+
+function rotate(t){
+	var n  = t.m.length;
+	for(var i in t.m){ // for every vertice in region
+		var w = new THREE.Matrix4().makeRotationAxis( t.axis, t.scale(i, n) );	
+		t.vp[t.m[i]].applyMatrix4(w);
+	}
 }
 
-function scale(original, mask, vprime, centroid,  majoraxis, ds, amp){
+function scale(t){
 	//DEFORM - SCALE
-	var n = mask.length;
-	for(var i in mask){ // for every vertice in region
-		var weight = majoraxis.clone();
-		weight.multiplyScalar( Mapping.dsp(i, n, ds) * amp );
-		// cl(weight);
-		vprime[mask[i]].addVectors(original[mask[i]], weight);
+	var n = t.m.length;
+	for(var i in t.m){ // for every vertice in region
+		var w = t.axis.clone();
+		w.multiplyScalar( t.scale(i, n) );
+		t.vp[t.m[i]].addVectors(t.v[t.m[i]], w);
 	}
 }
+
 function normalize(arr){
 	var max = Math.max.apply(null, arr);
 	for(var i in arr) arr[i] /= max;
