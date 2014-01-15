@@ -261,7 +261,16 @@ function extendTHREE(){
 		this.line.geometry.colorsNeedUpdate = true;
 		render();
 	}
+	THREE.toScreenXY = function ( position, worldMat, div ) {
+	    var pos = position.clone();
+	    
+	    pos.applyMatrix4(worldMat);
 
+	    var offset = div.offset();
+
+	    return new THREE.Vector2(( pos.x + 1 ) * div.width() / 2 + offset.left,
+	         ( - pos.y + 1) * div.height() / 2 + offset.top);
+    }
 	THREE.Mesh.prototype.rotate = function(){
 		var mesh = this;
 		var axis = new THREE.Vector3( - 1, 0, 0 );

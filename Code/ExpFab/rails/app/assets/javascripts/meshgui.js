@@ -2,8 +2,6 @@ var datastreams = [];
 var operations = [];
 var clearfix = $('<br/>').addClass('clearfix');
 
-
-
 function MeshGUI(){
 	this.canvas = $('canvas')
 	this.message = $('#error');
@@ -19,14 +17,56 @@ function MeshGUI(){
 		this.gallery.add(img);
 	}
 }
+
 function Gallery(){
 	this.container = $('#gallery');
 	this.wrapper = $('#gallery-wrapper');
 }
-Gallery.prototype.add = function(img){
+Gallery.prototype.add = function(img, box){
 	var node = $('<div></div>').addClass('gallery-node');
-	var nodeImg = $('<img/>').attr('src', img);
-	node.append(nodeImg);
+	cl(box);
+	var nodeImg = $('<img/>').attr('src', img).css({
+		width: '100%',
+		margin: "-50px 0 0 -10px"
+	});
+	
+	// var canvas = $('<div></div>');
+	// var context = canvas.getContext('2d');
+	// var imageObj = new Image();
+	// imageObj.onload = function() {
+
+	// 	// draw cropped image
+	// 	var sourceX = 0;
+	// 	var sourceY = 0;
+	// 	var sourceWidth = WIDTH;
+	// 	var sourceHeight = HEIGHT;
+	// 	if(typeof box !== "undefined"){
+	// 		cl(box);
+	// 		sourceWidth =  box.size().x;
+	// 		sourceHeight = box.size().y;
+	// 		sourceX = (WIDTH/2) - box.min.x;
+	// 		sourceY = (HEIGHT/2) - box.min.y;
+	// 		cl(sourceWidth + " " + sourceHeight);
+	// 		sourceWidth = 200;
+	// 		sourceHeight = 200;
+	// 		sourceX = 200;
+	// 		sourceY = 200;
+	// 	}
+	// 	var destWidth = sourceWidth;
+	// 	var destHeight = sourceHeight;
+	// 	var destX = node.width() / 2 - destWidth / 2;
+	// 	var destY = node.height() / 2 - destHeight / 2;
+	// 	destX = 0;
+	// 	destY = 0;
+	// 	destWidth = node.width();
+	// 	destHeight = node.height();
+	// 	console.log(sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight)
+	
+
+	// 	context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+	// };
+	// imageObj.src = img;
+    node.append(nodeImg);
 	this.container.append(node);
 }
 MeshGUI.prototype.displayUIMessage = function(msg, smsg, persist){
@@ -194,6 +234,68 @@ function GUIActivateListeners(){
 /*************************************************************************************************************/
 /*************************************************************************************************************/
 /*************************************************************************************************************/
+/*************************************************************************************************************/
+/*************************************************************************************************************/
+
+function GUINode(container, name, icon, functionality, isimage){
+	this.name = name;
+	this.icon = icon;
+	this.functionality = functionality;
+
+	var thumb;
+	if(isimage)
+		thumb = $('<img/>').attr('src', this.icon)
+				.css({
+					width: '100%',
+					margin: 0
+				});
+	else
+		thumb = $('<span><span/>').attr('name', 'swatch')
+				.css({
+					background: this.icon,
+					width: '100%',
+					margin: 0,
+					padding: 0,
+					display: 'block',
+					'min-height':  40
+				});
+			
+	var name = $('<span></span>').html(this.name)
+			.css({
+				width: '90%',
+				margin: '5%',
+				overflow: 'hidden',
+				color: 'black',
+				display: 'none',
+				'font-size': '6pt'
+			});
+	var op = $('<div></div>').addClass('op')
+			.append(thumb)
+			.append(name)
+			.addClass('list-button')
+			.attr('title', this.name)
+			.attr('name', this.name)
+			.css({
+				height: 45,
+				width : '20%',
+				overflow: 'hidden',
+				margin: '1%',
+				// padding: '1%',
+				float: 'left',
+				display: 'inline-block'
+			})
+			.click(this.functionality);
+	if(isimage) op.addClass('icon-button');
+	else op.addClass('swatch-button');
+	return op;
+}
+
+
+/*************************************************************************************************************/
+/*************************************************************************************************************/
+/*************************************************************************************************************/
+/*************************************************************************************************************/
+
 /*************************************************************************************************************/
 /*************************************************************************************************************/
 /*************************************************************************************************************/

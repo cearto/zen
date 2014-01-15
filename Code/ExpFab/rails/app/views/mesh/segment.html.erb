@@ -10,6 +10,9 @@ $(function(){
     "success" : function(){},
     "error" : function(){}
   });
+  $('#test-region').click(function(){
+    mainExpFab.regions[0].generateImage();
+  });
 });	
 
 
@@ -135,7 +138,8 @@ function onDocumentMouseUp(event) {
               <div id='gallery-controls'>
                 <button id='screenshot'>Screenshot</button>
                 <button id='fullscreen'>Fullscreen</button>
-                <button id='save'>Export STL</button>
+                <!-- <button id='save'>Export STL</button> -->
+                <button id='test-region'>Region Pic</button>
               </div>
             </div>
 
