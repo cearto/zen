@@ -1,14 +1,26 @@
 var selectedRegions;
+var activeRegions = [];
+var ops = ['Balloon', 'Scale', 'Rotate'];
 
 function Region(expfab, regid, faces, pca){
+	this.weights = {};
 	this.expfab = expfab;
 	this.regid = regid;
 	this.color = colors[regid];
 	this.faces = faces;
 	this.pca = [];
-
+	this.gene = {};
+	
 	for(var i in pca) this.pca.push(new THREE.Vector3(pca[i][0], pca[i][1], pca[i][2]));
+	
+	for(var i in ops){
+		this.gene[ops[i]] = {"0": null, "1": null, "2": null}
+		for(var j in this.pca){
+			this.gene[ops[i]][j] = new Gene(ops[i], 0, 0, datastreams['Uniform'], this.pca[j]);
+		}
+	}
 
+	this.currentTransform = null;
 	this.vertices = null;
 	this.centroid = null;
 	this.geometry = null;
@@ -18,11 +30,12 @@ function Region(expfab, regid, faces, pca){
 	this.highlight(false);
 
 	this.pca_lines = buildAxesPCA(this.centroid, this.pca); 
-	this.params = {
+	this.geom = {
 		"x_hat": this.centroid,
 		"v": this.expfab.current, 
 		"vp": this.expfab.object.geometry.vertices, 
 		"m": this.vertices, 
+		"original": this.expfab.original
 	};
 }
 
@@ -65,6 +78,10 @@ Region.prototype.updateCentroid = function(){
 	for(var j in this.vertices) this.centroid.add(this.expfab.original[this.vertices[j]]);
 		this.centroid.divideScalar(mask.length);
 }
+Region.prototype.updateGeom = function(){
+	this.updateCentroid();
+	this.geom.x_hat = this.centroid;
+}
 Region.prototype.highlight = function (active, type){
 	var c = this.color['selected'];
 	this.expfab.object.material.opacity = 1;
@@ -79,6 +96,10 @@ Region.prototype.highlight = function (active, type){
 		face.vertexColors[0] = c;
 		face.vertexColors[1] = c;
 		face.vertexColors[2] = c;
+	}
+	if(active && type != 'hover' && this.expfab.dna != undefined){
+		this.expfab.dna.valueSetter({'ROI': this.regid});
+		cl(this.regid);
 	}
 	this.expfab.object.geometry.colorsNeedUpdate = true; render();
 }
@@ -147,17 +168,40 @@ Region.prototype.addGUI = function(container){
 	});
 	render();
 }
+var currentTransform = null;
+/* In order to make a deformation, all these must be met */
+function Transform(type, axisid, ds, amp, inv){
+	this.axisid = axisid;
+	this.ds = datastreams[ds];
+	this.amp = parseFloat(amp);
+	
+	if(typeof(type) == "undefined"){
+		mainExpFab.mgui.displayUIMessage("Select an operation.", "", false);
+		return;  
+	}
+	type = type.slice(0, -1);
+	if      (type == "Balloon") this.type = balloon;
+	else if (type == "Scale"  ) this.type = scale;
+	else if (type == "Rotate" ) this.type = rotate;
+	else this.type = null;
 
-Region.prototype.transform = function(ds, amp){
-	this.params.scale = function(i, n){ return Mapping.dsp(i, n, ds) * amp };
+	this.iscale = function(i, n){ return -(Mapping.dsp(i, n, this.ds) * this.amp) };
+	this.fscale = function(i, n){ return Mapping.dsp(i, n, this.ds) * this.amp };
+}
 
-	if(activeOperation == 'Balloon')
-		balloon(this.params);
-	else if(activeOperation == "Scale")
-		scale(this.params);
-	else if(activeOperation == "Rotate")
-		rotate(this.params);
+Transform.prototype.transform = function(r, inv){
+	if(inv) {
+		this.scale = this.iscale;
+		console.log("Applying inverse.");
+	}
+	else this.scale = this.fscale;
 
-	this.expfab.object.geometry.verticesNeedUpdate = true;
+	this.axis = r.pca[this.axisid];
+	if(this.type != null){
+		this.type(r.geom, this);
+		console.log("T:", this.axisid, " ", this.amp);
+	}
+
+	r.expfab.object.geometry.verticesNeedUpdate = true;
 	render();
-}	
+}

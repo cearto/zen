@@ -105,15 +105,6 @@ function initOpenGL(container){
 	
 	$(renderer.domElement).css({position: 'relative', left: '50%', 'margin-left': -WIDTH/2, cursor: 'pointer'});
 	render();
-	$.get('/mesh/weather', function(data){
-		weather = data;
-		weather = normalize(weather);
-		var w = new DataStream(weather, "Weather", "Uniform random var", "A uniform data stream.");
-		w.add($('#streams'));
-		w.load();
-		datastreams.push(w);
-	});
-
 }
 
 function saveFile(){

@@ -6,7 +6,8 @@ function Mapping(){};
 
 Mapping.dsp = function(i,n, ds){
 	var param = parseFloat(i)/n;
-	return Mapping.linInterp(param, ds);
+
+	return Mapping.linInterp(param, ds.data);
 }
 /* param is from 0 to 1 */
 Mapping.linInterp = function(param, data){
@@ -27,51 +28,55 @@ Mapping.linInterp = function(param, data){
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function balloon(t){
+function balloon(g, t){
 	var yvectors = [];
 
 	// yvectors = i X (C - Vr) 
-	for(var i in t.v){
-		var vr = t.v[i].clone();
-		vr.sub(t.x_hat);		
+	for(var i in g.original){
+		var vr = g.original[i].clone();
+		vr.sub(g.x_hat);		
 		vr.projectOnVector(t.axis);
 		yvectors.push(vr);
 	}
 
 	//DEFORM - BALLOON
-	var n = t.m.length;
+	var n = g.m.length;
 
-	for(var i in t.m){
-		var k = t.m[i];
-		var w = t.v[k]
+	for(var i in g.m){
+		var k = g.m[i];
+		var w = g.original[k]
 				.clone()
 				.sub(yvectors[k]
 						.clone()
-						.add(t.x_hat)
+						.add(g.x_hat)
 					);
 
 		w.multiplyScalar( t.scale(i, n) );
-		t.vp[k].addVectors(t.v[k], w);
+		g.vp[k].addVectors(g.v[k], w);
 	}
 
 }
 // V => V'
 
-function rotate(t){
-	var n  = t.m.length;
-	for(var i in t.m){ // for every vertice in region
+function rotate(g, t){
+	var n  = g.m.length;
+	for(var i in g.m){ // for every vertice in region
 		var w = new THREE.Matrix4().makeRotationAxis( t.axis, t.scale(i, n) );	
-		t.vp[t.m[i]].applyMatrix4(w);
+		g.vp[g.m[i]].applyMatrix4(w);
 	}
 }
 
-function scale(t){
+function scale(g, t){
 	//DEFORM - SCALE
-	var n = t.m.length;
-	for(var i in t.m){ // for every vertice in region
+	var n = g.m.length; 
+	for(var i in g.m){ 
+		// for every vertex k in region
+		var k = g.m[i]; 
+		// move in the direction of the axis
 		var w = t.axis.clone();
 		w.multiplyScalar( t.scale(i, n) );
-		t.vp[t.m[i]].addVectors(t.v[t.m[i]], w);
+		// update vector buffer vp
+		g.vp[k].addVectors(g.v[k], w);
 	}
 }
 
@@ -116,35 +121,4 @@ function selectedRegions2(expfab){
 function computeNormal(v1, v2){ return v1.clone().cross(v2).normalize();}
 
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////  DNA.JS   ///////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
-var generateMode = false;
-
-function DNA(){
-	this.extract = function(){
-		headers = []; for(var i in operations) headers.push(operations[i].name);
-		opval = {};
-		sliders = $('.op-slider');
-		for(var i in sliders)
-			opval[sliders[i].name]  = parseFloat(sliders[i].value);
-			
-		var fv = [];
-		for(var i in headers) fv.push(opval[headers[i]]);
-		return fv;
-	}
-	this.generate = function(){
-		generateMode = true;
-		$.each($('.region'), function(i,v){
-			$('.region').removeClass('selected');
-			$(v).click();
-			$($('.op-slider')[0]).val(Math.random() * 2 - 1).change();
-			$($('.op-slider')[1]).val(Math.random() * 2 - 1).change();
-			$($('.op-slider')[2]).val(Math.random() * 2 - 1).change();
-		});
-		generateMode = false;
-	}
-}

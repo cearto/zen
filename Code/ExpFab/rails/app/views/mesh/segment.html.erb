@@ -32,6 +32,7 @@ function inputEvent(event){
   controls.enabled = !(event.metaKey);
   if(!(event.altKey || event.metaKey)) { gui = $('.region').mouseleave(); return; };
 
+
   var ray = userRay(event);
   var all = scene.children;
   cones  = [], objects = [];
@@ -41,17 +42,18 @@ function inputEvent(event){
   var selected = {'objects' : ray.intersectObjects(objects), 'axes' : ray.intersectObjects(cones)};
 
   if(activeAxis != null){
-    var regid = selectedRegions2(mainExpFab)[0];
+    var regid = selectedRegions2(mainExpFab);
     event.mainfn(event, regid);
   }
 
   if(selected.axes.length > 0){
+    selectionMode = true;
     var regid = selectedRegions2(mainExpFab)[0];
     var pcaid = parseInt(selected.axes[0].object.name);
     event.axesfn(regid, pcaid);
   }
-  
-  if ( selected.objects.length > 0 ) {
+  else if ( selected.objects.length > 0 && activeAxis == null) {
+      if(selectionMode ) selectionMode = false;
       var regid = invRegions[selected.objects[0].faceIndex];
       event.objfn(regid);
   }
@@ -59,7 +61,7 @@ function inputEvent(event){
 }
 
 function onDocumentMouseClick(event) {
-  event.objfn = function(regid){ $('.region[data-r="'+ regid +'"]').click(); };
+  
 	var selected = inputEvent(event);
 }
 
@@ -70,56 +72,96 @@ function onDocumentOver(event){
   };
 
   event.mainfn = function(event, regid){
-    cl(activeRegion);
+    if(currentOperation == undefined) return;
+    // cl(activeRegion);
     current = toCanvasCoord(event);
-    var origin = mainExpFab.regions[regid].centroid.clone();
+    for(var i in regid){
+    var region = mainExpFab.regions[regid[i]];
+    var origin = region.centroid.clone();
     var displacement = current.clone().subVectors(current, origin);
     var originaldisplacement = down.clone().subVectors(down, origin);
     var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
     activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
     var scale = (displacement.length() - originaldisplacement.length());
-    cl("S:" + (scale * 5));
-    $(".op-slider[name='"+ currentOperation +"']").val(larger * scale * (1/displacement.length()) * 5).change();
+    //cl("S:" + (scale * 5));
+    var amp = larger * scale * (1/displacement.length()) * 5;
+    currentTransform = new Transform(currentOperation, activeAxisID, activeDataStream, amp, false);
+    currentTransform.transform(region, false);
+  }
+    //$(".op-slider[name='"+ currentOperation +"']").val(larger * scale * (1/displacement.length()) * 5).change();
   };
 
   var selected = inputEvent(event);
 
 }
+var activeAxisID = 0;
 
 function onDocumentMouseDown(event) {
+
+  event.objfn = function(regid){ 
+    if(!selectionMode){
+      $('.region[data-r="'+ regid +'"]').click(); 
+      activeRegions = selectedRegions2(mainExpFab);
+    }
+  };
+  if(currentOperation == undefined){
+      //mainExpFab.mgui.displayUIMessage("Don't forget to select an operation.", "", false);  
+      return;
+  }
+
+
   event.axesfn = function(regid, pcaid){
+
     activeRegion = mainExpFab.regions[regid];
     activeAxis = activeRegion.pca_lines[pcaid];
-    activeRegion.params.axis = activeRegion.pca[pcaid];
-    cl(activeRegion);
-    activeDataStream = datastreams[0];
-    activeDataStream.saveState();
+    // activeRegion.params.axis = activeRegion.pca[pcaid];
+    // activeRegion.params.axisid = pcaid;
+    activeAxisID = pcaid;
+    mainExpFab.dna.valueSetter({"axis" : toAxisColor(pcaid)});
+    // cl(activeRegion);
+    activeDataStream = mainExpFab.datastream;
+    
 
     activeAxis.click();
     down = toCanvasCoord(event);
+    
   };
   var selected = inputEvent(event);
 }
 
+selectionMode = false;
 function onDocumentMouseUp(event) {
 
-  event.axesfn = function(regid, pcaid){ mainExpFab.regions[regid].pca_lines[pcaid].click();};
-  var selected = inputEvent(event);
+ event.axesfn = function(regid, pcaid){
+    mainExpFab.regions[regid].pca_lines[pcaid].click();
+ };
+  
 
  
   event.mainfn = function(event, regid){
     up = toCanvasCoord(event);
     current = toCanvasCoord(event);
+    for(var i in regid){
 
-    var origin = mainExpFab.regions[regid].centroid.clone();
-    var displacement = current.clone().subVectors(current, origin);
-    
-    var originaldisplacement = down.clone().subVectors(down, origin);
-    var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
-    activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
-
-    down = up;
+      var region = mainExpFab.regions[regid[i]];
+      var origin = region.centroid.clone();
+      var displacement = current.clone().subVectors(current, origin);
+      
+      var originaldisplacement = down.clone().subVectors(down, origin);
+      var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
+      activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
+    }
+      down = up;
   }
+
+  var selected = inputEvent(event);
+
+  if(activeRegions.length > 0 && currentTransform != null){
+    datastreams[activeDataStream].saveState();
+    mainExpFab.mutator.log(activeRegions);
+    currentTransform = null;
+  }
+  console.log(selectionMode);
   activeAxis = null;
 }	
 
@@ -147,7 +189,7 @@ function onDocumentMouseUp(event) {
         </div>
     </div>
 </div>
- <span id="pulldown"> <%= image_tag '/icons/gear.png', :class => "shadow"%> </span>
+ <span id="pulldown" class='undo'> <%= image_tag '/icons/undo.png', :class => "shadow"%> </span>
 <div id="error" class='shadow'> 
   
   <h2> We encountered an error. </h2>

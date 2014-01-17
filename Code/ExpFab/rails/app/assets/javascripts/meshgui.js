@@ -1,4 +1,4 @@
-var datastreams = [];
+
 var operations = [];
 var clearfix = $('<br/>').addClass('clearfix');
 
@@ -126,7 +126,6 @@ function GUIFileNav( currentFile ){
 	container.append(linkPrev).append(fileName).append(linkNext).append('<h3></h3>');
 	var wireMat = $('<a></a>').html('Wireframe').attr('href', 'segment?w=1&n=' + (n)).addClass('ui-link');
 	var solidMat = $('<a></a>').html('Solid').attr('href', 'segment?w=0&n=' + (n)).addClass('ui-link');
-	dna = new DNA();
 	var generator = $('<a></a>').html('Generate').click(function(){
 		dna.generate();
 	}).addClass('ui-link');
@@ -155,18 +154,7 @@ function GUIOperations(){
 	opContainer.append(clearfix);
 	$('#nav').append(opContainer);
 }
-function loadDataStreams(container){
-	var u = new DataStream([0.2, 0.2, 0.2, 0.2, 0.2], "Uniform", "Uniform random var", "A uniform data stream.");
-	u.add(container);
-	u.load();
-	datastreams.push(u);
 
-	var ds = new DataStream([5,6,7,9,9,5,3,2,2,4,6,7], "Test", "Random", "A random data stream.");
-	ds.add(container);
-	datastreams.push(ds);
-	ds.load();
-	
-}
 
 
 
@@ -174,6 +162,13 @@ function loadDataStreams(container){
 // 
 
 function GUIActivateListeners(){
+	$(window).keypress(function(event){
+		console.log(event.charCode);
+		if(event.charCode == 122)
+			$('.undo').click();
+		else if(event.charCode == 120)
+			$('.redo').click();
+	});
 	$('.slider input[name="zoom"]').change(function(e){
 			zoomLevel = $(this).val();
 			$(this).siblings('span').children().html(z);
@@ -206,6 +201,7 @@ function GUIActivateListeners(){
 			activeDataStream.restoreState();
 		});
 		$('#save').click(saveFile);
+		$('.undo').click(function(){mainExpFab.mutator.undo()});
 
 		// DIRECT MANIPULATION HANDLERS
 		$('canvas').mousemove(onDocumentOver);

@@ -120,7 +120,18 @@ var invert = function (obj) {
 
   return h;
 };
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+    }
+    return copy;
+}
 
+function include(arr,obj) {
+    return (arr.indexOf(obj) != -1);
+}
 function decimalToHexString(number)
 {
     if (number < 0)
