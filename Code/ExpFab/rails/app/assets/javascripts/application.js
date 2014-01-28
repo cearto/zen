@@ -40,14 +40,14 @@ var renderer = new THREE.WebGLRenderer({ antialias: true,  preserveDrawingBuffer
 var defaultMaterialSettings = { 
     wireframe: false, 
     //ambient: 0x030303, 
-    color: 0xdddddd, // gray 
+    color: 0xcccccc, // gray 
     specular: 0x0000, //white
     shininess: 30, 
     shading: THREE.FlatShading, 
     vertexColors: THREE.VertexColors, 
     overdraw : true,
     transparent: true,
-    opacity: 0.5
+    opacity: 0.9
 };
 
 var defaultColor = 0x777777;
@@ -140,4 +140,16 @@ function decimalToHexString(number)
     }
 
     return number.toString(16).toUpperCase();
+}
+
+
+function toAxisID(color){
+  if("Red" == color) return 0;
+  if("Green" == color) return 1;
+  if("Blue" == color) return 2;
+}
+function toAxisColor(id){
+  if(id == 0) return "Red";
+  if(id == 1) return "Green";
+  if(id == 2) return "Blue";
 }

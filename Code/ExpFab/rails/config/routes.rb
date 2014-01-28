@@ -1,6 +1,6 @@
 Mesh::Application.routes.draw do
   get "mesh/segment"
-
+  get "mesh/stream"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

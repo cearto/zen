@@ -76,6 +76,15 @@ button.icon img{
 	left: 10px;
 	font-size: 8pt;
 }
+.imp{
+	background-image: -webkit-gradient(linear,left 0,left 100%,from(#428bca),to(#3071a9));
+	background-image: -webkit-linear-gradient(top,#428bca,0%,#3071a9,100%);
+	background-image: -moz-linear-gradient(top,#428bca 0,#3071a9 100%);
+	background-image: linear-gradient(to bottom,#428bca 0,#3071a9 100%);
+	background-repeat: repeat-x;
+	border-color: #2d6ca2;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca',endColorstr='#ff3071a9',GradientType=0);
+}
 #pulldown img{
 	width: 60%;
 	padding: 6px;
@@ -112,15 +121,19 @@ button.icon img{
 	height: 15px;
 	position: absolute;
 	bottom: 0;
-	left: 0;
+	left: 2%;
 	padding: 10px 0;
 }
 #gallery-wrapper{
+	background: #1a1a1a;
 	position: fixed;
 	margin-left: 0;
 	margin-right: 0;
 	padding: 0;
 	z-index: 10;
+	color: #eee;
+	font: 11px 'Lucida Grande', sans-serif;
+	text-shadow: 0 -1px 0 #111;
 }
 .gallery-fullscreen{
 	top: 0;
@@ -130,29 +143,27 @@ button.icon img{
 }
 .gallery-sidebar{
 	bottom: 0;
-	right: 0;
+	right: 15px;
 	height: 50%;
-	width: 258px;
+	width: 250px;
 }
 .gallery-sidebar .gallery-node{
 	width: calc(48% - 2px);
-	border-right: #ccc solid 1px;
-	border-bottom: #ccc solid 1px;
-	padding: 1%;
 	height: calc(31% - 2px);
-	display: inline-block;
-	float: left;
+	
 }
 .gallery-fullscreen .gallery-node{
 	width: calc(18% - 2px);
-	border-left: #ccc solid 1px;
-	padding: 1%;
 	height: calc(23% - 2px);
+}
+.gallery-node{
 	display: inline-block;
 	float: left;
-}
-#gallery-node{
-	width: 100%;
+	padding: 1%;
+	border-right: #ccc solid 1px;
+	border-left: #ccc solid 1px;
+	border-bottom: #ccc solid 1px;
+	background: white;
 }
 #scene{
 	position: fixed;

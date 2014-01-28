@@ -121,6 +121,33 @@ function saveFile(){
 }
 
 function loadFile(scene){
+	var stlName = getURLParameter('n');
+	if(stlName == "null"){
+    		var geometry = new THREE.CubeGeometry(1, 1, 0.1, 200, 200, 2);
+	        smooth = geometry.clone();
+			smooth.mergeVertices();
+			var modifier = new THREE.SubdivisionModifier(0);
+			modifier.modify( smooth );
+			
+			var object = new THREE.Mesh( smooth, cubeMaterial );
+	     
+			object.overdraw = true;
+			object.geometry.dynamic = true;
+			object.geometry.normalize(0.7);
+			filename = "Custom"
+			mainExpFab = new ExpFab(object, regions, pca, filename);
+			mainExpFab.mgui.displayUIMessage("Loading model " + filename, '', false);
+			
+			scene.userData.objects.push(mainExpFab);	
+
+	        scene.add( object );
+	        var fileinfo = {'name' : filename, 'mtime': "3:45pm", 'author' : 'Cesar Torres', 'date': 'November 19, 2013'};
+	        mainExpFab.load(fileinfo);
+	       
+	    	render();
+	}
+
+
 	THREE.loadSTL(scene, '/stl/'+getURLParameter('n')+'.stl');
 }
 

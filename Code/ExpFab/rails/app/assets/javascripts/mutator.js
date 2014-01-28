@@ -22,11 +22,6 @@ function Mutator(ef){
 		});
 		generateMode = false;
 	}
-	this.load = function(){
-		//for(var i in operations) this.headers.push(operations[i].name);
-		//for(var i in mainExpFab.regions) this.history.push([]);
-		//this.log();
-	}
 }
 
 Mutator.prototype.undo = function(){
@@ -34,19 +29,32 @@ Mutator.prototype.undo = function(){
 		mainExpFab.mgui.displayUIMessage("Nothing to undo.", "", false);     
 		return; 
 	}
-
 	var now = this.history[ this.marker - 1];
 
 	for(var regid in now.regions){
 		var region = mainExpFab.regions[now.regions[regid]];
-		//region.updateGeom();
 		now.transform.transform(region, true);
-
 	}
-	now.transform.ds.saveState();
 
+	now.transform.ds.saveState();
 	this.marker--;
 }
+Mutator.prototype.redo = function(){
+	if(this.marker == this.history.length){
+		mainExpFab.mgui.displayUIMessage("Nothing to redo.", "", false);     
+		return; 
+	}
+	var now = this.history[ this.marker + 1];
+
+	for(var regid in now.regions){
+		var region = mainExpFab.regions[now.regions[regid]];
+		now.transform.transform(region, true);
+	}
+
+	now.transform.ds.saveState();
+	this.marker++;
+}
+
 Mutator.prototype.log = function(rs){
 	var t = currentTransform;
 	if( t == null) return;

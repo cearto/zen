@@ -1,27 +1,4 @@
 
-weather = [];
-
-/* A mapping takes a range and maps it to datastream */
-function Mapping(){};
-
-Mapping.dsp = function(i,n, ds){
-	var param = parseFloat(i)/n;
-
-	return Mapping.linInterp(param, ds.data);
-}
-/* param is from 0 to 1 */
-Mapping.linInterp = function(param, data){
-	var n = data.length - 1;
-	var index = param * n;
-	var interp = index - parseInt(index);
-	index = parseInt(index);
-	return data[index] * (1-interp) +  data[index + 1] * (interp);
-}
-
-// TODO: Add noise functions
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////  MESH DEFORMATIONS   /////////////////////////////////

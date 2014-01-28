@@ -16,7 +16,7 @@ function Region(expfab, regid, faces, pca){
 	for(var i in ops){
 		this.gene[ops[i]] = {"0": null, "1": null, "2": null}
 		for(var j in this.pca){
-			this.gene[ops[i]][j] = new Gene(ops[i], 0, 0, datastreams['Uniform'], this.pca[j]);
+			this.gene[ops[i]][j] = new Gene(this.regid, ops[i], 0.0, 0.0, "Uniform", toAxisColor(j), 0.0);
 		}
 	}
 
@@ -26,7 +26,6 @@ function Region(expfab, regid, faces, pca){
 	this.geometry = null;
 	this.updateVertices();
 	this.updateCentroid();
-
 	this.highlight(false);
 
 	this.pca_lines = buildAxesPCA(this.centroid, this.pca); 
@@ -98,8 +97,8 @@ Region.prototype.highlight = function (active, type){
 		face.vertexColors[2] = c;
 	}
 	if(active && type != 'hover' && this.expfab.dna != undefined){
-		this.expfab.dna.valueSetter({'ROI': this.regid});
-		cl(this.regid);
+		this.expfab.dna.lookAt("ROI", this.regid);
+		// cl(this.regid);
 	}
 	this.expfab.object.geometry.colorsNeedUpdate = true; render();
 }
@@ -185,13 +184,15 @@ function Transform(type, axisid, ds, amp, inv){
 	else if (type == "Rotate" ) this.type = rotate;
 	else this.type = null;
 
-	this.iscale = function(i, n){ return -(Mapping.dsp(i, n, this.ds) * this.amp) };
-	this.fscale = function(i, n){ return Mapping.dsp(i, n, this.ds) * this.amp };
+	this.iscale = function(i, n){ return -(this.ds.dsp(i, n) * this.amp) };
+	this.fscale = function(i, n){ return this.ds.dsp(i, n) * this.amp };
 }
 
 Transform.prototype.transform = function(r, inv){
+	var old = 0;
 	if(inv) {
 		this.scale = this.iscale;
+		old = -this.amp;
 		console.log("Applying inverse.");
 	}
 	else this.scale = this.fscale;
@@ -200,6 +201,7 @@ Transform.prototype.transform = function(r, inv){
 	if(this.type != null){
 		this.type(r.geom, this);
 		console.log("T:", this.axisid, " ", this.amp);
+		r.expfab.dna.lookAt("value", this.amp + old);
 	}
 
 	r.expfab.object.geometry.verticesNeedUpdate = true;

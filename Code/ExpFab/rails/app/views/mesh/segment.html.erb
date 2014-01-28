@@ -61,8 +61,7 @@ function inputEvent(event){
 }
 
 function onDocumentMouseClick(event) {
-  
-	var selected = inputEvent(event);
+	// var selected = inputEvent(event);
 }
 
 function onDocumentOver(event){
@@ -73,55 +72,49 @@ function onDocumentOver(event){
 
   event.mainfn = function(event, regid){
     if(currentOperation == undefined) return;
-    // cl(activeRegion);
     current = toCanvasCoord(event);
+
     for(var i in regid){
-    var region = mainExpFab.regions[regid[i]];
-    var origin = region.centroid.clone();
-    var displacement = current.clone().subVectors(current, origin);
-    var originaldisplacement = down.clone().subVectors(down, origin);
-    var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
-    activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
-    var scale = (displacement.length() - originaldisplacement.length());
-    //cl("S:" + (scale * 5));
-    var amp = larger * scale * (1/displacement.length()) * 5;
-    currentTransform = new Transform(currentOperation, activeAxisID, activeDataStream, amp, false);
-    currentTransform.transform(region, false);
-  }
-    //$(".op-slider[name='"+ currentOperation +"']").val(larger * scale * (1/displacement.length()) * 5).change();
+      var region = mainExpFab.regions[regid[i]];
+      var origin = region.centroid.clone();
+      var displacement = current.clone().subVectors(current, origin);
+      var originaldisplacement = down.clone().subVectors(down, origin);
+      var larger = displacement.signTo(yaxis) > 0 == originaldisplacement.signTo(yaxis) > 0 ? 1 : -1;
+      activeAxis.setLength( (larger * displacement.length() * (1/ originaldisplacement.length()) ));
+      var scale = (displacement.length() - originaldisplacement.length());
+      //cl("S:" + (scale * 5));
+      var amp = larger * scale * (1/displacement.length()) * 5;
+      currentTransform = new Transform(currentOperation, activeAxisID, activeDataStream, amp, false);
+      currentTransform.transform(region, false);
+    }
   };
-
   var selected = inputEvent(event);
-
 }
+
 var activeAxisID = 0;
-
 function onDocumentMouseDown(event) {
-
   event.objfn = function(regid){ 
+    if(currentOperation == undefined){
+      mainExpFab.mgui.displayUIMessage("Don't forget to select an operation.", "", false);  
+      return;
+  }
     if(!selectionMode){
       $('.region[data-r="'+ regid +'"]').click(); 
       activeRegions = selectedRegions2(mainExpFab);
     }
+
   };
-  if(currentOperation == undefined){
-      //mainExpFab.mgui.displayUIMessage("Don't forget to select an operation.", "", false);  
-      return;
-  }
+  
 
 
   event.axesfn = function(regid, pcaid){
-
     activeRegion = mainExpFab.regions[regid];
     activeAxis = activeRegion.pca_lines[pcaid];
-    // activeRegion.params.axis = activeRegion.pca[pcaid];
-    // activeRegion.params.axisid = pcaid;
     activeAxisID = pcaid;
-    mainExpFab.dna.valueSetter({"axis" : toAxisColor(pcaid)});
-    // cl(activeRegion);
+    mainExpFab.dna.lookAt("axis", toAxisColor(pcaid));
+    // mainExpFab.dna.valueSetter({"axis" : toAxisColor(pcaid)});
     activeDataStream = mainExpFab.datastream;
     
-
     activeAxis.click();
     down = toCanvasCoord(event);
     
@@ -131,12 +124,9 @@ function onDocumentMouseDown(event) {
 
 selectionMode = false;
 function onDocumentMouseUp(event) {
-
- event.axesfn = function(regid, pcaid){
+  event.axesfn = function(regid, pcaid){
     mainExpFab.regions[regid].pca_lines[pcaid].click();
- };
-  
-
+  };
  
   event.mainfn = function(event, regid){
     up = toCanvasCoord(event);
@@ -161,37 +151,33 @@ function onDocumentMouseUp(event) {
     mainExpFab.mutator.log(activeRegions);
     currentTransform = null;
   }
-  console.log(selectionMode);
   activeAxis = null;
 }	
-
 </script>
 
 <div class="pure-g-r content" id="layout">
     <div class="pure-u" id="nav"></div>
-
     <div class="pure-u-1" id="main">
-        <div class="mesh-content">
-            
-            <div id='gallery-wrapper' class='gallery-sidebar'>
-              
-              <div id='gallery' ></div>
-              
-              <div id='gallery-controls'>
-                <button id='screenshot'>Screenshot</button>
-                <button id='fullscreen'>Fullscreen</button>
-                <!-- <button id='save'>Export STL</button> -->
-                <button id='test-region'>Region Pic</button>
-              </div>
+      <div class="mesh-content">
+          <div id='gallery-wrapper' class='gallery-sidebar'>
+            <div id='gallery' ></div>
+            <div id='gallery-controls'>
+              <button id='screenshot'>Screenshot</button>
+              <button id='fullscreen'>Fullscreen</button>
+              <button class='imp' id='save'>Export STL</button>
+              <!-- <button id='test-region'>Region Pic</button> -->
             </div>
-
-            <div id="scene" class="mesh-content-body"></div>
-        </div>
+          </div>
+          <div id="scene" class="mesh-content-body"></div>
+      </div>
     </div>
 </div>
- <span id="pulldown" class='undo'> <%= image_tag '/icons/undo.png', :class => "shadow"%> </span>
+
+<span id="pulldown" class='undo'> 
+<%= image_tag '/icons/undo.png', :class => "shadow"%> 
+</span>
+
 <div id="error" class='shadow'> 
-  
   <h2> We encountered an error. </h2>
   <span id='error-msg'> Error message goes here. </span>
   <span class='x'>x</span> 

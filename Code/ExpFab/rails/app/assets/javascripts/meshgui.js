@@ -29,43 +29,6 @@ Gallery.prototype.add = function(img, box){
 		width: '100%',
 		margin: "-50px 0 0 -10px"
 	});
-	
-	// var canvas = $('<div></div>');
-	// var context = canvas.getContext('2d');
-	// var imageObj = new Image();
-	// imageObj.onload = function() {
-
-	// 	// draw cropped image
-	// 	var sourceX = 0;
-	// 	var sourceY = 0;
-	// 	var sourceWidth = WIDTH;
-	// 	var sourceHeight = HEIGHT;
-	// 	if(typeof box !== "undefined"){
-	// 		cl(box);
-	// 		sourceWidth =  box.size().x;
-	// 		sourceHeight = box.size().y;
-	// 		sourceX = (WIDTH/2) - box.min.x;
-	// 		sourceY = (HEIGHT/2) - box.min.y;
-	// 		cl(sourceWidth + " " + sourceHeight);
-	// 		sourceWidth = 200;
-	// 		sourceHeight = 200;
-	// 		sourceX = 200;
-	// 		sourceY = 200;
-	// 	}
-	// 	var destWidth = sourceWidth;
-	// 	var destHeight = sourceHeight;
-	// 	var destX = node.width() / 2 - destWidth / 2;
-	// 	var destY = node.height() / 2 - destHeight / 2;
-	// 	destX = 0;
-	// 	destY = 0;
-	// 	destWidth = node.width();
-	// 	destHeight = node.height();
-	// 	console.log(sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight)
-	
-
-	// 	context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-	// };
-	// imageObj.src = img;
     node.append(nodeImg);
 	this.container.append(node);
 }
@@ -73,44 +36,31 @@ MeshGUI.prototype.displayUIMessage = function(msg, smsg, persist){
 	this.messageText.html(msg);
 	this.messageSubText.html(smsg);
 	if(persist)	this.message.show().delay(2000);//.fadeOut();
-	else	this.message.show().delay(2000).fadeOut();
+	else this.message.show().delay(2000).fadeOut();
+	return this;
 }
 
-function GUIFile(fileinfo){
+MeshGUI.prototype.GUIFile = function(fileinfo){
 	var bar = $('#info-bar .pure-u-1-2');
 	bar.children('.mesh-content-title').html(fileinfo['name']);
 	
 	var subtitle = "From <a>"+ fileinfo['author'] +"</a> at <span>"+ fileinfo['mtime'] +", "+ fileinfo['date'] + "</span>";
 	bar.children('.mesh-content-subtitle').html(subtitle);
-	GUIFileNav(fileinfo.name);
-	//GUIMatSelect();
+	this.GUIFileNav(fileinfo.name);
+	return this;
 }
-function GUIStreams(){
+MeshGUI.prototype.GUIStreams = function(){
 	
 	var heading = $('<h3></h3>').html('Streams').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'streams').append(heading);
 	var data = scene.userData.objects;
 	$('#nav').append(container);
 	render();
+	return this;
 }
-var dna;
-function GUIMatSelect( currentFile ){
-	var heading = $('<h3></h3>').html('View').addClass('ui-heading');
-	var container = $('<div></div>').attr('id', 'matview').append(heading);
-	var n = parseInt(getURLParameter('n'));
-	
-	var wireMat = $('<a></a>').html('Wireframe').attr('href', 'segment?w=1&n=' + (n)).addClass('ui-link');
-	var solidMat = $('<a></a>').html('Solid').attr('href', 'segment?w=0&n=' + (n)).addClass('ui-link');
 
-	if(getURLParameter('w') == 1)
-		wireMat.addClass('selected-mat');
-	else
-		solidMat.addClass('selected-mat');
-	container.append(wireMat).append(solidMat);
-	container.append(clearfix.clone());
-	$('#nav').append(container);
-}
-function GUIFileNav( currentFile ){
+
+MeshGUI.prototype.GUIFileNav = function( currentFile ){
 	var heading = $('<h3></h3>').html('Object View').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'objnav').append(heading);
 	var n = parseInt(getURLParameter('n'));
@@ -137,31 +87,29 @@ function GUIFileNav( currentFile ){
 	container.append(wireMat).append(solidMat).append(generator);
 	container.append(clearfix.clone());
 	$('#nav').append(container);
+	return this;
 }
-function GUIRegions(exfab){
+MeshGUI.prototype.GUIRegions = function(exfab){
 	var heading = $('<h3></h3>').html('Regions').addClass('ui-heading');
 	var container = $('<div></div>').attr('id', 'regions').append(heading);
 	for(var i in exfab.regions) exfab.regions[i].addGUI(container);
 	container.append(clearfix.clone());
 	$('#objnav').after(container);
 	render();
+	return this;
 }
-function GUIOperations(){
+MeshGUI.prototype.GUIOperations = function(){
 	var heading = $('<h3></h3>').html('Operations').addClass('ui-heading');
 	var opContainer = $('<div></div>').attr('id', 'operations').append(heading);
 	for(var i in operationData)
 		operations.push(new Operation(opContainer, operationData[i]['name'], operationData[i]['img']));
 	opContainer.append(clearfix);
 	$('#nav').append(opContainer);
+	return this;
 }
 
 
-
-
-// 
-// 
-
-function GUIActivateListeners(){
+MeshGUI.prototype.GUIActivateListeners = function(){
 	$(window).keypress(function(event){
 		console.log(event.charCode);
 		if(event.charCode == 122)
@@ -224,6 +172,7 @@ function GUIActivateListeners(){
 				$(this).html('Fullscreen');
 			}
 		});
+		return this;
 }
 
 /*************************************************************************************************************/

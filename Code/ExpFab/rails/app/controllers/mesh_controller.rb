@@ -30,11 +30,19 @@ class MeshController < ApplicationController
 
   def weather
     data = [];
-    CSV.foreach("public/data/232761.csv", :headers => true, :header_converters => :symbol) do |row|
+    CSV.foreach("public/data/232761.csv", :headers => false, :header_converters => :symbol) do |row|
       data << row.to_hash;
     end
     data = data.group_by { |d| d[:station]}
     data = data["GHCND:USC00043714"].collect{|d| d[:mlytavgnormal].to_f / 10.0}
+    render :json => data
+    # render :json => CSV.read('public/data/232761.csv').parse().to_json;
+  end
+  def stream
+    data = [];
+    CSV.foreach("public/datastreams/wheel.csv") do |row|
+      data << row;
+    end
     render :json => data
     # render :json => CSV.read('public/data/232761.csv').parse().to_json;
   end
