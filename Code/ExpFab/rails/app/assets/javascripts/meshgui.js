@@ -1,5 +1,4 @@
 
-var operations = [];
 var clearfix = $('<br/>').addClass('clearfix');
 
 function MeshGUI(){
@@ -98,16 +97,6 @@ MeshGUI.prototype.GUIRegions = function(exfab){
 	render();
 	return this;
 }
-MeshGUI.prototype.GUIOperations = function(){
-	var heading = $('<h3></h3>').html('Operations').addClass('ui-heading');
-	var opContainer = $('<div></div>').attr('id', 'operations').append(heading);
-	for(var i in operationData)
-		operations.push(new Operation(opContainer, operationData[i]['name'], operationData[i]['img']));
-	opContainer.append(clearfix);
-	$('#nav').append(opContainer);
-	return this;
-}
-
 
 MeshGUI.prototype.GUIActivateListeners = function(){
 	$(window).keypress(function(event){
@@ -161,17 +150,20 @@ MeshGUI.prototype.GUIActivateListeners = function(){
 			mainExpFab.mgui.generateImage();
 		});
 		
+		// $('#fullscreen').click(function(){
+		// 	var gal = mainExpFab.mgui.gallery.wrapper;
+		// 	if(gal.hasClass('gallery-sidebar')){
+		// 		gal.removeClass('gallery-sidebar').addClass('gallery-fullscreen');
+		// 		$(this).html('Sidebar');
+		// 	}
+		// 	else{
+		// 		mainExpFab.mgui.gallery.wrapper.removeClass('gallery-fullscreen').addClass('gallery-sidebar');
+		// 		$(this).html('Fullscreen');
+		// 	}
+		// });
 		$('#fullscreen').click(function(){
-			var gal = mainExpFab.mgui.gallery.wrapper;
-			if(gal.hasClass('gallery-sidebar')){
-				gal.removeClass('gallery-sidebar').addClass('gallery-fullscreen');
-				$(this).html('Sidebar');
-			}
-			else{
-				mainExpFab.mgui.gallery.wrapper.removeClass('gallery-fullscreen').addClass('gallery-sidebar');
-				$(this).html('Fullscreen');
-			}
-		});
+			mainExpFab.dna.generate();
+		})
 		return this;
 }
 

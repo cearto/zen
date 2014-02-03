@@ -1,10 +1,45 @@
+var currentOperation;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////  MESH DEFORMATIONS   /////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//geometry and transform information
+function translate2d(g, t){
+	var xvectors = [];
+	var yvectors = [];
+	for(var i in g.original){
 
+		var vr = g.original[i].clone();
+		vr.sub(g.x_hat);
+		
+		var vx = vr.clone().dot(t.other_axes[0]);
+		var vy = vr.clone().dot(t.other_axes[1]);
+		
+		xvectors.push(vx);
+		yvectors.push(vy);
+	}
+	var n = Array.max(xvectors) - Array.min(xvectors);
+	var m = Array.max(yvectors) - Array.min(yvectors);
+	var xmin = Array.min(xvectors);
+	var ymin = Array.min(yvectors);
+	
+	console.log("MINS" , n, m);
+
+	for(var i in g.m){
+		var k = g.m[i]; // current index in structure
+		var x = xvectors[k] - xmin;
+		var y = yvectors[k] - ymin;
+		var w = t.axis.clone();
+		if(x < 0.01 && y < 0.01)
+			console.log(t.scale(x, y, n, m));
+		w.multiplyScalar( t.scale(x, y, n, m) );
+		g.vp[k].addVectors(g.v[k], w);
+	}
+
+
+}
 function balloon(g, t){
 	var yvectors = [];
 
@@ -28,7 +63,7 @@ function balloon(g, t){
 						.add(g.x_hat)
 					);
 
-		w.multiplyScalar( t.scale(i, n) );
+		w.multiplyScalar( t.scale(i, null,  n, null) );
 		g.vp[k].addVectors(g.v[k], w);
 	}
 
@@ -38,7 +73,7 @@ function balloon(g, t){
 function rotate(g, t){
 	var n  = g.m.length;
 	for(var i in g.m){ // for every vertice in region
-		var w = new THREE.Matrix4().makeRotationAxis( t.axis, t.scale(i, n) );	
+		var w = new THREE.Matrix4().makeRotationAxis( t.axis, t.scale(i, null, n, null) );	
 		g.vp[g.m[i]].applyMatrix4(w);
 	}
 }
@@ -51,7 +86,7 @@ function scale(g, t){
 		var k = g.m[i]; 
 		// move in the direction of the axis
 		var w = t.axis.clone();
-		w.multiplyScalar( t.scale(i, n) );
+		w.multiplyScalar( t.scale(i, null, n, null) );
 		// update vector buffer vp
 		g.vp[k].addVectors(g.v[k], w);
 	}

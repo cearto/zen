@@ -3,7 +3,6 @@
 var pca = <%= @pca %>;
 var regions = <%= @seg %>;
 var invRegions = invert(regions);
-var operationData = <%= @operations %>;
 
 $(function(){
 	initOpenGL($('#scene'), {
@@ -13,6 +12,7 @@ $(function(){
   $('#test-region').click(function(){
     mainExpFab.regions[0].generateImage();
   });
+
 });	
 
 
@@ -86,6 +86,7 @@ function onDocumentOver(event){
       var amp = larger * scale * (1/displacement.length()) * 5;
       currentTransform = new Transform(currentOperation, activeAxisID, activeDataStream, amp, false);
       currentTransform.transform(region, false);
+      cl(currentTransform);
     }
   };
   var selected = inputEvent(event);
@@ -163,7 +164,7 @@ function onDocumentMouseUp(event) {
             <div id='gallery' ></div>
             <div id='gallery-controls'>
               <button id='screenshot'>Screenshot</button>
-              <button id='fullscreen'>Fullscreen</button>
+              <button id='fullscreen'>Generate</button>
               <button class='imp' id='save'>Export STL</button>
               <!-- <button id='test-region'>Region Pic</button> -->
             </div>

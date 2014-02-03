@@ -92,6 +92,10 @@ Array.max = function( array ){
     return Math.max.apply( Math, array );
 };
 
+Array.min = function( array ){
+    return Math.min.apply( Math, array );
+};
+
 Array.max2 = function( array ){
 	var max = Number.MIN_VALUE;
 	for(var i in array)

@@ -40,7 +40,7 @@ class MeshController < ApplicationController
   end
   def stream
     data = [];
-    CSV.foreach("public/datastreams/wheel.csv") do |row|
+    CSV.foreach("public/datastreams/heart2d.csv") do |row|
       data << row;
     end
     render :json => data

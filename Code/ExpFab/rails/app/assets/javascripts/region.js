@@ -1,6 +1,6 @@
 var selectedRegions;
 var activeRegions = [];
-var ops = ['Balloon', 'Scale', 'Rotate'];
+
 
 function Region(expfab, regid, faces, pca){
 	this.weights = {};
@@ -13,10 +13,10 @@ function Region(expfab, regid, faces, pca){
 	
 	for(var i in pca) this.pca.push(new THREE.Vector3(pca[i][0], pca[i][1], pca[i][2]));
 	
-	for(var i in ops){
-		this.gene[ops[i]] = {"0": null, "1": null, "2": null}
+	for(var i in operations){
+		this.gene[operations[i]] = {"0": null, "1": null, "2": null}
 		for(var j in this.pca){
-			this.gene[ops[i]][j] = new Gene(this.regid, ops[i], 0.0, 0.0, "Uniform", toAxisColor(j), 0.0);
+			this.gene[operations[i]][j] = new Gene(this.regid, operations[i], 0.0, 0.0, "Uniform", toAxisColor(j), 0.0);
 		}
 	}
 
@@ -165,45 +165,5 @@ Region.prototype.addGUI = function(container){
 		padding: '3%',
 		background: 'rgba(225, 225, 225, 0.8)'
 	});
-	render();
-}
-var currentTransform = null;
-/* In order to make a deformation, all these must be met */
-function Transform(type, axisid, ds, amp, inv){
-	this.axisid = axisid;
-	this.ds = datastreams[ds];
-	this.amp = parseFloat(amp);
-	
-	if(typeof(type) == "undefined"){
-		mainExpFab.mgui.displayUIMessage("Select an operation.", "", false);
-		return;  
-	}
-	type = type.slice(0, -1);
-	if      (type == "Balloon") this.type = balloon;
-	else if (type == "Scale"  ) this.type = scale;
-	else if (type == "Rotate" ) this.type = rotate;
-	else this.type = null;
-
-	this.iscale = function(i, n){ return -(this.ds.dsp(i, n) * this.amp) };
-	this.fscale = function(i, n){ return this.ds.dsp(i, n) * this.amp };
-}
-
-Transform.prototype.transform = function(r, inv){
-	var old = 0;
-	if(inv) {
-		this.scale = this.iscale;
-		old = -this.amp;
-		console.log("Applying inverse.");
-	}
-	else this.scale = this.fscale;
-
-	this.axis = r.pca[this.axisid];
-	if(this.type != null){
-		this.type(r.geom, this);
-		console.log("T:", this.axisid, " ", this.amp);
-		r.expfab.dna.lookAt("value", this.amp + old);
-	}
-
-	r.expfab.object.geometry.verticesNeedUpdate = true;
 	render();
 }

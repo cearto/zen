@@ -21,7 +21,7 @@ DNA.prototype.load = function(regids){
 	var self = this;
 
 	var ROIController = this.gui.add(this, 'ROI', regids);
-	var opController = this.gui.add(this, 'operation', ops);
+	var opController = this.gui.add(this, 'operation', operations);
 	var axisController = this.gui.add(this, 'axis', ["Red", "Green", "Blue"]);
 	var datastreamController = this.gui.add(this, 'datastream').options(Object.keys(datastreams));
 	var minController = this.gui.add(this, 'min', -5.0, 5.0).step(0.001);
@@ -115,7 +115,7 @@ DNA.prototype.generate = function(){
 		this.lock = true;
 	}
 	Gene.prototype.transform = function(type){
-		return new Transform(this.operation + "r", toAxisID(this.axis), this.datastream, this[type], false);
+		return new Transform(this.operation, toAxisID(this.axis), this.datastream, this[type], false);
 	}
 	Gene.prototype.generate = function(){
 		var range = this.max - this.min;

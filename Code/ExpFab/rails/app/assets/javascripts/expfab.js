@@ -40,7 +40,8 @@ ExpFab.prototype.load = function(fileinfo) {
   var fileControl = f1.add(mainExpFab, 'filename');
   var colorControl = f1.addColor(mainExpFab, 'color');
   var wireframeControl = f1.add(mainExpFab, 'wireframe');
-  var operationControl = f2.add(mainExpFab, 'operation', ['None', 'Balloon', 'Translate', 'Rotate']);
+  cl(operations);
+  var operationControl = f2.add(mainExpFab, 'operation').options(operations);
   var dsControl = f2.add(mainExpFab, 'datastream').options(Object.keys(datastreams));
   f2.open();
   dsControl.onChange(function(value){
@@ -60,18 +61,13 @@ ExpFab.prototype.load = function(fileinfo) {
   });
 
   operationControl.onChange(function(value){
-    //TODO change name
-    if(value == 'Translate') value = 'Scale';
-    activeOperation = value; 
-    $(".op[name='"+ value +"x']").click();
-    $(".op[name='"+ value +"y']").click();
-    $(".op[name='"+ value +"z']").click();
+    // if(value == 'Translate') value = 'Scale';
+    currentOperation = value;
     that.dna.lookAt(this.property, value);
   });
 
   this.mgui.GUIActivateListeners()
            .GUIStreams()
-           .GUIOperations()
            .GUIFile(fileinfo)
            .GUIRegions(mainExpFab);
 
